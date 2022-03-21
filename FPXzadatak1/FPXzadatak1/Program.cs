@@ -15,7 +15,8 @@ namespace FPXzadatak1
 
             intro.PrintIntro();
 
-            logic.FindColumn(1);
+            logic.FindColumn(2);
+            logic.FindColumn(2);
 
             DisplayBoard();
         }
