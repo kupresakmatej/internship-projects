@@ -8,6 +8,11 @@ namespace FPXzadatak1
 {
     public class Board
     {
+        public Coin[,] BoardLayout { get; set; }
 
+        public Board()
+        {
+            BoardLayout = new Coin[6, 7];
+        }
     }
 }

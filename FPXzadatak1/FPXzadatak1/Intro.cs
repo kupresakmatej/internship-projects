@@ -21,12 +21,12 @@ namespace FPXzadatak1
 
             do
             {
-                if (input == "y" || input == "Y")
+                if (input.ToLower() == "y")
                 {
                     inputClass.InputColumn();
                     break;
                 }
-                else if (input == "x" || input == "X")
+                else if (input.ToLower() == "x")
                 {
                     PrintInstructions();
                     break;

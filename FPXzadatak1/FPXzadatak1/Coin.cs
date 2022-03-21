@@ -8,6 +8,9 @@ namespace FPXzadatak1
 {
     public class Coin
     {
+        public void FallIntoPlace(int column)
+        {
 
+        }
     }
 }
