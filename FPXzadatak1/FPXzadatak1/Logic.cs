@@ -17,7 +17,13 @@ namespace FPXzadatak1
 
         public void InsertCoin(int column)
         {
+            for(int i = 0; i < 6; i++)
+            {
+                for(int j = 0; j < 7; j++)
+                {
 
+                }
+            }
         }
     }
 }

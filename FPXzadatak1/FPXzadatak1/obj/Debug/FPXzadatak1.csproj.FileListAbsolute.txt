@@ -6,3 +6,11 @@ C:\Users\Reroot\Desktop\FPX - 1. zadatak\FPXzadatak1\FPXzadatak1\obj\Debug\FPXza
 C:\Users\Reroot\Desktop\FPX - 1. zadatak\FPXzadatak1\FPXzadatak1\obj\Debug\FPXzadatak1.csproj.CoreCompileInputs.cache
 C:\Users\Reroot\Desktop\FPX - 1. zadatak\FPXzadatak1\FPXzadatak1\obj\Debug\FPXzadatak1.exe
 C:\Users\Reroot\Desktop\FPX - 1. zadatak\FPXzadatak1\FPXzadatak1\obj\Debug\FPXzadatak1.pdb
+C:\Users\Reroot\Desktop\FPX - 1. zadatak\fpx-repository\FPXzadatak1\FPXzadatak1\bin\Debug\FPXzadatak1.exe.config
+C:\Users\Reroot\Desktop\FPX - 1. zadatak\fpx-repository\FPXzadatak1\FPXzadatak1\bin\Debug\FPXzadatak1.exe
+C:\Users\Reroot\Desktop\FPX - 1. zadatak\fpx-repository\FPXzadatak1\FPXzadatak1\bin\Debug\FPXzadatak1.pdb
+C:\Users\Reroot\Desktop\FPX - 1. zadatak\fpx-repository\FPXzadatak1\FPXzadatak1\obj\Debug\FPXzadatak1.csproj.AssemblyReference.cache
+C:\Users\Reroot\Desktop\FPX - 1. zadatak\fpx-repository\FPXzadatak1\FPXzadatak1\obj\Debug\FPXzadatak1.csproj.SuggestedBindingRedirects.cache
+C:\Users\Reroot\Desktop\FPX - 1. zadatak\fpx-repository\FPXzadatak1\FPXzadatak1\obj\Debug\FPXzadatak1.csproj.CoreCompileInputs.cache
+C:\Users\Reroot\Desktop\FPX - 1. zadatak\fpx-repository\FPXzadatak1\FPXzadatak1\obj\Debug\FPXzadatak1.exe
+C:\Users\Reroot\Desktop\FPX - 1. zadatak\fpx-repository\FPXzadatak1\FPXzadatak1\obj\Debug\FPXzadatak1.pdb

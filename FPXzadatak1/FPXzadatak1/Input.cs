@@ -13,8 +13,6 @@ namespace FPXzadatak1
         public void InputColumn()
         {
             PrintStartInfo();
-            
-
         }
 
         public void PrintStartInfo()
