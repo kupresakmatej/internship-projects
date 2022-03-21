@@ -10,6 +10,8 @@ namespace FPXzadatak1
     {
         public static readonly Board Instance = new Board();
 
+        private int counter;
+
         public Logic()
         {
             
@@ -23,7 +25,7 @@ namespace FPXzadatak1
                 {
                     if (Logic.Instance.BoardLayout[i, j] != null)
                     {
-                        //Logic.Instance.BoardLayout[i, j] += 
+                        
                     }
                 }
             }
@@ -40,6 +42,29 @@ namespace FPXzadatak1
 
                     }
                 }
+            }
+        }
+
+        public string DetermineActivePlayer()
+        {
+            for (int i = 0; i < 6; i++)
+            {
+                for (int j = 0; j < 7; j++)
+                {
+                    if (Logic.Instance.BoardLayout[i, j] != null)
+                    {
+                        counter++;
+                    }
+                }
+            }
+
+            if (counter % 2 == 0)
+            {
+                return Gameplay.secondPlayer.Name;
+            }
+            else
+            {
+                return Gameplay.firstPlayer.Name;
             }
         }
     }
