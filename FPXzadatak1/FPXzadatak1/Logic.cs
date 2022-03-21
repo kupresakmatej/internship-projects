@@ -27,12 +27,12 @@ namespace FPXzadatak1
 
             for (int i = columnLength - 1; i >= 0; i--)
             {
-                if (activePlayer && Logic.Instance.BoardLayout[i - counterBoardHelper, columnIdx] != null)
+                if (activePlayer && Logic.Instance.BoardLayout[i, columnIdx] != null)
                 {
                     Logic.Instance.BoardLayout[i - counterBoardHelper, columnIdx] = new Coin(Gameplay.firstPlayer.Color);
                     break;
                 }
-                else if (!activePlayer && Logic.Instance.BoardLayout[i - counterBoardHelper, columnIdx] != null)
+                else if (!activePlayer && Logic.Instance.BoardLayout[i, columnIdx] != null)
                 {
                     Logic.Instance.BoardLayout[i - counterBoardHelper, columnIdx] = new Coin(Gameplay.secondPlayer.Color);
                     break;
