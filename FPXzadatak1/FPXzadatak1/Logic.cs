@@ -25,7 +25,10 @@ namespace FPXzadatak1
                 {
                     if (Logic.Instance.BoardLayout[i, j] != null)
                     {
-                        
+                        //if(DetermineActivePlayer)
+                        //{
+
+                        //}
                     }
                 }
             }
@@ -45,7 +48,7 @@ namespace FPXzadatak1
             }
         }
 
-        public string DetermineActivePlayer()
+        public bool DetermineActivePlayer()
         {
             for (int i = 0; i < 6; i++)
             {
@@ -58,13 +61,13 @@ namespace FPXzadatak1
                 }
             }
 
-            if (counter % 2 == 0)
+            if(counter % 2 == 0)
             {
-                return Gameplay.secondPlayer.Name;
+                return true; //first player is active
             }
             else
             {
-                return Gameplay.firstPlayer.Name;
+                return false; //second player is active
             }
         }
     }
