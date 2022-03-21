@@ -26,7 +26,7 @@ namespace FPXzadatak1
 
             for (int i = 0; i < rowLength; i++)
             {
-                for (int j = 0; j < columnLength; j++)
+                for (int j = columnLength - 1; j >= 0; j--)
                 {
                     if (Logic.Instance.BoardLayout[i, j] != null)
                     {
@@ -49,7 +49,7 @@ namespace FPXzadatak1
             {
                 for (int j = 0; j < columnLength; j++)
                 {
-                    if (j == column)
+                    if (i == column)
                     {
                         FallIntoPlace();
                     }
