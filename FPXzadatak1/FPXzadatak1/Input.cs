@@ -10,9 +10,6 @@ namespace FPXzadatak1
     {
         Logic logic = new Logic();
 
-        private static readonly Player firstPlayer = new Player();
-        private static readonly Player secondPlayer = new Player();
-
         public void InputColumn()
         {
             
@@ -35,12 +32,12 @@ namespace FPXzadatak1
             Console.WriteLine(Environment.NewLine);
             Console.WriteLine("First player name:");
 
-            firstPlayer.Name = Console.ReadLine();
+            Gameplay.firstPlayer.Name = Console.ReadLine();
 
             Console.WriteLine(Environment.NewLine);
             Console.WriteLine("Second player name:");
 
-            secondPlayer.Name = Console.ReadLine();
+            Gameplay.secondPlayer.Name = Console.ReadLine();
         }
     }
 }

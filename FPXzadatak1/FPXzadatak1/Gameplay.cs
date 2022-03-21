@@ -8,6 +8,7 @@ namespace FPXzadatak1
 {
     public class Gameplay
     {
-        //Player firstPlayer = 
+        public static readonly Player firstPlayer = new Player();
+        public static readonly Player secondPlayer = new Player();
     }
 }
