@@ -8,25 +8,28 @@ namespace FPXzadatak1
 {
     internal class Intro
     {
+        public const string AFFIRMATIVE_INPUT = "y";
+        public const string NEGATIVE_INPUT = "x";
+
         Input inputClass = new Input();
 
         public void PrintIntro()
         {
             Console.WriteLine("Hello, welcome to Connect 4!");
             Console.WriteLine(Environment.NewLine);
-            Console.WriteLine("To get instructions, enter 'x'.");
-            Console.WriteLine("To continue, enter 'y'.");
+            Console.WriteLine(string.Format("To get instructions, enter '{0}'.", NEGATIVE_INPUT));
+            Console.WriteLine(string.Format("To continue, enter '{0}'.", AFFIRMATIVE_INPUT));
 
             string input = Console.ReadLine();
 
             do
             {
-                if (input.ToLower() == "y")
+                if (input.ToLower() == AFFIRMATIVE_INPUT)
                 {
-                    inputClass.InputColumn();
+                    inputClass.PrintStartInfo();
                     break;
                 }
-                else if (input.ToLower() == "x")
+                else if (input.ToLower() == NEGATIVE_INPUT)
                 {
                     PrintInstructions();
                     break;

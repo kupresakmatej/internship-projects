@@ -6,13 +6,8 @@ using System.Threading.Tasks;
 
 namespace FPXzadatak1
 {
-    public class Coin
+    public class Gameplay
     {
-        private string Color { get; set; }
-
-        public Coin(string color)
-        {
-            Color = color;
-        }
+        //Player firstPlayer = 
     }
 }

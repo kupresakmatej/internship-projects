@@ -14,5 +14,21 @@ namespace FPXzadatak1
         {
             BoardLayout = new Coin[6, 7];
         }
+
+        public bool IsRowFull()
+        {
+            for(int i = 0; i < 6; i++)
+            {
+                for(int j = 0; j < 7; j++)
+                {
+                    if(BoardLayout[i, j] != null)
+                    {
+                        return true;
+                    }
+                }
+            }
+
+            return false;
+        }
     }
 }

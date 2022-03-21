@@ -7,19 +7,38 @@ using System.Threading.Tasks;
 namespace FPXzadatak1
 {
     public class Logic
-    { 
+    {
+        public static readonly Board Instance = new Board();
+
         public Logic()
         {
             
         }
 
-        public void InsertCoin(int column)
+        public void FallIntoPlace()
         {
-            for(int i = 0; i < 6; i++)
+            for (int i = 0; i < 6; i++)
             {
-                for(int j = 0; j < 7; j++)
+                for (int j = 7; j > 0; j--)
                 {
+                    if (Logic.Instance.BoardLayout[i, j] != null)
+                    {
+                        //Logic.Instance.BoardLayout[i, j] += 
+                    }
+                }
+            }
+        }
 
+        public void FindColumn(int column)
+        {
+            for (int i = 0; i < 6; i++)
+            {
+                for (int j = 0; j < 7; j++)
+                {
+                    if (j == column)
+                    {
+
+                    }
                 }
             }
         }
