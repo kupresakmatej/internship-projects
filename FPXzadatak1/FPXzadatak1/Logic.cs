@@ -12,6 +12,9 @@ namespace FPXzadatak1
 
         private int counter;
 
+        int rowLength = Logic.Instance.BoardLayout.GetLength(0);
+        int columnLength = Logic.Instance.BoardLayout.GetLength(1);
+
         public Logic()
         {
             
@@ -19,16 +22,22 @@ namespace FPXzadatak1
 
         public void FallIntoPlace()
         {
-            for (int i = 0; i < 6; i++)
+            bool activePlayer = DetermineActivePlayer();
+
+            for (int i = 0; i < rowLength; i++)
             {
-                for (int j = 7; j > 0; j--)
+                for (int j = 0; j < columnLength; j++)
                 {
                     if (Logic.Instance.BoardLayout[i, j] != null)
                     {
-                        //if(DetermineActivePlayer)
-                        //{
-
-                        //}
+                        if(activePlayer)
+                        {
+                            Logic.Instance.BoardLayout[i, j] = new Coin(Gameplay.firstPlayer.Color);
+                        }
+                        else
+                        {
+                            Logic.Instance.BoardLayout[i, j] = new Coin(Gameplay.secondPlayer.Color);
+                        }
                     }
                 }
             }
@@ -36,13 +45,13 @@ namespace FPXzadatak1
 
         public void FindColumn(int column)
         {
-            for (int i = 0; i < 6; i++)
+            for (int i = 0; i < rowLength; i++)
             {
-                for (int j = 0; j < 7; j++)
+                for (int j = 0; j < columnLength; j++)
                 {
                     if (j == column)
                     {
-
+                        FallIntoPlace();
                     }
                 }
             }
@@ -50,9 +59,9 @@ namespace FPXzadatak1
 
         public bool DetermineActivePlayer()
         {
-            for (int i = 0; i < 6; i++)
+            for (int i = 0; i < rowLength; i++)
             {
-                for (int j = 0; j < 7; j++)
+                for (int j = 0; j < columnLength; j++)
                 {
                     if (Logic.Instance.BoardLayout[i, j] != null)
                     {

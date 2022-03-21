@@ -50,7 +50,7 @@ namespace FPXzadatak1
 
             System.Threading.Thread.Sleep(5000);
 
-            inputClass.InputColumn();
+            inputClass.PrintStartInfo();
         }
     }
 }
