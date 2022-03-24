@@ -24,7 +24,7 @@ namespace FPXzadatak1
 
             intro.PrintIntro();
 
-            while(!logic.GameOver())
+            while (!logic.GameOver())
             {
 
                 inputCommand.InputColumn(helper);

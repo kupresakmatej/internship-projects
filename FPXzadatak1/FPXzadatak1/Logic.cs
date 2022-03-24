@@ -120,7 +120,7 @@ namespace FPXzadatak1
 
             for(int i = 0; i < 4; i++)
             {
-                if(Logic.Instance.BoardLayout[row, column + i] == null)
+                if (Logic.Instance.BoardLayout[row, column + i] == null || Logic.Instance.BoardLayout[row, column + i].Color != Logic.Instance.BoardLayout[row, column].Color)
                 {
                     return false;
                 }
@@ -137,7 +137,7 @@ namespace FPXzadatak1
 
             for(int i = 0; i < 4; i++)
             {
-                if(Logic.Instance.BoardLayout[row + 1, column] == null)
+                if(Logic.Instance.BoardLayout[row + i, column] == null || Logic.Instance.BoardLayout[row + i, column].Color != Logic.Instance.BoardLayout[row, column].Color)
                 {
                     return false;
                 }
@@ -158,7 +158,7 @@ namespace FPXzadatak1
 
             for(int i = 0; i < 4; i++)
             {
-                if(Logic.Instance.BoardLayout[row - i, column + i] == null)
+                if(Logic.Instance.BoardLayout[row - i, column + i] == null || Logic.Instance.BoardLayout[row - i, column + i].Color != Logic.Instance.BoardLayout[row, column].Color)
                 {
                     return false;
                 }
@@ -179,7 +179,7 @@ namespace FPXzadatak1
 
             for(int i = 0; i < 4; i++)
             {
-                if(Logic.Instance.BoardLayout[row + i, column + i] == null)
+                if(Logic.Instance.BoardLayout[row + i, column + i] == null || Logic.Instance.BoardLayout[row + i, column + i].Color != Logic.Instance.BoardLayout[row, column].Color)
                 {
                     return false;
                 }
