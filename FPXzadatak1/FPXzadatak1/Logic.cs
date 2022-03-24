@@ -10,7 +10,7 @@ namespace FPXzadatak1
     {
         public static readonly Board Instance = new Board();
 
-        private int counterPlayerHelper = 1;
+        //private int counterPlayerHelper = 1;
 
         int rowLength = Logic.Instance.BoardLayout.GetLength(0);
         int columnLength = Logic.Instance.BoardLayout.GetLength(1);
@@ -51,18 +51,18 @@ namespace FPXzadatak1
             return false;
         }
 
-        public void FallIntoPlace(int columnIdx) //popravljeno
+        public void FallIntoPlace(int columnIdx, int helper) //popravljeno
         {
-            bool activePlayer = DetermineActivePlayer();
+            //bool activePlayer = DetermineActivePlayer();
 
             for (int i = 0; i < rowLength; i++)
             {
-                if (activePlayer && ((i == rowLength - 1) || Logic.Instance.BoardLayout[i + 1, columnIdx] != null)) //provjerava je li došao do kraja, ili je naišao na već popunjeno mjesto
+                if ((helper % 2 == 0) && ((i == rowLength - 1) || Logic.Instance.BoardLayout[i + 1, columnIdx] != null)) //provjerava je li došao do kraja, ili je naišao na već popunjeno mjesto
                 {
                     Logic.Instance.BoardLayout[i, columnIdx] = new Coin(Gameplay.firstPlayer.Color);
                     break;
                 }
-                else if (!activePlayer && ((i == rowLength - 1) || Logic.Instance.BoardLayout[i + 1, columnIdx] != null))
+                else if ((helper % 2 != 0) && ((i == rowLength - 1) || Logic.Instance.BoardLayout[i + 1, columnIdx] != null))
                 {
                     Logic.Instance.BoardLayout[i, columnIdx] = new Coin(Gameplay.secondPlayer.Color);
                     break;
@@ -86,28 +86,28 @@ namespace FPXzadatak1
         //    }
         //}
 
-        public bool DetermineActivePlayer()
-        {
-            for (int i = 0; i < rowLength; i++)
-            {
-                for (int j = 0; j < columnLength; j++)
-                {
-                    if (Logic.Instance.BoardLayout[i, j] != null)
-                    {
-                        counterPlayerHelper++;
-                    }
-                }
-            }
+        //public bool DetermineActivePlayer()
+        //{
+        //    for (int i = 0; i < rowLength; i++)
+        //    {
+        //        for (int j = 0; j < columnLength; j++)
+        //        {
+        //            if (Logic.Instance.BoardLayout[i, j] != null)
+        //            {
+        //                counterPlayerHelper++;
+        //            }
+        //        }
+        //    }
 
-            if(counterPlayerHelper % 2 == 0)
-            {
-                return false; //first player is active
-            }
-            else
-            {
-                return true; //second player is active
-            }
-        }
+        //    if(counterPlayerHelper % 2 == 0)
+        //    {
+        //        return false; //first player is active
+        //    }
+        //    else
+        //    {
+        //        return true; //second player is active
+        //    }
+        //}
 
         //zamijenio true i false na svima, odnosno okrenio uvjete
 

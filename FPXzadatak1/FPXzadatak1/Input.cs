@@ -89,8 +89,7 @@ namespace FPXzadatak1
                 Console.WriteLine("You didn't enter any of the possible colors. Try again.");
                 Gameplay.secondPlayer.Color = Console.ReadLine();
 
-            } while (!COLOR_INPUT.Contains(Gameplay.secondPlayer.Color.ToLower()));
-           
+            } while (!COLOR_INPUT.Contains(Gameplay.secondPlayer.Color.ToLower()));  
         }
 
         public void Output()

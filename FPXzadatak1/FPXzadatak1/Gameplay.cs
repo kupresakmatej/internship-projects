@@ -20,18 +20,18 @@ namespace FPXzadatak1
             Input input = new Input();
 
             int columnIdx;
+            int helper = 0;
 
             intro.PrintIntro();
 
             while(!logic.GameOver())
             {
-                int helper = 0;
 
                 inputCommand.InputColumn(helper);
 
                 columnIdx = Convert.ToInt32(inputCommand.ReadColumnInput()) - 1;
 
-                logic.FallIntoPlace(columnIdx);
+                logic.FallIntoPlace(columnIdx, helper);
 
                 Console.WriteLine(Environment.NewLine);
                 input.Output();
