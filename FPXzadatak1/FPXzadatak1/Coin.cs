@@ -4,15 +4,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-enum Coin
-{
-    PlayerA,
-    PlayerB,
-    Empty
-}
-
 namespace FPXzadatak1
 {
+
+    //public enum Coins
+    //{
+    //    PlayerA,
+    //    PlayerB,
+    //    Empty
+    //}
+
     public class Coin
     {
         public string Color { get; set; }

@@ -56,13 +56,13 @@ namespace FPXzadatak1
                             Console.ForegroundColor = ConsoleColor.Red;
                         }
 
-                        Console.Write(string.Format("1 "));
+                        Console.Write(string.Format("|O"));
                         Console.ForegroundColor = ConsoleColor.White;
                     }
                     else
                     {
                         Console.ForegroundColor = ConsoleColor.White;
-                        Console.Write(string.Format("0 "));
+                        Console.Write(string.Format(" |"));
                     }
                 }
                 Console.Write(Environment.NewLine + Environment.NewLine);

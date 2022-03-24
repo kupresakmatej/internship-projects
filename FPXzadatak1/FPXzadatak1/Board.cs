@@ -14,7 +14,7 @@ namespace FPXzadatak1
         {
             BoardLayout = new Coin[6, 7];
         }
-
+        
         public void ClearBoard()
         {
             Array.Clear(BoardLayout, 0, BoardLayout.Length);
