@@ -8,7 +8,12 @@ namespace FPXzadatak1
 {
     public class Coin
     {
-        private string Color { get; set; }
+        public string Color { get; set; }
+
+        public Coin()
+        {
+
+        }
 
         public Coin(string color)
         {
