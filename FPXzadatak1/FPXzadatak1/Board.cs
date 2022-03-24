@@ -15,20 +15,9 @@ namespace FPXzadatak1
             BoardLayout = new Coin[6, 7];
         }
 
-        public bool IsRowFull()
+        public void ClearBoard()
         {
-            for(int i = 0; i < 6; i++)
-            {
-                for(int j = 0; j < 7; j++)
-                {
-                    if(BoardLayout[i, j] != null)
-                    {
-                        return true;
-                    }
-                }
-            }
-
-            return false;
+            Array.Clear(BoardLayout, 0, BoardLayout.Length);
         }
     }
 }

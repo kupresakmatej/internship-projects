@@ -109,8 +109,8 @@ namespace FPXzadatak1
         //    }
         //}
 
-        //zamijenio true i false na svima, odnosno okrenio uvjete
 
+        //zamijenio true i false na svima, odnosno okrenio uvjete
         public bool WinHorizontally(int row, int column)
         {
             if(column + 3 >= columnLength) //prekida odmah, ako nema uopće 4 mjesta da provjeri
@@ -130,7 +130,7 @@ namespace FPXzadatak1
 
         public bool WinVertically(int row, int column)
         {
-            if(row + 4 >= rowLength) //prekida odmah, ako nema uopće 4 mjesta da provjeri
+            if(row + 3 >= rowLength) //prekida odmah, ako nema uopće 4 mjesta da provjeri
             {
                 return false;
             }
