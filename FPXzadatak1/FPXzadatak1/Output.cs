@@ -39,22 +39,22 @@ namespace FPXzadatak1
                 {
                     if (Logic.Instance.BoardLayout[i, j] != Coin.Empty)
                     {
-                        if(Logic.Instance.BoardLayout[i, j] == Coin.PlayerA)
+                        if (Logic.Instance.BoardLayout[i, j] == Coin.PlayerA)
                         {
                             Console.ForegroundColor = (ConsoleColor)Enum.Parse(typeof(ConsoleColor), Gameplay.firstPlayer.Color);
                         }
-                        else if(Logic.Instance.BoardLayout[i, j] == Coin.PlayerB)
+                        else if (Logic.Instance.BoardLayout[i, j] == Coin.PlayerB)
                         {
                             Console.ForegroundColor = (ConsoleColor)Enum.Parse(typeof(ConsoleColor), Gameplay.secondPlayer.Color);
                         }
 
-                        Console.Write(string.Format("O "));
+                        Console.Write(string.Format("|O|"));
                         //Console.ForegroundColor = ConsoleColor.White;
                     }
                     else
                     {
                         //Console.ForegroundColor = ConsoleColor.White;
-                        Console.Write(string.Format("  "));
+                        Console.Write(string.Format(" |"));
                     }
                 }
                 Console.ForegroundColor = ConsoleColor.White;
