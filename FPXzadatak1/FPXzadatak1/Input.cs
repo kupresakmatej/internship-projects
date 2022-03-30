@@ -11,17 +11,20 @@ namespace FPXzadatak1
         public static readonly string[] COLOR_INPUT = {"blue", "yellow", "green", "red"};
 
         Logic logic = new Logic();
+        Output output = new Output();
 
         public void InputColumn(int helper)
         {
-            Console.Clear();
-
             if(helper % 2 == 0)
             {
+                output.OutputBoard();
+                Console.WriteLine(Environment.NewLine);
                 Console.WriteLine(string.Format("{0}, enter the number of the column you wish to put your coin in (1 to 7):", Gameplay.firstPlayer.Name));
             }
             else
             {
+                output.OutputBoard();
+                Console.WriteLine(Environment.NewLine);
                 Console.WriteLine(string.Format("{0}, enter the number of the column you wish to put your coin in (1 to 7):", Gameplay.secondPlayer.Name));
             }
         }
@@ -49,6 +52,12 @@ namespace FPXzadatak1
             ChooseColor();
 
             System.Threading.Thread.Sleep(2000);
+
+            Console.Clear();
+
+            //output.OutputBoard();
+
+            //Console.WriteLine(Environment.NewLine);
 
             //Gameplay next
         }

@@ -37,6 +37,9 @@ namespace FPXzadatak1
 
                 Console.WriteLine(Environment.NewLine);
                 output.OutputBoard();
+
+                Console.Clear();
+
                 helper++;
 
                 System.Threading.Thread.Sleep(2000);
@@ -78,9 +81,7 @@ namespace FPXzadatak1
                     Console.WriteLine(string.Format("Enter only '{1}' or '{0}'.", AFFIRMATIVE_INPUT, NEGATIVE_INPUT));
                     restartOrEnd = Console.ReadLine();
                 }          
-            } while (restartOrEnd != null);
-
-            
+            } while (restartOrEnd != null);            
         }
     }
 }
