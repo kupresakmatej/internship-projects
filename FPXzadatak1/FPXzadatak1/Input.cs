@@ -8,12 +8,17 @@ namespace FPXzadatak1
 {
     public class Input
     {
-        private static Board board = new Board();
+        private static Board board;
         public static readonly string[] COLOR_INPUT = {"blue", "yellow", "green", "red"};
         public static readonly string[] COLUMN_INPUT = { "1", "2", "3", "4", "5", "6", "7" };
 
         Logic logic = new Logic(board);
-        Output output = new Output();
+        Output output = new Output(board);
+
+        public Input(Board Board)
+        {
+            board = Board;
+        }
 
         public void InputColumn(int helper)
         {

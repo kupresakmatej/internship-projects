@@ -11,11 +11,11 @@ namespace FPXzadatak1
         public const string AFFIRMATIVE_INPUT = "y";
         public const string NEGATIVE_INPUT = "x";
 
-        private static Board board = new Board();
+        private static Board board;
 
-        public Output()
+        public Output(Board Board)
         {
-            //board.FillBoard();
+            board = Board;
         }
 
         public void OutputWinMessage(int helper)

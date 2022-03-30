@@ -11,7 +11,14 @@ namespace FPXzadatak1
         public const string AFFIRMATIVE_INPUT = "y";
         public const string NEGATIVE_INPUT = "x";
 
-        Input inputClass = new Input();
+        private static Board board;
+
+        public Intro(Board Board)
+        {
+            board = Board;
+        }
+
+        Input inputClass = new Input(board);
 
         public void PrintIntro()
         {

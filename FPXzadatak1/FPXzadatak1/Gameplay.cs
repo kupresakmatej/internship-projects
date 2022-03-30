@@ -13,12 +13,12 @@ namespace FPXzadatak1
 
         public static readonly Player firstPlayer = new Player();
         public static readonly Player secondPlayer = new Player();
-        public static readonly Input inputCommand = new Input();
+        public static readonly Input inputCommand = new Input(board);
         private static Board board = new Board();
 
-        Intro intro = new Intro();
+        Intro intro = new Intro(board);
         Logic logic = new Logic(board);
-        Output output = new Output();
+        Output output = new Output(board);
 
         public void Start()
         {
