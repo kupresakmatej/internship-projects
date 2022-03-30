@@ -33,25 +33,13 @@ namespace FPXzadatak1
             int rowLength = Logic.Instance.BoardLayout.GetLength(0);
             int columnLength = Logic.Instance.BoardLayout.GetLength(1);
 
-            for (int i = 0; i < 6; i++)
-            {
-                Console.WriteLine(" --- --- --- --- --- --- ---");
-                Console.WriteLine("|   |   |   |   |   |   |   |");
-            }
+
             Console.WriteLine(" --- --- --- --- --- --- ---");
-
-            int cursorPositionTop = Console.CursorTop;
-            int cursorPositionLeft = Console.CursorLeft;
-
             for (int i = 0; i < rowLength; i++)
             {
-                //Console.CursorTop = (cursorPositionTop - 2) + (i - 5);
-                //Console.CursorLeft = cursorPositionLeft + 1;
-
-                Console.SetCursorPosition(cursorPositionLeft + 1, cursorPositionTop - 2);
-
                 for (int j = 0; j < columnLength; j++)
                 {
+                    Console.Write("|");
                     if (Logic.Instance.BoardLayout[i, j] != Coin.Empty)
                     {
                         if (Logic.Instance.BoardLayout[i, j] == Coin.PlayerA)
@@ -62,18 +50,55 @@ namespace FPXzadatak1
                         {
                             Console.ForegroundColor = (ConsoleColor)Enum.Parse(typeof(ConsoleColor), Gameplay.secondPlayer.Color);
                         }
-                        Console.Write(string.Format(" 0 ").Insert(cursorPositionLeft, ""));
+                        Console.Write(string.Format(" 0 "));
                         Console.ForegroundColor = ConsoleColor.White;
-                        Console.Write("|");
                     }
                     else
                     {
                         Console.ForegroundColor = ConsoleColor.White;
-                        Console.Write(string.Format(""));
+                        Console.Write(string.Format(" x "));
                     }
                 }
+                Console.Write("|");
+                Console.WriteLine(Environment.NewLine);
                 Console.ForegroundColor = ConsoleColor.White;
             }
+            Console.WriteLine(" --- --- --- --- --- --- ---");
+
+            //int cursorPositionTop = Console.CursorTop;
+            //int cursorPositionLeft = Console.CursorLeft;
+
+            //for (int i = 0; i < rowLength; i++)
+            //{
+            //    //Console.CursorTop = (cursorPositionTop - 2) + (i - 5);
+            //    //Console.CursorLeft = cursorPositionLeft + 1;
+
+            //    Console.SetCursorPosition(cursorPositionLeft + 1, cursorPositionTop - 2);
+
+            //    for (int j = 0; j < columnLength; j++)
+            //    {
+            //        if (Logic.Instance.BoardLayout[i, j] != Coin.Empty)
+            //        {
+            //            if (Logic.Instance.BoardLayout[i, j] == Coin.PlayerA)
+            //            {
+            //                Console.ForegroundColor = (ConsoleColor)Enum.Parse(typeof(ConsoleColor), Gameplay.firstPlayer.Color);
+            //            }
+            //            else if (Logic.Instance.BoardLayout[i, j] == Coin.PlayerB)
+            //            {
+            //                Console.ForegroundColor = (ConsoleColor)Enum.Parse(typeof(ConsoleColor), Gameplay.secondPlayer.Color);
+            //            }
+            //            Console.Write(string.Format(" 0 ").Insert(cursorPositionLeft, ""));
+            //            Console.ForegroundColor = ConsoleColor.White;
+            //            Console.Write("|");
+            //        }
+            //        else
+            //        {
+            //            Console.ForegroundColor = ConsoleColor.White;
+            //            Console.Write(string.Format(""));
+            //        }
+            //    }
+            //    Console.ForegroundColor = ConsoleColor.White;
+            //}
         }
     }
 }
