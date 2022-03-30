@@ -57,14 +57,14 @@ namespace FPXzadatak1
 
             for (int i = 0; i < rowLength; i++)
             {
-                if ((helper % 2 == 0) && ((i == rowLength - 1) || Logic.Instance.BoardLayout[i + 1, columnIdx] != null)) //provjerava je li došao do kraja, ili je naišao na već popunjeno mjesto
+                if ((helper % 2 == 0) && ((i == rowLength - 1) || Logic.Instance.BoardLayout[i + 1, columnIdx] != Coin.Empty)) //provjerava je li došao do kraja, ili je naišao na već popunjeno mjesto
                 {
-                    Logic.Instance.BoardLayout[i, columnIdx] = new Coin(Gameplay.firstPlayer.Color);
+                    Logic.Instance.BoardLayout[i, columnIdx] = Coin.PlayerA;
                     break;
                 }
-                else if ((helper % 2 != 0) && ((i == rowLength - 1) || Logic.Instance.BoardLayout[i + 1, columnIdx] != null))
+                else if ((helper % 2 != 0) && ((i == rowLength - 1) || Logic.Instance.BoardLayout[i + 1, columnIdx] != Coin.Empty))
                 {
-                    Logic.Instance.BoardLayout[i, columnIdx] = new Coin(Gameplay.secondPlayer.Color);
+                    Logic.Instance.BoardLayout[i, columnIdx] = Coin.PlayerB;
                     break;
                 }
             }
@@ -120,7 +120,7 @@ namespace FPXzadatak1
 
             for(int i = 0; i < 4; i++)
             {
-                if (Logic.Instance.BoardLayout[row, column + i] == null || Logic.Instance.BoardLayout[row, column + i].Color != Logic.Instance.BoardLayout[row, column].Color)
+                if (Logic.Instance.BoardLayout[row, column + i] == Coin.Empty || Logic.Instance.BoardLayout[row, column + i] != Logic.Instance.BoardLayout[row, column])
                 {
                     return false;
                 }
@@ -137,7 +137,7 @@ namespace FPXzadatak1
 
             for(int i = 0; i < 4; i++)
             {
-                if(Logic.Instance.BoardLayout[row + i, column] == null || Logic.Instance.BoardLayout[row + i, column].Color != Logic.Instance.BoardLayout[row, column].Color)
+                if(Logic.Instance.BoardLayout[row + i, column] == Coin.Empty || Logic.Instance.BoardLayout[row + i, column] != Logic.Instance.BoardLayout[row, column])
                 {
                     return false;
                 }
@@ -158,7 +158,7 @@ namespace FPXzadatak1
 
             for(int i = 0; i < 4; i++)
             {
-                if(Logic.Instance.BoardLayout[row - i, column + i] == null || Logic.Instance.BoardLayout[row - i, column + i].Color != Logic.Instance.BoardLayout[row, column].Color)
+                if(Logic.Instance.BoardLayout[row - i, column + i] == Coin.Empty || Logic.Instance.BoardLayout[row - i, column + i] != Logic.Instance.BoardLayout[row, column])
                 {
                     return false;
                 }
@@ -179,7 +179,7 @@ namespace FPXzadatak1
 
             for(int i = 0; i < 4; i++)
             {
-                if(Logic.Instance.BoardLayout[row + i, column + i] == null || Logic.Instance.BoardLayout[row + i, column + i].Color != Logic.Instance.BoardLayout[row, column].Color)
+                if(Logic.Instance.BoardLayout[row + i, column + i] == Coin.Empty || Logic.Instance.BoardLayout[row + i, column + i] != Logic.Instance.BoardLayout[row, column])
                 {
                     return false;
                 }

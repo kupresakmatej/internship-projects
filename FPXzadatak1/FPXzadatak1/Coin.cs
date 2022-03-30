@@ -7,25 +7,25 @@ using System.Threading.Tasks;
 namespace FPXzadatak1
 {
 
-    //public enum Coins
-    //{
-    //    PlayerA,
-    //    PlayerB,
-    //    Empty
-    //}
-
-    public class Coin
+    public enum Coin
     {
-        public string Color { get; set; }
-
-        public Coin()
-        {
-
-        }
-
-        public Coin(string color)
-        {
-            Color = color;
-        }
+        PlayerA,
+        PlayerB,
+        Empty
     }
+
+    //public class Coin
+    //{
+    //    public string Color { get; set; }
+
+    //    public Coin()
+    //    {
+
+    //    }
+
+    //    public Coin(string color)
+    //    {
+    //        Color = color;
+    //    }
+    //}
 }

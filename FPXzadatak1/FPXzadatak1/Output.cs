@@ -28,7 +28,7 @@ namespace FPXzadatak1
             Console.WriteLine(Environment.NewLine);
         }
 
-        public void OutputBoard()
+        public void OutputBoard(int helper)
         {
             int rowLength = Logic.Instance.BoardLayout.GetLength(0);
             int columnLength = Logic.Instance.BoardLayout.GetLength(1);
@@ -37,32 +37,24 @@ namespace FPXzadatak1
             {
                 for (int j = 0; j < columnLength; j++)
                 {
-                    if (Logic.Instance.BoardLayout[i, j] != null)
+                    if (Logic.Instance.BoardLayout[i, j] != Coin.Empty)
                     {
-                        if (Logic.Instance.BoardLayout[i, j].Color == "blue")
+                        if(helper % 2 == 0)
                         {
-                            Console.ForegroundColor = ConsoleColor.Blue;
+                            Console.ForegroundColor = (ConsoleColor)Enum.Parse(typeof(ConsoleColor), Gameplay.firstPlayer.Color);
                         }
-                        else if (Logic.Instance.BoardLayout[i, j].Color == "yellow")
+                        else
                         {
-                            Console.ForegroundColor = ConsoleColor.Yellow;
-                        }
-                        else if (Logic.Instance.BoardLayout[i, j].Color == "green")
-                        {
-                            Console.ForegroundColor = ConsoleColor.Green;
-                        }
-                        else if (Logic.Instance.BoardLayout[i, j].Color == "red")
-                        {
-                            Console.ForegroundColor = ConsoleColor.Red;
+                            Console.ForegroundColor = (ConsoleColor)Enum.Parse(typeof(ConsoleColor), Gameplay.secondPlayer.Color);
                         }
 
-                        Console.Write(string.Format("|O"));
+                        Console.Write(string.Format("O "));
                         Console.ForegroundColor = ConsoleColor.White;
                     }
                     else
                     {
                         Console.ForegroundColor = ConsoleColor.White;
-                        Console.Write(string.Format(" |"));
+                        Console.Write(string.Format("  "));
                     }
                 }
                 Console.Write(Environment.NewLine + Environment.NewLine);

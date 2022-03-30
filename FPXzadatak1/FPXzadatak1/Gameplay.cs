@@ -38,7 +38,7 @@ namespace FPXzadatak1
                 logic.FallIntoPlace(columnIdx, helper);
 
                 Console.WriteLine(Environment.NewLine);
-                output.OutputBoard();
+                output.OutputBoard(helper);
                 helper++;
 
                 System.Threading.Thread.Sleep(2000);
@@ -46,7 +46,7 @@ namespace FPXzadatak1
             Console.Clear();
 
             output.OutputWinMessage(helper);
-            output.OutputBoard();
+            output.OutputBoard(helper);
 
             System.Threading.Thread.Sleep(5000);
 
@@ -77,7 +77,7 @@ namespace FPXzadatak1
                 }
                 else
                 {
-                    Console.WriteLine("Enter only 'x' or 'y'.");
+                    Console.WriteLine(string.Format("Enter only '{1}' or '{0}'.", AFFIRMATIVE_INPUT, NEGATIVE_INPUT));
                     restartOrEnd = Console.ReadLine();
                 }          
             } while (restartOrEnd != null);

@@ -71,25 +71,28 @@ namespace FPXzadatak1
             Console.WriteLine("Now you can choose your coin color, options are - blue, yellow, green and red.\n");
 
             Console.WriteLine(string.Format("{0}, choose your coin color:", Gameplay.firstPlayer.Name));
-            Gameplay.firstPlayer.Color = Console.ReadLine();
+            string firstColor = Console.ReadLine();
 
             do
             {
                 Console.WriteLine("You didn't enter any of the possible colors. Try again.");
-                Gameplay.firstPlayer.Color = Console.ReadLine();
+                firstColor = Console.ReadLine();
 
-            } while (!COLOR_INPUT.Contains(Gameplay.firstPlayer.Color.ToLower()));
+            } while (!COLOR_INPUT.Any(firstColor.Contains));
 
 
             Console.WriteLine(string.Format("\n{0}, choose your coin color:", Gameplay.secondPlayer.Name));
-            Gameplay.secondPlayer.Color = Console.ReadLine();
+            string secondColor = Console.ReadLine();
 
             do
             {
                 Console.WriteLine("You didn't enter any of the possible colors. Try again.");
-                Gameplay.secondPlayer.Color = Console.ReadLine();
+                secondColor = Console.ReadLine();
 
-            } while (!COLOR_INPUT.Contains(Gameplay.secondPlayer.Color.ToLower()));  
+            } while (!COLOR_INPUT.Any(secondColor.Contains));
+
+            Gameplay.firstPlayer.Color = char.ToUpper(firstColor[0]) + firstColor.Substring(1);
+            Gameplay.secondPlayer.Color = char.ToUpper(secondColor[0]) + secondColor.Substring(1);
         }
     }
 }
