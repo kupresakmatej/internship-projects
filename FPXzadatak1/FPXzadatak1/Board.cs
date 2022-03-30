@@ -13,6 +13,7 @@ namespace FPXzadatak1
         public Board()
         {
             BoardLayout = new Coin[6, 7];
+            FillBoard();
         }
 
         public void ClearBoard()
@@ -31,15 +32,15 @@ namespace FPXzadatak1
             }
         }
 
-        //public void PrintBoard()
-        //{
-        //    for (int i = 0; i < 6; i++)
-        //    {
-        //        for (int j = 0; j < 7; j++)
-        //        {
-        //            Console.WriteLine(BoardLayout[i, j]);
-        //        }
-        //    }
-        //}
+        public void PrintBoard()
+        {
+            for (int i = 0; i < 6; i++)
+            {
+                for (int j = 0; j < 7; j++)
+                {
+                    Console.WriteLine(BoardLayout[i, j]);
+                }
+            }
+        }
     }
 }

@@ -11,6 +11,13 @@ namespace FPXzadatak1
         public const string AFFIRMATIVE_INPUT = "y";
         public const string NEGATIVE_INPUT = "x";
 
+        private static Board board = new Board();
+
+        public Output()
+        {
+            board.FillBoard();
+        }
+
         public void OutputWinMessage(int helper)
         {
             string winner;
@@ -30,8 +37,8 @@ namespace FPXzadatak1
 
         public void OutputBoard()
         {
-            int rowLength = Logic.Instance.BoardLayout.GetLength(0);
-            int columnLength = Logic.Instance.BoardLayout.GetLength(1);
+            int rowLength = board.BoardLayout.GetLength(0);
+            int columnLength = board.BoardLayout.GetLength(1);
 
 
             Console.WriteLine(" --- --- --- --- --- --- ---");
@@ -40,13 +47,13 @@ namespace FPXzadatak1
                 for (int j = 0; j < columnLength; j++)
                 {
                     Console.Write("|");
-                    if (Logic.Instance.BoardLayout[i, j] != Coin.Empty)
+                    if (board.BoardLayout[i, j] != Coin.Empty)
                     {
-                        if (Logic.Instance.BoardLayout[i, j] == Coin.PlayerA)
+                        if (board.BoardLayout[i, j] == Coin.PlayerA)
                         {
                             Console.ForegroundColor = (ConsoleColor)Enum.Parse(typeof(ConsoleColor), Gameplay.firstPlayer.Color);
                         }
-                        else if (Logic.Instance.BoardLayout[i, j] == Coin.PlayerB)
+                        else if (board.BoardLayout[i, j] == Coin.PlayerB)
                         {
                             Console.ForegroundColor = (ConsoleColor)Enum.Parse(typeof(ConsoleColor), Gameplay.secondPlayer.Color);
                         }
@@ -56,7 +63,7 @@ namespace FPXzadatak1
                     else
                     {
                         Console.ForegroundColor = ConsoleColor.White;
-                        Console.Write(string.Format(" x "));
+                        Console.Write(string.Format(" X "));
                     }
                 }
                 Console.Write("|");

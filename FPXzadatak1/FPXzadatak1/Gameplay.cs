@@ -14,7 +14,7 @@ namespace FPXzadatak1
         public static readonly Player firstPlayer = new Player();
         public static readonly Player secondPlayer = new Player();
         public static readonly Input inputCommand = new Input();
-        //public static readonly Board board = new Board();
+        private static Board board = new Board();
 
         Intro intro = new Intro();
         Logic logic = new Logic();
@@ -22,6 +22,8 @@ namespace FPXzadatak1
 
         public void Start()
         {
+            board.FillBoard();
+
             int columnIdx;
             int helper = 0;
 

@@ -8,7 +8,9 @@ namespace FPXzadatak1
 {
     public class Input
     {
+        private static Board board = new Board();
         public static readonly string[] COLOR_INPUT = {"blue", "yellow", "green", "red"};
+        public static readonly string[] COLUMN_INPUT = { "1", "2", "3", "4", "5", "6", "7" };
 
         Logic logic = new Logic();
         Output output = new Output();
@@ -33,8 +35,12 @@ namespace FPXzadatak1
         {
             string input;
 
-            input = Console.ReadLine();
+            do
+            {
+                input = Console.ReadLine();
+                Console.WriteLine("You didn't enter a number between 1 and 7. Try again.");
 
+            } while (!COLUMN_INPUT.Any(input.Contains));
             return input;
         }
 
@@ -54,12 +60,6 @@ namespace FPXzadatak1
             System.Threading.Thread.Sleep(2000);
 
             Console.Clear();
-
-            //output.OutputBoard();
-
-            //Console.WriteLine(Environment.NewLine);
-
-            //Gameplay next
         }
 
         public void InputPlayerName()
@@ -80,23 +80,23 @@ namespace FPXzadatak1
             Console.WriteLine("Now you can choose your coin color, options are - blue, yellow, green and red.\n");
 
             Console.WriteLine(string.Format("{0}, choose your coin color:", Gameplay.firstPlayer.Name));
-            string firstColor = Console.ReadLine();
+            string firstColor;
 
             do
             {
-                Console.WriteLine("You didn't enter any of the possible colors. Try again.");
                 firstColor = Console.ReadLine();
+                Console.WriteLine("You didn't enter any of the possible colors. Try again.");
 
             } while (!COLOR_INPUT.Any(firstColor.Contains));
 
 
             Console.WriteLine(string.Format("\n{0}, choose your coin color:", Gameplay.secondPlayer.Name));
-            string secondColor = Console.ReadLine();
+            string secondColor;
 
             do
             {
-                Console.WriteLine("You didn't enter any of the possible colors. Try again.");
                 secondColor = Console.ReadLine();
+                Console.WriteLine("You didn't enter any of the possible colors. Try again.");
 
             } while (!COLOR_INPUT.Any(secondColor.Contains));
 

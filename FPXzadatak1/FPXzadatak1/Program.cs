@@ -13,6 +13,19 @@ namespace FPXzadatak1
             Gameplay game = new Gameplay();
 
             game.Start();
+
+            //Board board = new Board();
+            //Logic logic = new Logic();
+
+            //board.FillBoard();
+
+            //board.PrintBoard();
+
+            //logic.FallIntoPlace(1, 1);
+
+            //Console.WriteLine(Environment.NewLine);
+
+            //board.PrintBoard();
         }
     }
 }

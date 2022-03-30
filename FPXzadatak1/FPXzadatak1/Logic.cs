@@ -8,16 +8,16 @@ namespace FPXzadatak1
 {
     public class Logic
     {
-        public static readonly Board Instance = new Board();
+        private static Board board = new Board();
 
         //private int counterPlayerHelper = 1;
 
-        int rowLength = Logic.Instance.BoardLayout.GetLength(0);
-        int columnLength = Logic.Instance.BoardLayout.GetLength(1);
+        int rowLength = board.BoardLayout.GetLength(0);
+        int columnLength = board.BoardLayout.GetLength(1);
 
         public Logic()
         {
-            Instance.FillBoard();
+            
         }
 
         public bool GameOver()
@@ -57,14 +57,14 @@ namespace FPXzadatak1
 
             for (int i = 0; i < rowLength; i++)
             {
-                if ((helper % 2 == 0) && ((i == rowLength - 1) || Logic.Instance.BoardLayout[i + 1, columnIdx] != Coin.Empty)) //provjerava je li došao do kraja, ili je naišao na već popunjeno mjesto
+                if ((helper % 2 == 0) && ((i == rowLength - 1) || board.BoardLayout[i + 1, columnIdx] != Coin.Empty)) //provjerava je li došao do kraja, ili je naišao na već popunjeno mjesto
                 {
-                    Logic.Instance.BoardLayout[i, columnIdx] = Coin.PlayerA;
+                    board.BoardLayout[i, columnIdx] = Coin.PlayerA;
                     break;
                 }
-                else if ((helper % 2 != 0) && ((i == rowLength - 1) || Logic.Instance.BoardLayout[i + 1, columnIdx] != Coin.Empty))
+                else if ((helper % 2 != 0) && ((i == rowLength - 1) || board.BoardLayout[i + 1, columnIdx] != Coin.Empty))
                 {
-                    Logic.Instance.BoardLayout[i, columnIdx] = Coin.PlayerB;
+                    board.BoardLayout[i, columnIdx] = Coin.PlayerB;
                     break;
                 }
             }
@@ -120,7 +120,7 @@ namespace FPXzadatak1
 
             for(int i = 0; i < 4; i++)
             {
-                if (Logic.Instance.BoardLayout[row, column + i] == Coin.Empty || Logic.Instance.BoardLayout[row, column + i] != Logic.Instance.BoardLayout[row, column])
+                if (board.BoardLayout[row, column + i] == Coin.Empty || board.BoardLayout[row, column + i] != board.BoardLayout[row, column])
                 {
                     return false;
                 }
@@ -137,7 +137,7 @@ namespace FPXzadatak1
 
             for(int i = 0; i < 4; i++)
             {
-                if(Logic.Instance.BoardLayout[row + i, column] == Coin.Empty || Logic.Instance.BoardLayout[row + i, column] != Logic.Instance.BoardLayout[row, column])
+                if(board.BoardLayout[row + i, column] == Coin.Empty || board.BoardLayout[row + i, column] != board.BoardLayout[row, column])
                 {
                     return false;
                 }
@@ -158,7 +158,7 @@ namespace FPXzadatak1
 
             for(int i = 0; i < 4; i++)
             {
-                if(Logic.Instance.BoardLayout[row - i, column + i] == Coin.Empty || Logic.Instance.BoardLayout[row - i, column + i] != Logic.Instance.BoardLayout[row, column])
+                if(board.BoardLayout[row - i, column + i] == Coin.Empty || board.BoardLayout[row - i, column + i] != board.BoardLayout[row, column])
                 {
                     return false;
                 }
@@ -179,7 +179,7 @@ namespace FPXzadatak1
 
             for(int i = 0; i < 4; i++)
             {
-                if(Logic.Instance.BoardLayout[row + i, column + i] == Coin.Empty || Logic.Instance.BoardLayout[row + i, column + i] != Logic.Instance.BoardLayout[row, column])
+                if(board.BoardLayout[row + i, column + i] == Coin.Empty || board.BoardLayout[row + i, column + i] != board.BoardLayout[row, column])
                 {
                     return false;
                 }
