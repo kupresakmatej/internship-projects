@@ -45,8 +45,10 @@ namespace FPXzadatak1
 
             for (int i = 0; i < rowLength; i++)
             {
-                Console.CursorTop = (cursorPositionTop - 2) + (i - 5);
-                Console.CursorLeft = cursorPositionLeft + 1;
+                //Console.CursorTop = (cursorPositionTop - 2) + (i - 5);
+                //Console.CursorLeft = cursorPositionLeft + 1;
+
+                Console.SetCursorPosition(cursorPositionLeft + 1, cursorPositionTop - 2);
 
                 for (int j = 0; j < columnLength; j++)
                 {
