@@ -28,7 +28,7 @@ namespace FPXzadatak1
             Console.WriteLine(Environment.NewLine);
         }
 
-        public void OutputBoard(int helper)
+        public void OutputBoard()
         {
             int rowLength = Logic.Instance.BoardLayout.GetLength(0);
             int columnLength = Logic.Instance.BoardLayout.GetLength(1);
@@ -39,24 +39,25 @@ namespace FPXzadatak1
                 {
                     if (Logic.Instance.BoardLayout[i, j] != Coin.Empty)
                     {
-                        if(helper % 2 == 0)
+                        if(Logic.Instance.BoardLayout[i, j] == Coin.PlayerA)
                         {
                             Console.ForegroundColor = (ConsoleColor)Enum.Parse(typeof(ConsoleColor), Gameplay.firstPlayer.Color);
                         }
-                        else
+                        else if(Logic.Instance.BoardLayout[i, j] == Coin.PlayerB)
                         {
                             Console.ForegroundColor = (ConsoleColor)Enum.Parse(typeof(ConsoleColor), Gameplay.secondPlayer.Color);
                         }
 
                         Console.Write(string.Format("O "));
-                        Console.ForegroundColor = ConsoleColor.White;
+                        //Console.ForegroundColor = ConsoleColor.White;
                     }
                     else
                     {
-                        Console.ForegroundColor = ConsoleColor.White;
+                        //Console.ForegroundColor = ConsoleColor.White;
                         Console.Write(string.Format("  "));
                     }
                 }
+                Console.ForegroundColor = ConsoleColor.White;
                 Console.Write(Environment.NewLine + Environment.NewLine);
             }
         }

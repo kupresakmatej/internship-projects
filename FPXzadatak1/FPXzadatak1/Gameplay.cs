@@ -14,11 +14,10 @@ namespace FPXzadatak1
         public static readonly Player firstPlayer = new Player();
         public static readonly Player secondPlayer = new Player();
         public static readonly Input inputCommand = new Input();
-        public static readonly Board board = new Board();
+        //public static readonly Board board = new Board();
 
         Intro intro = new Intro();
         Logic logic = new Logic();
-        Input input = new Input();
         Output output = new Output();
 
         public void Start()
@@ -30,7 +29,6 @@ namespace FPXzadatak1
 
             while (!logic.GameOver())
             {
-
                 inputCommand.InputColumn(helper);
 
                 columnIdx = Convert.ToInt32(inputCommand.ReadColumnInput()) - 1;
@@ -38,7 +36,7 @@ namespace FPXzadatak1
                 logic.FallIntoPlace(columnIdx, helper);
 
                 Console.WriteLine(Environment.NewLine);
-                output.OutputBoard(helper);
+                output.OutputBoard();
                 helper++;
 
                 System.Threading.Thread.Sleep(2000);
@@ -46,7 +44,7 @@ namespace FPXzadatak1
             Console.Clear();
 
             output.OutputWinMessage(helper);
-            output.OutputBoard(helper);
+            output.OutputBoard();
 
             System.Threading.Thread.Sleep(5000);
 

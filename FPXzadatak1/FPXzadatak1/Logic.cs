@@ -17,7 +17,7 @@ namespace FPXzadatak1
 
         public Logic()
         {
-            
+            Instance.FillBoard();
         }
 
         public bool GameOver()

@@ -13,6 +13,11 @@ namespace FPXzadatak1
             Gameplay game = new Gameplay();
 
             game.Start();
+
+            //Board board = new Board();
+            //board.FillBoard();
+
+
         }
     }
 }
