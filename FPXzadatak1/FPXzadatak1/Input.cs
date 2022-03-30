@@ -12,7 +12,7 @@ namespace FPXzadatak1
         public static readonly string[] COLOR_INPUT = {"blue", "yellow", "green", "red"};
         public static readonly string[] COLUMN_INPUT = { "1", "2", "3", "4", "5", "6", "7" };
 
-        Logic logic = new Logic();
+        Logic logic = new Logic(board);
         Output output = new Output();
 
         public void InputColumn(int helper)

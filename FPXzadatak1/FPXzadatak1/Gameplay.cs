@@ -17,7 +17,7 @@ namespace FPXzadatak1
         private static Board board = new Board();
 
         Intro intro = new Intro();
-        Logic logic = new Logic();
+        Logic logic = new Logic(board);
         Output output = new Output();
 
         public void Start()

@@ -15,7 +15,7 @@ namespace FPXzadatak1
 
         public Output()
         {
-            board.FillBoard();
+            //board.FillBoard();
         }
 
         public void OutputWinMessage(int helper)
@@ -37,14 +37,14 @@ namespace FPXzadatak1
 
         public void OutputBoard()
         {
-            int rowLength = board.BoardLayout.GetLength(0);
-            int columnLength = board.BoardLayout.GetLength(1);
+            //int rowLength = board.BoardLayout.GetLength(0);
+            //int columnLength = board.BoardLayout.GetLength(1);
 
 
             Console.WriteLine(" --- --- --- --- --- --- ---");
-            for (int i = 0; i < rowLength; i++)
+            for (int i = 0; i < 6; i++)
             {
-                for (int j = 0; j < columnLength; j++)
+                for (int j = 0; j < 7; j++)
                 {
                     Console.Write("|");
                     if (board.BoardLayout[i, j] != Coin.Empty)

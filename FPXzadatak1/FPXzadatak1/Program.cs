@@ -15,13 +15,11 @@ namespace FPXzadatak1
             game.Start();
 
             //Board board = new Board();
-            //Logic logic = new Logic();
+            //Logic logic = new Logic(board);
 
             //board.FillBoard();
 
             //board.PrintBoard();
-
-            //logic.FallIntoPlace(1, 1);
 
             //Console.WriteLine(Environment.NewLine);
 
