@@ -13,47 +13,26 @@ namespace FPXzadatak1
         //private int counterPlayerHelper = 1;
 
         private static Board board;
-        private static Output output;
+
+        public static Coin coin = new Coin();
 
         public Logic(Board Board)
         {
             board = Board;
         }
 
+        int ROWS_COUNT = 6;
+        int COLUMNS_COUNT = 7;
 
-        //int rowLength = board.BoardLayout.GetLength(0);
-        //int columnLength = board.BoardLayout.GetLength(1);
+        public bool GameOver()
+        {
+            if(coin != Coin.Empty)
+            {
+                return true;
+            }
 
-        //public bool GameOver()
-        //{
-        //    for(int i = 0; i < 6; i++)
-        //    {
-        //        for(int j = 0; j < 7; j++)
-        //        {
-        //            if(WinHorizontally(i, j))
-        //            {
-        //                return true;
-        //            }
-
-        //            if(WinVertically(i, j))
-        //            {
-        //                return true;
-        //            }
-
-        //            if(WinDiagonallyUp(i, j))
-        //            {
-        //                return true;
-        //            }
-
-        //            if(WinDiagonallyDown(i, j))
-        //            {
-        //                return true;
-        //            }
-        //        }
-        //    }
-
-        //    return false;
-        //}
+            return false;
+        }
 
         public Coin FallIntoPlace(int columnIdx, int helper) //popravljeno
         {
@@ -64,16 +43,52 @@ namespace FPXzadatak1
                 if ((helper % 2 == 0) && ((i == 6 - 1) || board.BoardLayout[i + 1, columnIdx] != Coin.Empty)) //provjerava je li došao do kraja, ili je naišao na već popunjeno mjesto
                 {
                     board.BoardLayout[i, columnIdx] = Coin.PlayerA;
+
+                    if(CheckRows() != Coin.Empty)
+                    {
+                        coin = CheckRows();
+                    }
+                    else if (CheckColumns(columnIdx) != Coin.Empty)
+                    {
+                        coin = CheckColumns(columnIdx);
+                    }
+                    else if (CheckDiagonallyUp(i, columnIdx) != Coin.Empty)
+                    {
+                        coin = CheckDiagonallyUp(i, columnIdx);
+                    }
+                    else if (CheckDiagonallyDown(i, columnIdx) != Coin.Empty)
+                    {
+                        coin = CheckDiagonallyDown(i, columnIdx);
+                    }
+
                     break;
                 }
                 else if ((helper % 2 != 0) && ((i == 6 - 1) || board.BoardLayout[i + 1, columnIdx] != Coin.Empty))
                 {
                     board.BoardLayout[i, columnIdx] = Coin.PlayerB;
+
+                    if (CheckRows() != Coin.Empty)
+                    {
+                        coin = CheckRows();
+                    }
+                    else if (CheckColumns(columnIdx) != Coin.Empty)
+                    {
+                        coin = CheckColumns(columnIdx);
+                    }
+                    else if (CheckDiagonallyUp(i, columnIdx) != Coin.Empty)
+                    {
+                        coin = CheckDiagonallyUp(i, columnIdx);
+                    }
+                    else if (CheckDiagonallyDown(i, columnIdx) != Coin.Empty)
+                    {
+                        coin = CheckDiagonallyDown(i, columnIdx);
+                    }
+
                     break;
                 }
             }
 
-            return Coin.Empty;
+            return coin;
         }
 
         //Nepotrebno
@@ -193,50 +208,73 @@ namespace FPXzadatak1
         //    return true;
         //}
 
-        public Coin Winner(Coin[] coins)
+        private Coin CheckForWinner(Coin[] coins)
         {
-            int index = 0;
+            int countA = 0;
+            int countB = 0;
 
-            for (int i = 0; i < coins.Length - 1; i++)
+            for (int i = 0; i < coins.Length; i++)
             {
-                if (coins[i] != coins[i + 1])
+                if (coins[i] == Coin.Empty)
                 {
-                    return Coin.Empty;
+                    countA = 0;
+                    countB = 0;
+                }
+                else if (coins[i] == Coin.PlayerA)
+                {
+                    countA++;
+                    countB = 0;
                 }
                 else
                 {
-                    index = i;
+                    countB++;
+                    countA = 0;
                 }
+
+
+                if (countA >= 4)
+                    return Coin.PlayerA;
+                else if (countB >= 4)
+                    return Coin.PlayerB;
             }
 
-            return coins[index];
+            return Coin.Empty;
         }
 
-        public Coin[] CheckHorizontally(int row)
+        public Coin CheckRows()
         {
-            Coin[] coins = new Coin[7];
-            
-            for(int i = 0; i < 7; i++)
+            Coin[] coins = new Coin[COLUMNS_COUNT];
+
+            for (int i = 0; i < ROWS_COUNT; i++)
             {
-                coins[i] = board.BoardLayout[row, i];
+                for (int j = 0; j < COLUMNS_COUNT; j++)
+                    coins[j] = board.BoardLayout[i, j];
+
+                var result = CheckForWinner(coins);
+                if (result != Coin.Empty)
+                    return result;
             }
 
-            return coins;
+            return Coin.Empty;
         }
 
-        public Coin[] CheckVertically(int column)
+        public Coin CheckColumns(int column)
         {
-            Coin[] coins = new Coin[6];
+            Coin[] coins = new Coin[ROWS_COUNT];
 
             for(int i = 0; i < 6; i++)
             {
                 coins[i] = board.BoardLayout[i, column];
+
+                var result = CheckForWinner(coins);
+                if (result != Coin.Empty)
+                    return result;
             }
 
-            return coins;
+            return Coin.Empty;
         }
 
-        public Coin[] CheckDiagonallyUp(int row, int column)
+        public Coin CheckDiagonallyUp(int row, int column)
         {
             Coin[] coins = new Coin[] { Coin.Empty };
 
@@ -247,14 +285,18 @@ namespace FPXzadatak1
                     for (int j = 7 - column; j < board.BoardLayout.GetLength(1); j++)
                     {
                         coins[k] = board.BoardLayout[i, j];
+
+                        var result = CheckForWinner(coins);
+                        if (result != Coin.Empty)
+                            return result;
                     }
                 }
             }
 
-            return coins;
+            return Coin.Empty;
         }
 
-        public Coin[] CheckDiagonallyDown(int row, int column)
+        public Coin CheckDiagonallyDown(int row, int column)
         {
             Coin[] coins = new Coin[] { Coin.Empty };
 
@@ -265,11 +307,15 @@ namespace FPXzadatak1
                     for (int j = 7 - column; j > board.BoardLayout.GetLength(1) - column; j--)
                     {
                         coins[k] = board.BoardLayout[i, j];
+
+                        var result = CheckForWinner(coins);
+                        if (result != Coin.Empty)
+                            return result;
                     }
                 }
             }
 
-            return coins;
+            return Coin.Empty;
         }
     }
 }
