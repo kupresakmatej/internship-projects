@@ -13,6 +13,7 @@ namespace FPXzadatak1
         //private int counterPlayerHelper = 1;
 
         private static Board board;
+        private static Output output;
 
         public Logic(Board Board)
         {
@@ -23,38 +24,38 @@ namespace FPXzadatak1
         //int rowLength = board.BoardLayout.GetLength(0);
         //int columnLength = board.BoardLayout.GetLength(1);
 
-        public bool GameOver()
-        {
-            for(int i = 0; i < 6; i++)
-            {
-                for(int j = 0; j < 7; j++)
-                {
-                    if(WinHorizontally(i, j))
-                    {
-                        return true;
-                    }
+        //public bool GameOver()
+        //{
+        //    for(int i = 0; i < 6; i++)
+        //    {
+        //        for(int j = 0; j < 7; j++)
+        //        {
+        //            if(WinHorizontally(i, j))
+        //            {
+        //                return true;
+        //            }
 
-                    if(WinVertically(i, j))
-                    {
-                        return true;
-                    }
+        //            if(WinVertically(i, j))
+        //            {
+        //                return true;
+        //            }
 
-                    if(WinDiagonallyUp(i, j))
-                    {
-                        return true;
-                    }
+        //            if(WinDiagonallyUp(i, j))
+        //            {
+        //                return true;
+        //            }
 
-                    if(WinDiagonallyDown(i, j))
-                    {
-                        return true;
-                    }
-                }
-            }
+        //            if(WinDiagonallyDown(i, j))
+        //            {
+        //                return true;
+        //            }
+        //        }
+        //    }
 
-            return false;
-        }
+        //    return false;
+        //}
 
-        public void FallIntoPlace(int columnIdx, int helper) //popravljeno
+        public Coin FallIntoPlace(int columnIdx, int helper) //popravljeno
         {
             //bool activePlayer = DetermineActivePlayer();
 
@@ -71,6 +72,8 @@ namespace FPXzadatak1
                     break;
                 }
             }
+
+            return Coin.Empty;
         }
 
         //Nepotrebno
@@ -114,80 +117,159 @@ namespace FPXzadatak1
 
 
         //zamijenio true i false na svima, odnosno okrenio uvjete
-        public bool WinHorizontally(int row, int column)
-        {
-            if(column + 3 >= 7) //prekida odmah, ako nema uopće 4 mjesta da provjeri
-            {
-                return false;
-            }
+        //public bool WinHorizontally(int row, int column)
+        //{
+        //    if(column + 3 >= 7) //prekida odmah, ako nema uopće 4 mjesta da provjeri
+        //    {
+        //        return false;
+        //    }
 
-            for(int i = 0; i < 4; i++)
+        //    for(int i = 0; i < 4; i++)
+        //    {
+        //        if (board.BoardLayout[row, column + i] == Coin.Empty || board.BoardLayout[row, column + i] != board.BoardLayout[row, column])
+        //        {
+        //            return false;
+        //        }
+        //    }
+        //    return true;
+        //}
+
+        //public bool WinVertically(int row, int column)
+        //{
+        //    if(row + 3 >= 6) //prekida odmah, ako nema uopće 4 mjesta da provjeri
+        //    {
+        //        return false;
+        //    }
+
+        //    for(int i = 0; i < 4; i++)
+        //    {
+        //        if(board.BoardLayout[row + i, column] == Coin.Empty || board.BoardLayout[row + i, column] != board.BoardLayout[row, column])
+        //        {
+        //            return false;
+        //        }
+        //    }
+        //    return true;
+        //}
+
+        //public bool WinDiagonallyUp(int row, int column)
+        //{
+        //    if(row - 3 < 0) //prekida odmah, ako nema uopće 4 mjesta da provjeri
+        //    {
+        //        return false;
+        //    }
+        //    if(column + 3 >= 7)
+        //    {
+        //        return false;
+        //    }
+
+        //    for(int i = 0; i < 4; i++)
+        //    {
+        //        if(board.BoardLayout[row - i, column + i] == Coin.Empty || board.BoardLayout[row - i, column + i] != board.BoardLayout[row, column])
+        //        {
+        //            return false;
+        //        }
+        //    }
+        //    return true;
+        //}
+
+        //public bool WinDiagonallyDown(int row, int column)
+        //{
+        //    if(row + 3 >= 6) //prekida odmah, ako nema uopće 4 mjesta da provjeri
+        //    {
+        //        return false;
+        //    }
+        //    if(column + 3 >= 7)
+        //    {
+        //        return false;
+        //    }
+
+        //    for(int i = 0; i < 4; i++)
+        //    {
+        //        if(board.BoardLayout[row + i, column + i] == Coin.Empty || board.BoardLayout[row + i, column + i] != board.BoardLayout[row, column])
+        //        {
+        //            return false;
+        //        }
+        //    }
+        //    return true;
+        //}
+
+        public Coin Winner(Coin[] coins)
+        {
+            int index = 0;
+
+            for (int i = 0; i < coins.Length - 1; i++)
             {
-                if (board.BoardLayout[row, column + i] == Coin.Empty || board.BoardLayout[row, column + i] != board.BoardLayout[row, column])
+                if (coins[i] != coins[i + 1])
                 {
-                    return false;
+                    return Coin.Empty;
+                }
+                else
+                {
+                    index = i;
                 }
             }
-            return true;
+
+            return coins[index];
         }
 
-        public bool WinVertically(int row, int column)
+        public Coin[] CheckHorizontally(int row)
         {
-            if(row + 3 >= 6) //prekida odmah, ako nema uopće 4 mjesta da provjeri
+            Coin[] coins = new Coin[7];
+            
+            for(int i = 0; i < 7; i++)
             {
-                return false;
+                coins[i] = board.BoardLayout[row, i];
             }
 
-            for(int i = 0; i < 4; i++)
-            {
-                if(board.BoardLayout[row + i, column] == Coin.Empty || board.BoardLayout[row + i, column] != board.BoardLayout[row, column])
-                {
-                    return false;
-                }
-            }
-            return true;
+            return coins;
         }
 
-        public bool WinDiagonallyUp(int row, int column)
+        public Coin[] CheckVertically(int column)
         {
-            if(row - 3 < 0) //prekida odmah, ako nema uopće 4 mjesta da provjeri
+            Coin[] coins = new Coin[6];
+
+            for(int i = 0; i < 6; i++)
             {
-                return false;
-            }
-            if(column + 3 >= 7)
-            {
-                return false;
+                coins[i] = board.BoardLayout[i, column];
             }
 
-            for(int i = 0; i < 4; i++)
-            {
-                if(board.BoardLayout[row - i, column + i] == Coin.Empty || board.BoardLayout[row - i, column + i] != board.BoardLayout[row, column])
-                {
-                    return false;
-                }
-            }
-            return true;
+            return coins;
         }
 
-        public bool WinDiagonallyDown(int row, int column)
+        public Coin[] CheckDiagonallyUp(int row, int column)
         {
-            if(row + 3 >= 6) //prekida odmah, ako nema uopće 4 mjesta da provjeri
-            {
-                return false;
-            }
-            if(column + 3 >= 7)
-            {
-                return false;
-            }
+            Coin[] coins = new Coin[] { Coin.Empty };
 
-            for(int i = 0; i < 4; i++)
+            for(int k = 0; k < coins.Length; k++)
             {
-                if(board.BoardLayout[row + i, column + i] == Coin.Empty || board.BoardLayout[row + i, column + i] != board.BoardLayout[row, column])
+                for (int i = 6 - row; i < board.BoardLayout.GetLength(0); i++)
                 {
-                    return false;
+                    for (int j = 7 - column; j < board.BoardLayout.GetLength(1); j++)
+                    {
+                        coins[k] = board.BoardLayout[i, j];
+                    }
                 }
             }
-            return true;
+
+            return coins;
+        }
+
+        public Coin[] CheckDiagonallyDown(int row, int column)
+        {
+            Coin[] coins = new Coin[] { Coin.Empty };
+
+            for(int k = 0; k < coins.Length; k++)
+            {
+                for (int i = 6 - row; i > board.BoardLayout.GetLength(0) - row; i--)
+                {
+                    for (int j = 7 - column; j > board.BoardLayout.GetLength(1) - column; j--)
+                    {
+                        coins[k] = board.BoardLayout[i, j];
+                    }
+                }
+            }
+
+            return coins;
         }
     }
 }
