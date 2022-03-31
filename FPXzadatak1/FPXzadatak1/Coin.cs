@@ -9,9 +9,9 @@ namespace FPXzadatak1
 
     public enum Coin
     {
+        Empty,
         PlayerA,
-        PlayerB,
-        Empty
+        PlayerB
     }
 
     //public class Coin

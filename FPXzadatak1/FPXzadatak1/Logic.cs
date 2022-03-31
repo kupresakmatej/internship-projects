@@ -278,18 +278,27 @@ namespace FPXzadatak1
         {
             Coin[] coins = new Coin[] { Coin.Empty };
 
-            for(int k = 0; k < coins.Length; k++)
+            for(int i = 0; i < ROWS_COUNT; i++)
             {
-                for (int i = 6 - row; i < board.BoardLayout.GetLength(0); i++)
+                for(int j = 0; j < COLUMNS_COUNT; j++)
                 {
-                    for (int j = 7 - column; j < board.BoardLayout.GetLength(1); j++)
+                    if (row - 3 < 0)
                     {
-                        coins[k] = board.BoardLayout[i, j];
-
-                        var result = CheckForWinner(coins);
-                        if (result != Coin.Empty)
-                            return result;
+                        return Coin.Empty;
                     }
+                    if (column + 3 >= 7)
+                    {
+                        return Coin.Empty;
+                    }
+
+                    if (board.BoardLayout[row - i, column + i] != Coin.Empty)
+                    {
+                        coins[i] = board.BoardLayout[i, j];
+                    }
+
+                    var result = CheckForWinner(coins);
+                    if (result != Coin.Empty)
+                        return result;
                 }
             }
 
@@ -300,18 +309,27 @@ namespace FPXzadatak1
         {
             Coin[] coins = new Coin[] { Coin.Empty };
 
-            for(int k = 0; k < coins.Length; k++)
+            for (int i = 0; i < ROWS_COUNT - 1; i++)
             {
-                for (int i = 6 - row; i > board.BoardLayout.GetLength(0) - row; i--)
+                for (int j = 0; j < COLUMNS_COUNT - 1; j++)
                 {
-                    for (int j = 7 - column; j > board.BoardLayout.GetLength(1) - column; j--)
+                    if(row + 3 >= 6)
                     {
-                        coins[k] = board.BoardLayout[i, j];
-
-                        var result = CheckForWinner(coins);
-                        if (result != Coin.Empty)
-                            return result;
+                        return Coin.Empty;
                     }
+                    if(column + 3 >= 7)
+                    {
+                        return Coin.Empty;
+                    }
+
+                    if (board.BoardLayout[row + i, column + i] != Coin.Empty)
+                    {
+                        coins[i] = board.BoardLayout[i, j];
+                    }
+
+                    var result = CheckForWinner(coins);
+                    if (result != Coin.Empty)
+                        return result;
                 }
             }
 
