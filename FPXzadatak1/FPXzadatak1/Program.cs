@@ -18,12 +18,57 @@ namespace FPXzadatak1
             //Logic logic = new Logic(board);
 
             //board.FillBoard();
+            //PrintSmth();
 
             //board.PrintBoard();
 
             //Console.WriteLine(Environment.NewLine);
 
             //board.PrintBoard();
+        }
+
+        static void PrintSmth()
+        {
+            int ROWS_COUNT = 6;
+            int COLUMNS_COUNT = 7;
+
+            //for (int i = 0; i < ROWS_COUNT; i++)
+            //{
+            //    //Coin[] coins = new Coin[i];
+
+            //    for (int j = 0; j < i; j++)
+            //    {
+            //        Console.WriteLine(string.Format("{0} {1}", j, COLUMNS_COUNT - j - 1));
+            //    }
+            //    Console.WriteLine();
+            //}
+
+            //for (int i = 0; i < ROWS_COUNT; i++)
+            //{
+            //    for (int j = 0; j < i; j++)
+            //    {
+            //        Console.WriteLine(string.Format("{0} {1}", ROWS_COUNT - i + 1 + j, j));
+            //    }
+            //    Console.WriteLine();
+            //}
+
+            //for(int i = 0; i < ROWS_COUNT; i++)
+            //{
+            //    for(int j = 0; j < i; j++)
+            //    {
+            //        Console.WriteLine(string.Format("{0} {1}", ROWS_COUNT - i + 1 + j, COLUMNS_COUNT - j - 1));
+            //    }
+            //    Console.WriteLine();
+            //}
+
+            for(int i = 0; i < ROWS_COUNT; i++)
+            {
+                for(int j = 0; j < i; j++)
+                {
+                    Console.WriteLine(string.Format("{0} {1}", ROWS_COUNT - j, i - j - 1));
+                }
+                Console.WriteLine();
+            }
         }
     }
 }
