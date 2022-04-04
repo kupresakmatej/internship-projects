@@ -10,7 +10,12 @@ namespace FPXzadatak1
     {
         private static Board board;
         public static readonly string[] COLOR_INPUT = {"blue", "yellow", "green", "red"};
-        public static readonly string[] COLUMN_INPUT = { "1", "2", "3", "4", "5", "6", "7" };
+
+        //public static readonly string[] COLOR_YELLOW = { "blue", "yellow", "green", "red" };
+        //public static readonly string[] COLOR_GREEN = { "blue", "yellow", "green", "red" };
+        //public static readonly string[] COLOR_RED = { "blue", "yellow", "green", "red" };
+
+        //public static readonly string[] COLUMN_INPUT = { "1", "2", "3", "4", "5", "6", "7" };
 
         Logic logic = new Logic(board);
         Output output = new Output(board);
@@ -36,16 +41,17 @@ namespace FPXzadatak1
             }
         }
 
-        public string ReadColumnInput()
+        public int ReadColumnInput()
         {
-            string input;
+            int input;
 
             do
             {
-                input = Console.ReadLine();
+                input = Convert.ToInt32(Console.ReadLine());
                 Console.WriteLine("You didn't enter a number between 1 and 7. Try again.");
 
-            } while (!COLUMN_INPUT.Any(input.Contains));
+            } while (input < 1 || input > 7);
+
             return input;
         }
 

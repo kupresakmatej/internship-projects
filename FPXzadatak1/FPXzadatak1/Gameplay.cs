@@ -27,7 +27,9 @@ namespace FPXzadatak1
             int columnIdx;
             int helper = 0;
 
-            intro.PrintIntro();
+            ChooseGameplay();
+
+            //intro.PrintIntro();
 
             while (!logic.GameOver())
             {
@@ -84,6 +86,11 @@ namespace FPXzadatak1
                     restartOrEnd = Console.ReadLine();
                 }          
             } while (restartOrEnd != null);            
+        }
+
+        public void ChooseGameplay()
+        {
+            intro.ChooseGameplay();
         }
     }
 }
