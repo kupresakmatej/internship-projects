@@ -10,17 +10,19 @@ namespace FPXzadatak1
     {
         static void Main(string[] args)
         {
-            Gameplay game = new Gameplay();
+            //Gameplay game = new Gameplay();
 
-            game.Start();
+            //game.Start();
 
-            //Board board = new Board();
+            Board board = new Board();
             //Logic logic = new Logic(board);
 
-            //board.FillBoard();
-            //PrintSmth();
+            board.FillBoard();
+            PrintSmth();
 
             //board.PrintBoard();
+
+            //logic.FallIntoPlace(1, 0);
 
             //Console.WriteLine(Environment.NewLine);
 
@@ -32,13 +34,23 @@ namespace FPXzadatak1
             int ROWS_COUNT = 6;
             int COLUMNS_COUNT = 7;
 
+            for (int i = 0; i < ROWS_COUNT; i++)
+            {
+                //Coin[] coins = new Coin[i];
+
+                for (int j = 0; j < i; j++)
+                {
+                    Console.WriteLine(string.Format("{0} {1}", j, COLUMNS_COUNT - i + j));
+                }
+                Console.WriteLine();
+            }
+
+
             //for (int i = 0; i < ROWS_COUNT; i++)
             //{
-            //    //Coin[] coins = new Coin[i];
-
             //    for (int j = 0; j < i; j++)
             //    {
-            //        Console.WriteLine(string.Format("{0} {1}", j, COLUMNS_COUNT - j - 1));
+            //        Console.WriteLine(string.Format("{0} {1}", ROWS_COUNT - i + j, j));
             //    }
             //    Console.WriteLine();
             //}
@@ -46,29 +58,20 @@ namespace FPXzadatak1
             //for (int i = 0; i < ROWS_COUNT; i++)
             //{
             //    for (int j = 0; j < i; j++)
-            //    {
-            //        Console.WriteLine(string.Format("{0} {1}", ROWS_COUNT - i + 1 + j, j));
-            //    }
-            //    Console.WriteLine();
-            //}
-
-            //for(int i = 0; i < ROWS_COUNT; i++)
-            //{
-            //    for(int j = 0; j < i; j++)
             //    {
             //        Console.WriteLine(string.Format("{0} {1}", ROWS_COUNT - i + 1 + j, COLUMNS_COUNT - j - 1));
             //    }
             //    Console.WriteLine();
             //}
 
-            for(int i = 0; i < ROWS_COUNT; i++)
-            {
-                for(int j = 0; j < i; j++)
-                {
-                    Console.WriteLine(string.Format("{0} {1}", ROWS_COUNT - j, i - j - 1));
-                }
-                Console.WriteLine();
-            }
+            //for (int i = 0; i < ROWS_COUNT; i++)
+            //{
+            //    for(int j = 0; j < i; j++)
+            //    {
+            //        Console.WriteLine(string.Format("{0} {1}", ROWS_COUNT - j, i - j - 1));
+            //    }
+            //    Console.WriteLine();
+            //}
         }
     }
 }

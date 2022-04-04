@@ -56,9 +56,9 @@ namespace FPXzadatak1
                     {
                         coin = CheckDiagonallyUp();
                     }
-                    else if (CheckDiagonallyDown(i, columnIdx) != Coin.Empty)
+                    else if (CheckDiagonallyDown() != Coin.Empty)
                     {
-                        coin = CheckDiagonallyDown(i, columnIdx);
+                        coin = CheckDiagonallyDown();
                     }
 
                     break;
@@ -79,9 +79,9 @@ namespace FPXzadatak1
                     {
                         coin = CheckDiagonallyUp();
                     }
-                    else if (CheckDiagonallyDown(i, columnIdx) != Coin.Empty)
+                    else if (CheckDiagonallyDown() != Coin.Empty)
                     {
-                        coin = CheckDiagonallyDown(i, columnIdx);
+                        coin = CheckDiagonallyDown();
                     }
 
                     break;
@@ -276,13 +276,13 @@ namespace FPXzadatak1
 
         public Coin CheckDiagonallyUp()
         {
-            for(int i = 0; i < ROWS_COUNT; i++)
+            for (int i = 0; i < ROWS_COUNT; i++)
             {
                 Coin[] coins = new Coin[i];
 
-                for(int j = 0; j < i; j++)
+                for (int j = 0; j < i; j++)
                 {
-                    coins[j] = board.BoardLayout[j, COLUMNS_COUNT - j - 1];
+                    coins[j] = board.BoardLayout[j, COLUMNS_COUNT - i + j];
                 }
 
                 var result = CheckForWinner(coins);
@@ -307,7 +307,7 @@ namespace FPXzadatak1
             return Coin.Empty;
         }
 
-        public Coin CheckDiagonallyDown(int row, int column)
+        public Coin CheckDiagonallyDown()
         {
             for (int i = 0; i < ROWS_COUNT; i++)
             {
@@ -329,7 +329,7 @@ namespace FPXzadatak1
 
                 for (int j = 0; j < i; j++)
                 {
-                    coins[j] = board.BoardLayout[ROWS_COUNT - j, i - j - 1];
+                    coins[j] = board.BoardLayout[ROWS_COUNT - j - 1, i - j - 1];
                 }
 
                 var result = CheckForWinner(coins);
