@@ -304,6 +304,24 @@ namespace FPXzadatak1
                     return result;
             }
 
+            for (int i = 1; i <= (ROWS_COUNT + COLUMNS_COUNT - 1); i++)
+            {
+                Coin[] coins = new Coin[i];
+
+                int start_column = Math.Max(0, i - ROWS_COUNT);
+
+                int counter = Math.Min(i, Math.Min((COLUMNS_COUNT - start_column), ROWS_COUNT));
+
+                for (int j = 0; j < counter; j++)
+                {
+                    coins[j] = board.BoardLayout[Math.Min(ROWS_COUNT, i) - j - 1, start_column + j];
+                }
+
+                var result = CheckForWinner(coins);
+                if (result != Coin.Empty)
+                    return result;
+            }
+
             return Coin.Empty;
         }
 
@@ -330,6 +348,24 @@ namespace FPXzadatak1
                 for (int j = 0; j < i; j++)
                 {
                     coins[j] = board.BoardLayout[ROWS_COUNT - j - 1, i - j - 1];
+                }
+
+                var result = CheckForWinner(coins);
+                if (result != Coin.Empty)
+                    return result;
+            }
+
+            for (int i = (ROWS_COUNT + COLUMNS_COUNT - 1); i >= 1; i--)
+            {
+                Coin[] coins = new Coin[i];
+
+                int start_column = Math.Max(0, i - ROWS_COUNT);
+
+                int counter = Math.Min(i, Math.Min((COLUMNS_COUNT - start_column), ROWS_COUNT));
+
+                for (int j = 0; j < counter; j++)
+                {
+                    coins[j] = board.BoardLayout[Math.Min(ROWS_COUNT, i) - j - 1, start_column + j];
                 }
 
                 var result = CheckForWinner(coins);
