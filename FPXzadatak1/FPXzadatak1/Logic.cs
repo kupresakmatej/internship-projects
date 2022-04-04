@@ -355,6 +355,8 @@ namespace FPXzadatak1
                     return result;
             }
 
+            Coin[,] coinsFlipped = Flip();
+
             for (int i = (ROWS_COUNT + COLUMNS_COUNT - 1); i >= 1; i--)
             {
                 Coin[] coins = new Coin[i];
@@ -365,7 +367,7 @@ namespace FPXzadatak1
 
                 for (int j = 0; j < counter; j++)
                 {
-                    coins[j] = board.BoardLayout[Math.Min(ROWS_COUNT, i) - j - 1, start_column + j];
+                    coins[j] = coinsFlipped[Math.Min(ROWS_COUNT, i) - j - 1, start_column + j];
                 }
 
                 var result = CheckForWinner(coins);
@@ -374,6 +376,21 @@ namespace FPXzadatak1
             }
 
             return Coin.Empty;
+        }
+
+        public Coin[,] Flip()
+        {
+            Coin[,] coins = new Coin[6, 7];
+
+            for(int i = 0; i < ROWS_COUNT; i++)
+            {
+                for(int j = 0; j < COLUMNS_COUNT; j++)
+                {
+                    coins[ROWS_COUNT - 1 - i, j] = board.BoardLayout[i, j];
+                }
+            }
+
+            return coins;
         }
     }
 }
