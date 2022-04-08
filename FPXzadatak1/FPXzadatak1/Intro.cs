@@ -92,8 +92,8 @@ namespace FPXzadatak1
             {
                 if (input.ToLower() == AFFIRMATIVE_INPUT)
                 {
-                    Console.WriteLine("You choose singleplayer.");
-                    //break;
+                    
+                    break;
                 }
                 else if (input.ToLower() == NEGATIVE_INPUT)
                 {
@@ -127,7 +127,7 @@ namespace FPXzadatak1
 
             System.Threading.Thread.Sleep(5000);
 
-            //ChooseGameplay();
+            ChooseGameplay();
         }
     }
 }

@@ -29,7 +29,7 @@ namespace FPXzadatak1
 
             ChooseGameplay();
 
-            intro.PrintIntro();
+            //intro.PrintIntro();
 
             while (!logic.GameOver())
             {
