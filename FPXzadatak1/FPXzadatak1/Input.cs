@@ -19,6 +19,7 @@ namespace FPXzadatak1
 
         Logic logic = new Logic(board);
         Output output = new Output(board);
+        Intro intro = new Intro(board);
 
         public Input(Board Board)
         {
