@@ -10,6 +10,8 @@ namespace FPXzadatak1
     {
         public const string AFFIRMATIVE_INPUT = "y";
         public const string NEGATIVE_INPUT = "x";
+        public const string AFFIRMATIVE_INT = "1";
+        public const string NEGATIVE_INT = "2";
 
         public static readonly Player firstPlayer = new Player();
         public static readonly Player secondPlayer = new Player();
@@ -24,38 +26,26 @@ namespace FPXzadatak1
         {
             board.FillBoard();
 
-            int columnIdx;
-            int helper = 0;
+            Console.WriteLine("Hello, welcome to Connect 4!");
+            Console.WriteLine();
 
-            ChooseGameplay();
+            Console.WriteLine("Do you want to play singleplayer or with 2 players? Enter below.");
+            Console.WriteLine();
 
-            //intro.PrintIntro();
+            Console.WriteLine("If you want to play singleplayer, enter '{0}'. If you want 2 players, enter '{1}'.", AFFIRMATIVE_INT, NEGATIVE_INT);
 
-            while (!logic.GameOver())
+            string input = Console.ReadLine();
+
+            intro.ChooseGameplay(input);
+
+            if(input == AFFIRMATIVE_INT)
             {
-                inputCommand.InputColumn(helper);
-
-                columnIdx = Convert.ToInt32(inputCommand.ReadColumnInput()) - 1;
-
-                logic.FallIntoPlace(columnIdx, helper);
-
-                Console.WriteLine(Environment.NewLine);
-                output.OutputBoard();
-
-                Console.Clear();
-
-                helper++;
-
-                System.Threading.Thread.Sleep(2000);
+                Singleplayer();
             }
-            Console.Clear();
-
-            output.OutputWinMessage(helper);
-            output.OutputBoard();
-
-            System.Threading.Thread.Sleep(5000);
-
-            Restart();
+            if(input == NEGATIVE_INT)
+            {
+                Multiplayer();
+            }
         }
 
         public void Restart()
@@ -88,9 +78,76 @@ namespace FPXzadatak1
             } while (restartOrEnd != null);            
         }
 
-        public void ChooseGameplay()
+        public void Singleplayer()
         {
-            intro.ChooseGameplay();
+            int columnIdx;
+            int helper = 0;
+
+            while(!logic.GameOver())
+            {
+                inputCommand.InputColumnSP();
+
+                columnIdx = Convert.ToInt32(inputCommand.ReadColumnInput()) - 1;
+
+                logic.FallIntoPlaceSP(columnIdx);
+
+                Console.WriteLine(Environment.NewLine);
+                output.OutputBoard();
+
+                Console.Clear();
+
+                logic.FallIntoPlaceAI();
+
+                Console.WriteLine(Environment.NewLine);
+                output.OutputBoard();
+
+                Console.Clear();
+
+                helper++;
+
+                System.Threading.Thread.Sleep(2000);
+            }
+
+            Console.Clear();
+
+            output.OutputWinMessage(helper);
+            output.OutputBoard();
+
+            System.Threading.Thread.Sleep(5000);
+
+            Restart();
+        }
+
+        public void Multiplayer()
+        { 
+            int columnIdx;
+            int helper = 0;
+
+            while (!logic.GameOver())
+            {
+                inputCommand.InputColumn(helper);
+
+                columnIdx = Convert.ToInt32(inputCommand.ReadColumnInput()) - 1;
+
+                logic.FallIntoPlace(columnIdx, helper);
+
+                Console.WriteLine(Environment.NewLine);
+                output.OutputBoard();
+
+                Console.Clear();
+
+                helper++;
+
+                System.Threading.Thread.Sleep(2000);
+            }
+            Console.Clear();
+
+            output.OutputWinMessage(helper);
+            output.OutputBoard();
+
+            System.Threading.Thread.Sleep(5000);
+
+            Restart();
         }
     }
 }

@@ -41,6 +41,13 @@ namespace FPXzadatak1
             }
         }
 
+        public void InputColumnSP()
+        {
+            output.OutputBoard();
+            Console.WriteLine(Environment.NewLine);
+            Console.WriteLine(string.Format("{0}, enter the number of the column you wish to put your coin in (1 to 7):", Gameplay.firstPlayer.Name));
+        }
+
         public int ReadColumnInput()
         {
             int input;
@@ -73,6 +80,24 @@ namespace FPXzadatak1
             Console.Clear();
         }
 
+        public void PrintStartInfoSP()
+        {
+            Console.Clear();
+            Console.WriteLine("The game has started. It's time to set your player name.");
+
+            InputPlayerNameSP();
+            Console.WriteLine("\nName saved.");
+
+            System.Threading.Thread.Sleep(5000);
+            Console.Clear();
+
+            ChooseColorSP();
+
+            System.Threading.Thread.Sleep(2000);
+
+            Console.Clear();
+        }
+
         public void InputPlayerName()
         {
             Console.WriteLine(Environment.NewLine);
@@ -84,6 +109,14 @@ namespace FPXzadatak1
             Console.WriteLine("Second player name:");
 
             Gameplay.secondPlayer.Name = Console.ReadLine();
+        }
+        public void InputPlayerNameSP()
+        {
+            Console.WriteLine(Environment.NewLine);
+            Console.WriteLine("Player name:");
+
+            Gameplay.firstPlayer.Name = Console.ReadLine();
+            Gameplay.secondPlayer.Name = "Computer";
         }
 
         public void ChooseColor()
@@ -102,6 +135,34 @@ namespace FPXzadatak1
 
 
             Console.WriteLine(string.Format("\n{0}, choose your coin color:", Gameplay.secondPlayer.Name));
+            string secondColor;
+
+            do
+            {
+                secondColor = Console.ReadLine();
+                Console.WriteLine("You didn't enter any of the possible colors. Try again.");
+
+            } while (!COLOR_INPUT.Any(secondColor.Contains));
+
+            Gameplay.firstPlayer.Color = char.ToUpper(firstColor[0]) + firstColor.Substring(1);
+            Gameplay.secondPlayer.Color = char.ToUpper(secondColor[0]) + secondColor.Substring(1);
+        }
+
+        public void ChooseColorSP()
+        {
+            Console.WriteLine("Now you can choose your coin color, options are - blue, yellow, green and red.\n");
+
+            Console.WriteLine(string.Format("{0}, choose your coin color:", Gameplay.firstPlayer.Name));
+            string firstColor;
+
+            do
+            {
+                firstColor = Console.ReadLine();
+                Console.WriteLine("You didn't enter any of the possible colors. Try again.");
+
+            } while (!COLOR_INPUT.Any(firstColor.Contains));
+
+            Console.WriteLine("\nChoose the color for the computer:");
             string secondColor;
 
             do
