@@ -201,14 +201,6 @@ namespace FPXzadatak1
             {
                 column = LASTPOS_Y;
             }
-            else if (CheckDiagonallyDownAI() == Coin.PlayerB || CheckDiagonallyDownAI() == Coin.PlayerA)
-            {
-                column = LASTPOS_Y - 1;
-            }
-            else if (CheckDiagonallyUpAI() == Coin.PlayerB ||CheckDiagonallyUpAI() == Coin.PlayerA)
-            {
-                column = LASTPOS_Y + 1;
-            }
             else
             {
                 column = random.Next(1, 7);
@@ -234,12 +226,12 @@ namespace FPXzadatak1
                         k = i;
                         m = j;
                     }
-                    else if(board.BoardLayout[i, j] == Coin.PlayerB)
-                    {
-                        counter++;
-                        k = i;
-                        m = j;
-                    }
+                    //else if(board.BoardLayout[i, j] == Coin.PlayerB)
+                    //{
+                    //    counter++;
+                    //    k = i;
+                    //    m = j;
+                    //}
                 }
 
                 if (counter == 3)
@@ -283,82 +275,6 @@ namespace FPXzadatak1
                     counter++;
                     k = i;
                     m = LASTPOS_Y;
-                    //return false;
-                }
-            }
-
-            if (counter == 3)
-            {
-                coin = board.BoardLayout[k, m];
-                return coin;
-            }
-            return Coin.Empty;
-
-            //return true;
-        }
-
-        private Coin CheckDiagonallyDownAI()
-        {
-            Coin coin = new Coin();
-
-            int counter = 0;
-            int k = 0;
-            int m = 0;
-
-            if (LASTPOS_X + 3 >= ROWS_COUNT)
-            {
-                return Coin.Empty;
-            }
-            if (LASTPOS_Y + 3 >= COLUMNS_COUNT)
-            {
-                return Coin.Empty;
-            }
-
-            for (int i = 0; i < 3; i++)
-            {
-                if (board.BoardLayout[LASTPOS_X + i, LASTPOS_Y + i] == Coin.PlayerA) 
-                {
-                    counter++;
-                    k = LASTPOS_X + i;
-                    m = LASTPOS_Y + i;
-                    //return false; 
-                }
-            }
-
-            if (counter == 3)
-            {
-                coin = board.BoardLayout[k, m];
-                return coin;
-            }
-            return Coin.Empty;
-
-            //return true;
-        }
-
-        private Coin CheckDiagonallyUpAI()
-        {
-            Coin coin = new Coin();
-
-            int counter = 0;
-            int k = 0;
-            int m = 0;
-
-            if(LASTPOS_X + 3 < 0)
-            {
-                return Coin.Empty;
-            }
-            if(LASTPOS_Y + 3 >= COLUMNS_COUNT)
-            {
-                return Coin.Empty;
-            }
-
-            for (int i = 0; i < 3; i++)
-            {
-                if (board.BoardLayout[LASTPOS_X - i, LASTPOS_Y + i] == Coin.PlayerA)
-                {
-                    counter++;
-                    k = LASTPOS_X - i;
-                    m = LASTPOS_Y + i;
                     //return false;
                 }
             }
