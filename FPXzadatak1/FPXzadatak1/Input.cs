@@ -25,9 +25,9 @@ namespace FPXzadatak1
             board = Board;
         }
 
-        public void InputColumn(int helper)
+        public void InputColumn(int helper, bool isSingePlayer = true)
         {
-            if(helper % 2 == 0)
+            if(isSingePlayer)
             {
                 output.OutputBoard();
                 Console.WriteLine(Environment.NewLine);
@@ -35,17 +35,19 @@ namespace FPXzadatak1
             }
             else
             {
-                output.OutputBoard();
-                Console.WriteLine(Environment.NewLine);
-                Console.WriteLine(string.Format("{0}, enter the number of the column you wish to put your coin in (1 to 7):", Gameplay.secondPlayer.Name));
+                if (helper % 2 == 0)
+                {
+                    output.OutputBoard();
+                    Console.WriteLine(Environment.NewLine);
+                    Console.WriteLine(string.Format("{0}, enter the number of the column you wish to put your coin in (1 to 7):", Gameplay.firstPlayer.Name));
+                }
+                else
+                {
+                    output.OutputBoard();
+                    Console.WriteLine(Environment.NewLine);
+                    Console.WriteLine(string.Format("{0}, enter the number of the column you wish to put your coin in (1 to 7):", Gameplay.secondPlayer.Name));
+                }
             }
-        }
-
-        public void InputColumnSP()
-        {
-            output.OutputBoard();
-            Console.WriteLine(Environment.NewLine);
-            Console.WriteLine(string.Format("{0}, enter the number of the column you wish to put your coin in (1 to 7):", Gameplay.firstPlayer.Name));
         }
 
         public int ReadColumnInput()
@@ -62,115 +64,76 @@ namespace FPXzadatak1
             return input;
         }
 
-        public void PrintStartInfo()
+        public void PrintStartInfo(bool isSinglePlayer)
         {
             Console.Clear();
-            Console.WriteLine("The game has started. It's time to set your player names.");
+            if(!isSinglePlayer)
+                Console.WriteLine("The game has started. It's time to set your player name.");
+            else
+                Console.WriteLine("The game has started. It's time to set your player names.");
 
-            InputPlayerName();
+            InputPlayerName(isSinglePlayer);
             Console.WriteLine("\nNames saved.");
 
-            System.Threading.Thread.Sleep(5000);
+            System.Threading.Thread.Sleep(1000);
             Console.Clear();
 
-            ChooseColor();
+            ChooseColor(isSinglePlayer);
 
-            System.Threading.Thread.Sleep(2000);
+            System.Threading.Thread.Sleep(1000);
 
             Console.Clear();
         }
 
-        public void PrintStartInfoSP()
+        public void InputPlayerName(bool isSinglePlayer)
         {
-            Console.Clear();
-            Console.WriteLine("The game has started. It's time to set your player name.");
+            if(!isSinglePlayer)
+            {
+                Console.WriteLine(Environment.NewLine);
+                Console.WriteLine("Player name:");
 
-            InputPlayerNameSP();
-            Console.WriteLine("\nName saved.");
+                Gameplay.firstPlayer.Name = Console.ReadLine();
+                Gameplay.secondPlayer.Name = "Computer";
+            }
+            else
+            {
+                Console.WriteLine(Environment.NewLine);
+                Console.WriteLine("First player name:");
 
-            System.Threading.Thread.Sleep(5000);
-            Console.Clear();
+                Gameplay.firstPlayer.Name = Console.ReadLine();
 
-            ChooseColorSP();
+                Console.WriteLine(Environment.NewLine);
+                Console.WriteLine("Second player name:");
 
-            System.Threading.Thread.Sleep(2000);
-
-            Console.Clear();
+                Gameplay.secondPlayer.Name = Console.ReadLine();
+            }
         }
 
-        public void InputPlayerName()
-        {
-            Console.WriteLine(Environment.NewLine);
-            Console.WriteLine("First player name:");
-
-            Gameplay.firstPlayer.Name = Console.ReadLine();
-
-            Console.WriteLine(Environment.NewLine);
-            Console.WriteLine("Second player name:");
-
-            Gameplay.secondPlayer.Name = Console.ReadLine();
-        }
-        public void InputPlayerNameSP()
-        {
-            Console.WriteLine(Environment.NewLine);
-            Console.WriteLine("Player name:");
-
-            Gameplay.firstPlayer.Name = Console.ReadLine();
-            Gameplay.secondPlayer.Name = "Computer";
-        }
-
-        public void ChooseColor()
+        public void ChooseColor(bool isSinglePlayer = false)
         {
             Console.WriteLine("Now you can choose your coin color, options are - blue, yellow, green and red.\n");
 
             Console.WriteLine(string.Format("{0}, choose your coin color:", Gameplay.firstPlayer.Name));
-            string firstColor;
+            string firstColor = Console.ReadLine();
 
-            do
+            while (!COLOR_INPUT.Any(firstColor.Contains))
             {
+                Console.WriteLine("You didn't enter any of the possible colors. Try again.");
                 firstColor = Console.ReadLine();
-                Console.WriteLine("You didn't enter any of the possible colors. Try again.");
+            } 
 
-            } while (!COLOR_INPUT.Any(firstColor.Contains));
+            if(!isSinglePlayer)
+                Console.WriteLine("\nChoose the color for the computer:");
+            else
+                Console.WriteLine(string.Format("\n{0}, choose your coin color:", Gameplay.secondPlayer.Name));
 
+            string secondColor = Console.ReadLine();
 
-            Console.WriteLine(string.Format("\n{0}, choose your coin color:", Gameplay.secondPlayer.Name));
-            string secondColor;
-
-            do
+            while (!COLOR_INPUT.Any(secondColor.Contains))
             {
+                Console.WriteLine("You didn't enter any of the possible colors. Try again.");
                 secondColor = Console.ReadLine();
-                Console.WriteLine("You didn't enter any of the possible colors. Try again.");
-
-            } while (!COLOR_INPUT.Any(secondColor.Contains));
-
-            Gameplay.firstPlayer.Color = char.ToUpper(firstColor[0]) + firstColor.Substring(1);
-            Gameplay.secondPlayer.Color = char.ToUpper(secondColor[0]) + secondColor.Substring(1);
-        }
-
-        public void ChooseColorSP()
-        {
-            Console.WriteLine("Now you can choose your coin color, options are - blue, yellow, green and red.\n");
-
-            Console.WriteLine(string.Format("{0}, choose your coin color:", Gameplay.firstPlayer.Name));
-            string firstColor;
-
-            do
-            {
-                firstColor = Console.ReadLine();
-                Console.WriteLine("You didn't enter any of the possible colors. Try again.");
-
-            } while (!COLOR_INPUT.Any(firstColor.Contains));
-
-            Console.WriteLine("\nChoose the color for the computer:");
-            string secondColor;
-
-            do
-            {
-                secondColor = Console.ReadLine();
-                Console.WriteLine("You didn't enter any of the possible colors. Try again.");
-
-            } while (!COLOR_INPUT.Any(secondColor.Contains));
+            }
 
             Gameplay.firstPlayer.Color = char.ToUpper(firstColor[0]) + firstColor.Substring(1);
             Gameplay.secondPlayer.Color = char.ToUpper(secondColor[0]) + secondColor.Substring(1);

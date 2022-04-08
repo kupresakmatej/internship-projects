@@ -22,7 +22,7 @@ namespace FPXzadatak1
 
         Input inputClass = new Input(board);
 
-        public void PrintIntro()
+        public void PrintIntro(bool isSinglePlayer)
         {
             Console.Clear();
             Console.WriteLine(string.Format("To get instructions, enter '{0}'.", NEGATIVE_INPUT));
@@ -34,12 +34,12 @@ namespace FPXzadatak1
             {
                 if (input.ToLower() == AFFIRMATIVE_INPUT)
                 {
-                    inputClass.PrintStartInfo();
+                    inputClass.PrintStartInfo(isSinglePlayer);
                     break;
                 }
                 else if (input.ToLower() == NEGATIVE_INPUT)
                 {
-                    PrintInstructions();
+                    PrintInstructions(isSinglePlayer);
                     break;
                 }
                 else
@@ -54,11 +54,11 @@ namespace FPXzadatak1
         {
             if (input.ToLower() == AFFIRMATIVE_INT)
             {
-                PrintIntroSP();
+                PrintIntro(false);
             }
             else if (input.ToLower() == NEGATIVE_INT)
             {
-                PrintIntro();
+                PrintIntro(true);
             }
             else
             {
@@ -67,35 +67,7 @@ namespace FPXzadatak1
             }
         }
 
-        public void PrintIntroSP()
-        {
-            Console.Clear();
-            Console.WriteLine(string.Format("To get instructions, enter '{0}'.", NEGATIVE_INPUT));
-            Console.WriteLine(string.Format("To continue, enter '{0}'.", AFFIRMATIVE_INPUT));
-
-            string input = Console.ReadLine();
-
-            do
-            {
-                if (input.ToLower() == AFFIRMATIVE_INPUT)
-                {
-                    inputClass.PrintStartInfoSP();
-                    break;
-                }
-                else if (input.ToLower() == NEGATIVE_INPUT)
-                {
-                    PrintInstructionsSP();
-                    break;
-                }
-                else
-                {
-                    Console.WriteLine("The commands are only 'x' or 'y'. Try again.");
-                    input = Console.ReadLine();
-                }
-            } while (input != null);
-        }
-
-        public void PrintInstructions()
+        public void PrintInstructions(bool isSinglePlayer)
         {
             Console.WriteLine(Environment.NewLine);
             Console.WriteLine("Your goal is to connect 4 coins in a row, column or diagonally.");
@@ -103,18 +75,7 @@ namespace FPXzadatak1
 
             System.Threading.Thread.Sleep(5000);
 
-            inputClass.PrintStartInfo();
-        }
-
-        public void PrintInstructionsSP()
-        {
-            Console.WriteLine(Environment.NewLine);
-            Console.WriteLine("Your goal is to connect 4 coins in a row, column or diagonally.");
-            Console.WriteLine("You will be entering the number of the column you want to put your coin in.");
-
-            System.Threading.Thread.Sleep(5000);
-
-            inputClass.PrintStartInfoSP();
+            inputClass.PrintStartInfo(isSinglePlayer);
         }
     }
 }

@@ -85,11 +85,13 @@ namespace FPXzadatak1
 
             while(!logic.GameOver())
             {
-                inputCommand.InputColumnSP();
+                inputCommand.InputColumn(-1);
 
                 columnIdx = Convert.ToInt32(inputCommand.ReadColumnInput()) - 1;
 
                 logic.FallIntoPlaceSP(columnIdx);
+
+                Console.Clear();
 
                 Console.WriteLine(Environment.NewLine);
                 output.OutputBoard();
@@ -104,8 +106,6 @@ namespace FPXzadatak1
                 Console.Clear();
 
                 helper++;
-
-                System.Threading.Thread.Sleep(2000);
             }
 
             Console.Clear();
@@ -125,7 +125,7 @@ namespace FPXzadatak1
 
             while (!logic.GameOver())
             {
-                inputCommand.InputColumn(helper);
+                inputCommand.InputColumn(helper, false);
 
                 columnIdx = Convert.ToInt32(inputCommand.ReadColumnInput()) - 1;
 
@@ -137,8 +137,6 @@ namespace FPXzadatak1
                 Console.Clear();
 
                 helper++;
-
-                System.Threading.Thread.Sleep(2000);
             }
             Console.Clear();
 
