@@ -12,17 +12,23 @@ namespace FPX___Zadatak2
     {
         List<Drawable> drawableObjects;
 
-        public Renderer(List<Drawable> objects)
+        private static GameWindow gameWindow;
+
+        public Renderer(List<Drawable> objects, GameWindow window)
         {
             drawableObjects = objects;
+            gameWindow = window;
         }
 
         public void RenderF(object o, EventArgs e)
         {
             foreach(Drawable drawable in drawableObjects)
             {
+                GL.LoadIdentity();
                 drawable.Draw();
             }
+
+            gameWindow.SwapBuffers();
         }
     }
 }

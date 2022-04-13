@@ -39,7 +39,7 @@ namespace FPX___Zadatak2
 
         public void Start()
         {
-            Renderer renderer = new Renderer(triangles);
+            Renderer renderer = new Renderer(triangles, gameWindow);
 
             gameWindow.Load += Loaded;
             gameWindow.Resize += Resize;
