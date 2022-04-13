@@ -47,6 +47,8 @@ namespace FPX___Zadatak2
         {
             Renderer renderer = new Renderer(triangles, gameWindow);
 
+            GL.Viewport(0, 0, gameWindow.Width, gameWindow.Height);
+
             gameWindow.Load += Loaded;
             gameWindow.Resize += Resize;
             gameWindow.RenderFrame += renderer.RenderF;
@@ -54,15 +56,12 @@ namespace FPX___Zadatak2
         }
 
         public void Resize(object o, EventArgs e)
-        {
-            GL.Viewport(0, 0, gameWindow.Width, gameWindow.Height);
-
+        { 
             GL.MatrixMode(MatrixMode.Projection);
             GL.LoadIdentity();
-            GL.Ortho(-50.0, 50.0, -50.0, 50.0, -1.0, 1.0);
+            GL.Ortho(0.0, gameWindow.Width, 0.0, gameWindow.Height, -1.0, 1.0);
 
             GL.MatrixMode(MatrixMode.Modelview);
-            GL.LoadIdentity();
         }
 
         public void Loaded(object o, EventArgs e)
