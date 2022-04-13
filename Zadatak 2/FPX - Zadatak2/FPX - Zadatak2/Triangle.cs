@@ -19,15 +19,15 @@ namespace FPX___Zadatak2
 
         public override void Draw()
         {
-            GL.Translate(0.0, 0.0, 0.0);
+            GL.Translate(Position, Position, 0.0);
             GL.Begin(BeginMode.Triangles);
 
             GL.Color3(1.0, 0.0, 0.0);
-            GL.Vertex2(-Position, -Position);
+            GL.Vertex2(-25.0, -25.0);
             GL.Color3(0.0, 1.0, 0.0);
-            GL.Vertex2(Position, -Position);
+            GL.Vertex2(25.0, -25.0);
             GL.Color3(0.0, 0.0, 1.0);
-            GL.Vertex2(0, Position);
+            GL.Vertex2(0, 25.0);
 
             GL.End();
         }
