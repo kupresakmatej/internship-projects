@@ -28,10 +28,16 @@ namespace FPX___Zadatak2
 
             for(int i = 0; i < inputAmount; i++)
             {
-                Console.WriteLine("Enter the value for a: ");
+                Console.WriteLine(string.Format("Enter the value for size of the {0}. triangle: ", i + 1));
                 int inputSize = Convert.ToInt32(Console.ReadLine());
 
-                triangles.Add(new Triangle(inputSize));
+                Console.WriteLine("Enter the value for x: ");
+                int x = Convert.ToInt32(Console.ReadLine()); 
+
+                Console.WriteLine("Enter the value for y: ");
+                int y = Convert.ToInt32(Console.ReadLine());
+
+                triangles.Add(new Triangle(inputSize, x, y));
             }
 
             return triangles;
