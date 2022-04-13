@@ -44,7 +44,7 @@ namespace FPX___Zadatak2
             gameWindow.Load += Loaded;
             gameWindow.Resize += Resize;
             gameWindow.RenderFrame += renderer.RenderF;
-            gameWindow.Run(1.0 / 60.0); //time in seconds after which the window updates
+            gameWindow.Run(1.0 / 60.0);
         }
 
         public void Resize(object o, EventArgs e)
@@ -56,6 +56,7 @@ namespace FPX___Zadatak2
             GL.Ortho(-50.0, 50.0, -50.0, 50.0, -1.0, 1.0);
 
             GL.MatrixMode(MatrixMode.Modelview);
+            GL.LoadIdentity();
         }
 
         public void Loaded(object o, EventArgs e)

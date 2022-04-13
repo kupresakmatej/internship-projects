@@ -17,12 +17,10 @@ namespace FPX___Zadatak2
             A = a;
         }
 
-        public override void Draw()
+        public override void Draw(double move)
         {
-            //GL.Clear(ClearBufferMask.ColorBufferBit);
-
+            GL.Translate(0.0 + move, 0.0, 0.0);
             GL.Begin(BeginMode.Triangles);
-            GL.Translate(A, A, 0);
 
             GL.Color3(1.0, 0.0, 0.0);
             GL.Vertex2(-A, -A);
