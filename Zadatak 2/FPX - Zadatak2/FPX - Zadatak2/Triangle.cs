@@ -10,8 +10,6 @@ namespace FPX___Zadatak2
 {
     class Triangle : Drawable
     {
-        private double theta = 0.0;
-
         GameWindow gameWindow;
         private double A { get; set; }
 
@@ -24,9 +22,7 @@ namespace FPX___Zadatak2
         public override void Draw()
         {
             GL.LoadIdentity();
-            GL.Clear(ClearBufferMask.ColorBufferBit);
-
-            GL.Translate(A, 0, 0);
+            //GL.Clear(ClearBufferMask.ColorBufferBit);
 
             GL.Begin(BeginMode.Triangles);
 
@@ -38,6 +34,8 @@ namespace FPX___Zadatak2
             GL.Vertex2(0, A);
 
             GL.End();
+
+            GL.PopMatrix();
 
             gameWindow.SwapBuffers();
         }
