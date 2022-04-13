@@ -31,7 +31,7 @@ namespace FPX___Zadatak2
                 Console.WriteLine("Enter the value for a: ");
                 int inputSize = Convert.ToInt32(Console.ReadLine());
 
-                triangles.Add(new Triangle(inputSize, gameWindow));
+                triangles.Add(new Triangle(inputSize));
             }
 
             return triangles;

@@ -12,14 +12,14 @@ namespace FPX___Zadatak2
     {
         private double A { get; set; }
 
-        public Triangle(double a, GameWindow window)
+        public Triangle(double a)
         {
             A = a;
         }
 
-        public override void Draw(double move)
+        public override void Draw()
         {
-            GL.Translate(0.0 + move, 0.0, 0.0);
+            GL.Translate(0.0, 0.0, 0.0);
             GL.Begin(BeginMode.Triangles);
 
             GL.Color3(1.0, 0.0, 0.0);

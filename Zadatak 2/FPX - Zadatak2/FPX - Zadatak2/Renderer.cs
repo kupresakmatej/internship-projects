@@ -10,8 +10,6 @@ namespace FPX___Zadatak2
 {
     class Renderer
     {
-        private double move = 0.0;
-
         List<Drawable> drawableObjects;
 
         private static GameWindow gameWindow;
@@ -27,10 +25,8 @@ namespace FPX___Zadatak2
             foreach (Drawable drawable in drawableObjects)
             {
                 GL.LoadIdentity();
-                drawable.Draw(move);
-                move += 5.0;
+                drawable.Draw();
             }
-
             gameWindow.SwapBuffers();
         }
     }
