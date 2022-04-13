@@ -27,11 +27,11 @@ namespace FPX___Zadatak2
             GL.Begin(BeginMode.Triangles);
 
             GL.Color3(1.0, 0.0, 0.0);
-            GL.Vertex2(-Size, -Size);
+            GL.Vertex2(X, Y);
             GL.Color3(0.0, 1.0, 0.0);
-            GL.Vertex2(Size, -Size);
+            GL.Vertex2(X + Size, Y);
             GL.Color3(0.0, 0.0, 1.0);
-            GL.Vertex2(0, Size);
+            GL.Vertex2(X + Size/2, Y + Size);
 
             GL.End();
         }
