@@ -10,11 +10,11 @@ namespace FPX___Zadatak2
 {
     class Triangle : Drawable
     {
-        private double A { get; set; }
+        private double Position { get; set; }
 
-        public Triangle(double a)
+        public Triangle(double position)
         {
-            A = a;
+            Position = position;
         }
 
         public override void Draw()
@@ -23,11 +23,11 @@ namespace FPX___Zadatak2
             GL.Begin(BeginMode.Triangles);
 
             GL.Color3(1.0, 0.0, 0.0);
-            GL.Vertex2(-A, -A);
+            GL.Vertex2(-Position, -Position);
             GL.Color3(0.0, 1.0, 0.0);
-            GL.Vertex2(A, -A);
+            GL.Vertex2(Position, -Position);
             GL.Color3(0.0, 0.0, 1.0);
-            GL.Vertex2(0, A);
+            GL.Vertex2(0, Position);
 
             GL.End();
         }
