@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using OpenTK;
 
 namespace FPX___Zadatak2
 {
@@ -10,6 +11,8 @@ namespace FPX___Zadatak2
     {
         static void Main(string[] args)
         {
+            GameWindow window = new GameWindow(500, 500);
+            Game game = new Game(window);
         }
     }
 }
