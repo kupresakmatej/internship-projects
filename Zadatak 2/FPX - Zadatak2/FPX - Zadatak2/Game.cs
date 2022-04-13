@@ -10,20 +10,40 @@ namespace FPX___Zadatak2
 {
     public class Game
     {
-        private double theta = 0.0;
         GameWindow gameWindow;
+        List<Drawable> triangles;
 
         public Game(GameWindow window)
         {
             this.gameWindow = window;
+            triangles = new List<Drawable>();
+            Input();
             Start();
+        }
+
+        private List<Drawable> Input()
+        {
+            Console.WriteLine("Enter how many triangles you want to draw: ");
+            int inputAmount = Convert.ToInt32(Console.ReadLine());
+
+            for(int i = 0; i < inputAmount; i++)
+            {
+                Console.WriteLine("Enter the value for a: ");
+                int inputSize = Convert.ToInt32(Console.ReadLine());
+
+                triangles.Add(new Triangle(inputSize, gameWindow));
+            }
+
+            return triangles;
         }
 
         public void Start()
         {
+            Renderer renderer = new Renderer(triangles);
+
             gameWindow.Load += Loaded;
             gameWindow.Resize += Resize;
-            gameWindow.RenderFrame += RenderF;
+            gameWindow.RenderFrame += renderer.RenderF;
             gameWindow.Run(1.0 / 60.0); //time in seconds after which the window updates
         }
 
@@ -34,35 +54,8 @@ namespace FPX___Zadatak2
             GL.MatrixMode(MatrixMode.Projection);
             GL.LoadIdentity();
             GL.Ortho(-50.0, 50.0, -50.0, 50.0, -1.0, 1.0);
+
             GL.MatrixMode(MatrixMode.Modelview);
-        }
-
-        public void RenderF(object o, EventArgs e)
-        {
-            GL.LoadIdentity();
-            GL.Clear(ClearBufferMask.ColorBufferBit);
-
-            GL.Rotate(theta, 0.0, 0.0, 1.0);
-            GL.Begin(BeginMode.Quads);
-
-            GL.Color3(1.0, 0.0, 0.0);
-            GL.Vertex2(30.0, 30.0);
-            GL.Color3(0.0, 1.0, 0.0);
-            GL.Vertex2(-30.0, 30.0);
-            GL.Color3(0.0, 0.0, 1.0);
-            GL.Vertex2(-30.0, -30.0);
-            GL.Color3(1.0, 1.0, 0.0);
-            GL.Vertex2(30.0, -30.0);
-
-            GL.End();
-
-            gameWindow.SwapBuffers();
-
-            theta += 1.0; //update se ne radi ovako inace, updateframe funkcija
-            if(theta > 360)
-            {
-                theta -= 360;
-            }
         }
 
         public void Loaded(object o, EventArgs e)
