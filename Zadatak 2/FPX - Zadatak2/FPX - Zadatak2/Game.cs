@@ -54,9 +54,9 @@ namespace FPX___Zadatak2
 
                     float[] rgb = new float[3];
 
-                    for(int j = 0; j < colors.Length - 1; j++)
+                    for(int j = 0; j < colors.Length; j++)
                     {
-                        rgb[j] += Convert.ToSingle(colors[j]);
+                        rgb[j] += float.Parse(colors[j]);
                     }
 
                     triangles.Add(new Triangle(new Vector(x, y), inputSize, new Color(rgb[0], rgb[1], rgb[2])));
@@ -70,9 +70,9 @@ namespace FPX___Zadatak2
 
                     byte[] rgb = new byte[3];
 
-                    for (int j = 0; j < colors.Length - 1; j++)
+                    for (int j = 0; j < colors.Length; j++)
                     {
-                        rgb[j] += Convert.ToByte(colors[j]);
+                        rgb[j] += byte.Parse(colors[j]);
                     }
 
                     triangles.Add(new Triangle(new Vector(x, y), inputSize, new Color(rgb[0], rgb[1], rgb[2])));
