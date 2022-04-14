@@ -8,10 +8,10 @@ namespace FPX___Zadatak2
 {
     public struct Vector
     {
-        private double X;
-        private double Y;
+        public float X { get; set; }
+        public float Y { get; set; }
 
-        public Vector(double x, double y)
+        public Vector(float x, float y)
         {
             X = x;
             Y = y;
