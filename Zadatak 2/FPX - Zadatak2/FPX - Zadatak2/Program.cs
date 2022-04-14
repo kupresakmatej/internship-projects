@@ -11,8 +11,8 @@ namespace FPX___Zadatak2
     {
         static void Main(string[] args)
         {
-            GameWindow window = new GameWindow(500, 500);
-            Game game = new Game(window);
+            //GameWindow window = new GameWindow(500, 500);
+            //Game game = new Game(window); 
         }
     }
 }

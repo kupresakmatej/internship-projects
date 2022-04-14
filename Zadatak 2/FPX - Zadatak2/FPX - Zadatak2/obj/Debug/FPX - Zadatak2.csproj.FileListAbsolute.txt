@@ -11,3 +11,16 @@ C:\Users\Reroot\Desktop\FPX - 1. zadatak\fpx-repository\Zadatak 2\FPX - Zadatak2
 C:\Users\Reroot\Desktop\FPX - 1. zadatak\fpx-repository\Zadatak 2\FPX - Zadatak2\FPX - Zadatak2\obj\Debug\FPX - Zadatak2.csproj.CopyComplete
 C:\Users\Reroot\Desktop\FPX - 1. zadatak\fpx-repository\Zadatak 2\FPX - Zadatak2\FPX - Zadatak2\obj\Debug\FPX - Zadatak2.exe
 C:\Users\Reroot\Desktop\FPX - 1. zadatak\fpx-repository\Zadatak 2\FPX - Zadatak2\FPX - Zadatak2\obj\Debug\FPX - Zadatak2.pdb
+C:\Users\Reroot\Desktop\FPX\fpx-repository\Zadatak 2\FPX - Zadatak2\FPX - Zadatak2\bin\Debug\FPX - Zadatak2.exe.config
+C:\Users\Reroot\Desktop\FPX\fpx-repository\Zadatak 2\FPX - Zadatak2\FPX - Zadatak2\bin\Debug\FPX - Zadatak2.exe
+C:\Users\Reroot\Desktop\FPX\fpx-repository\Zadatak 2\FPX - Zadatak2\FPX - Zadatak2\bin\Debug\FPX - Zadatak2.pdb
+C:\Users\Reroot\Desktop\FPX\fpx-repository\Zadatak 2\FPX - Zadatak2\FPX - Zadatak2\bin\Debug\OpenTK.dll
+C:\Users\Reroot\Desktop\FPX\fpx-repository\Zadatak 2\FPX - Zadatak2\FPX - Zadatak2\bin\Debug\OpenTK.pdb
+C:\Users\Reroot\Desktop\FPX\fpx-repository\Zadatak 2\FPX - Zadatak2\FPX - Zadatak2\bin\Debug\OpenTK.xml
+C:\Users\Reroot\Desktop\FPX\fpx-repository\Zadatak 2\FPX - Zadatak2\FPX - Zadatak2\bin\Debug\OpenTK.dll.config
+C:\Users\Reroot\Desktop\FPX\fpx-repository\Zadatak 2\FPX - Zadatak2\FPX - Zadatak2\obj\Debug\FPX - Zadatak2.csproj.AssemblyReference.cache
+C:\Users\Reroot\Desktop\FPX\fpx-repository\Zadatak 2\FPX - Zadatak2\FPX - Zadatak2\obj\Debug\FPX - Zadatak2.csproj.SuggestedBindingRedirects.cache
+C:\Users\Reroot\Desktop\FPX\fpx-repository\Zadatak 2\FPX - Zadatak2\FPX - Zadatak2\obj\Debug\FPX - Zadatak2.csproj.CoreCompileInputs.cache
+C:\Users\Reroot\Desktop\FPX\fpx-repository\Zadatak 2\FPX - Zadatak2\FPX - Zadatak2\obj\Debug\FPX - Zadatak2.csproj.CopyComplete
+C:\Users\Reroot\Desktop\FPX\fpx-repository\Zadatak 2\FPX - Zadatak2\FPX - Zadatak2\obj\Debug\FPX - Zadatak2.exe
+C:\Users\Reroot\Desktop\FPX\fpx-repository\Zadatak 2\FPX - Zadatak2\FPX - Zadatak2\obj\Debug\FPX - Zadatak2.pdb
