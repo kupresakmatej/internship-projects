@@ -63,11 +63,11 @@ namespace FPX___Zadatak2
             B = b;
         }
 
-        public Colors(byte[] r, byte[] g, byte[] b)
+        public Colors(byte r, byte g, byte b)
         {
-            R = BitConverter.ToSingle(r, 0);
-            G = BitConverter.ToSingle(g, 0);
-            B = BitConverter.ToSingle(b, 0);
+            R = r / 255;
+            G = g / 255;
+            B = b / 255;
         }
     }
 }
