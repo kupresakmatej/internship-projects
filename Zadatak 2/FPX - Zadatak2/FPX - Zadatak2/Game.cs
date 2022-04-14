@@ -31,6 +31,8 @@ namespace FPX___Zadatak2
 
             for(int i = 0; i < inputAmount; i++)
             {
+                Console.Clear();
+
                 Console.WriteLine(string.Format("Enter the value for size of the {0}. triangle: ", i + 1));
                 int inputSize = Convert.ToInt32(Console.ReadLine());
 
