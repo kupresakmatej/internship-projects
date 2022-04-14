@@ -9,39 +9,46 @@ namespace FPX___Zadatak2
 {
     class Color
     {
+        private float _r;
+        private float _g;
+        private float _b;
+
         public float R { 
-            get { return R; }
-            
+            get { return _r; } 
             set 
             {
-                if(value < 0 || value > 1)
-                {
-                    R = 1f;
-                }
+                if (value > 1f)
+                    _r = 1f;
+                else if (value < 0f)
+                    _r = 0f;
+                else
+                    _r = value;
             } 
         }
         public float G
         {
-            get { return G; }
-
+            get { return _g; }
             set
             {
-                if (value < 0 || value > 1)
-                {
-                    G = 1f;
-                }
+                if (value > 1f)
+                    _g = 1f;
+                else if (value < 0f)
+                    _g = 0f;
+                else
+                    _g = value;
             }
         }
         public float B
         {
-            get { return B; }
-
+            get { return _b; }
             set
             {
-                if (value < 0 || value > 1)
-                {
-                    B = 1f;
-                }
+                if (value > 1f)
+                    _b = 1f;
+                else if (value < 0f)
+                    _b = 0f;
+                else
+                    _b = value;
             }
         }
 
