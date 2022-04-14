@@ -154,7 +154,7 @@ namespace FPX___Zadatak2
         {
             Renderer renderer = new Renderer(drawables, gameWindow);
 
-            GL.Viewport(0, 0, gameWindow.Width, gameWindow.Height);
+            //GL.Viewport(0, 0, gameWindow.Width, gameWindow.Height);
 
             gameWindow.Load += Loaded;
             gameWindow.Resize += Resize;
@@ -163,7 +163,8 @@ namespace FPX___Zadatak2
         }
 
         public void Resize(object o, EventArgs e)
-        { 
+        {
+            GL.Viewport(0, 0, gameWindow.Width, gameWindow.Height);
             GL.MatrixMode(MatrixMode.Projection);
             GL.LoadIdentity();
             GL.Ortho(0.0, gameWindow.Width, 0.0, gameWindow.Height, -1.0, 1.0);
