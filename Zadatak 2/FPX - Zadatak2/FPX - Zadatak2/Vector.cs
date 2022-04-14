@@ -25,5 +25,10 @@ namespace FPX___Zadatak2
         {
             return new Vector(v1.X - v2.X, v1.Y - v2.Y);
         }
+
+        public static Vector operator *(Vector v1, float a)
+        {
+            return new Vector(v1.X * a, v1.Y * a);
+        }
     }
 }
