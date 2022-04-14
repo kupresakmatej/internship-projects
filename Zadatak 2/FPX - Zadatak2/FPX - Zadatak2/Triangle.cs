@@ -10,28 +10,26 @@ namespace FPX___Zadatak2
 {
     class Triangle : Drawable
     {
-        private float X { get; set; }
-        private float Y { get; set; }
+        private Vector Position { get; set; }
         private float Size { get; set; }
         private Color Color { get; set; }
 
-        public Triangle(Vector vector, float size, Color color)
+        public Triangle(Vector position, float size, Color color)
         {
-            X = vector.X;
-            Y = vector.Y;
+            Position = position;
             Size = size;
             Color = color;
         }
 
         public override void Draw()
         {
-            GL.Translate(X, Y, 0.0);
+            GL.Translate(Position.X, Position.Y, 0.0);
             GL.Begin(BeginMode.Triangles);
 
             GL.Color3(Color.R, Color.G, Color.B);
-            GL.Vertex2(X, Y);
-            GL.Vertex2(X + Size, Y);
-            GL.Vertex2(X + Size/2, Y + Size);
+            GL.Vertex2(Position.X, Position.Y);
+            GL.Vertex2(Position.X + Size, Position.Y);
+            GL.Vertex2(Position.X + Size/2, Position.Y + Size);
 
             GL.End();
         }
