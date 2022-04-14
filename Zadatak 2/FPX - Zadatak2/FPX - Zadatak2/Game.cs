@@ -10,6 +10,9 @@ namespace FPX___Zadatak2
 {
     public class Game
     {
+        private static string FLOATCHOICE = "x";
+        private static string BYTECHOICE = "y";
+
         GameWindow gameWindow;
         List<Drawable> triangles;
 
@@ -37,7 +40,43 @@ namespace FPX___Zadatak2
                 Console.WriteLine("Enter the value for y: ");
                 int y = Convert.ToInt32(Console.ReadLine());
 
-                triangles.Add(new Triangle(inputSize, x, y));
+                Console.WriteLine(string.Format("Do you want to enter float or byte values for color({0} for float, {1} for byte): ", FLOATCHOICE, BYTECHOICE));
+                string colorType = Console.ReadLine();
+
+                Console.Clear();
+
+                if(colorType == FLOATCHOICE)
+                {
+                    Console.WriteLine("Choose color(enter 3 values 0-1 divided by a space): ");
+                    string colorFloat = Console.ReadLine();
+
+                    string[] colors = colorFloat.Split(' ');
+
+                    float[] rgb = new float[3];
+
+                    for(int j = 0; j < colors.Length - 1; j++)
+                    {
+                        rgb[j] += Convert.ToSingle(colors[j]);
+                    }
+
+                    triangles.Add(new Triangle(new Vector(x, y), inputSize, new Color(rgb[0], rgb[1], rgb[2])));
+                }
+                else if(colorType == BYTECHOICE)
+                {
+                    Console.WriteLine("Choose color(enter 3 values 0-255 divided by a space): ");
+                    string colorFloat = Console.ReadLine();
+
+                    string[] colors = colorFloat.Split(' ');
+
+                    byte[] rgb = new byte[3];
+
+                    for (int j = 0; j < colors.Length - 1; j++)
+                    {
+                        rgb[j] += Convert.ToByte(colors[j]);
+                    }
+
+                    triangles.Add(new Triangle(new Vector(x, y), inputSize, new Color(rgb[0], rgb[1], rgb[2])));
+                }
             }
 
             return triangles;
