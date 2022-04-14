@@ -65,9 +65,9 @@ namespace FPX___Zadatak2
 
         public Colors(byte r, byte g, byte b)
         {
-            R = r / 255;
-            G = g / 255;
-            B = b / 255;
+            R = r / 255.0f;
+            G = g / 255.0f;
+            B = b / 255.0f;
         }
     }
 }
