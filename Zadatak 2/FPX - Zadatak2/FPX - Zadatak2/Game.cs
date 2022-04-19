@@ -29,7 +29,7 @@ namespace FPX___Zadatak2
             //Console.WriteLine(string.Format("Do you want to draw circles or triangles({0} for circles, {1} for triangles): ", AFFIRMATIVE, NEGATIVE));
             //string choice = Console.ReadLine();
 
-            CircleHole circleHole = new CircleHole(new Vector(0f, 0f), 50, 30, new Color(255, 123, 123), 250);
+            CircleHole circleHole = new CircleHole(new Vector(0f, 0f), 50, 30, new Color(255, 0, 255), 250);
             drawables.Add(circleHole);
 
             //if (choice == AFFIRMATIVE) //circles

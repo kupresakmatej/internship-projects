@@ -33,7 +33,7 @@ namespace FPX___Zadatak2
 
             GL.Color3(Color.R, Color.G, Color.B);
             GL.Vertex2(Position.X, Position.Y);
-
+            
             for (int i = 0; i <= AmountOfTriangles; i++)
             {
                 GL.Vertex2(Position.X + (RadiusOut * Math.Cos(i * (2 * Math.PI) / AmountOfTriangles)), Position.Y + (RadiusOut * Math.Sin(i * (2 * Math.PI) / AmountOfTriangles)));
