@@ -41,14 +41,13 @@ namespace FPX___Zadatak2
 
             GL.End();
 
-            
             for (int j = 0; j <= AmountOfTriangles; j++)
             {
                 GL.Enable(EnableCap.ScissorTest);
-                GL.Scissor((int)(Position.X + RadiusOut), (int)(Position.Y + RadiusOut), (int)(Position.X + (RadiusIn * Math.Cos(j + (2 * Math.PI) / AmountOfTriangles))), (int)(Position.Y + (RadiusIn * Math.Sin(j + (2 * Math.PI) / AmountOfTriangles))));
+                GL.Scissor((int)(Position.X + RadiusOut), (int)(Position.Y + RadiusOut), (int)(Position.X + (RadiusIn * Math.Cos(j + (4 * Math.PI) / AmountOfTriangles))), (int)(Position.Y + (RadiusIn * Math.Sin(j + (2 * Math.PI) / AmountOfTriangles))));
                 GL.Clear(ClearBufferMask.ColorBufferBit);
                 GL.Disable(EnableCap.ScissorTest);
-            }           
+            }
         }
     }
 }
