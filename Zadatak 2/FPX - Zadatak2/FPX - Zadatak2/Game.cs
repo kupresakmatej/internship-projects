@@ -26,126 +26,129 @@ namespace FPX___Zadatak2
 
         private List<Drawable> Input()
         {
-            Console.WriteLine(string.Format("Do you want to draw circles or triangles({0} for circles, {1} for triangles): ", AFFIRMATIVE, NEGATIVE));
-            string choice = Console.ReadLine();
+            //Console.WriteLine(string.Format("Do you want to draw circles or triangles({0} for circles, {1} for triangles): ", AFFIRMATIVE, NEGATIVE));
+            //string choice = Console.ReadLine();
 
-            if (choice == AFFIRMATIVE) //circles
-            {
-                Console.WriteLine("Enter how many circles you want to draw: ");
-                int inputAmount = Convert.ToInt32(Console.ReadLine());
+            CircleHole circleHole = new CircleHole(new Vector(0f, 0f), 50, 30, new Color(255, 123, 123), 250);
+            drawables.Add(circleHole);
 
-                Console.WriteLine("Enter how many triangles you want to circle to consist of: ");
-                int triangleAmount = Convert.ToInt32(Console.ReadLine());
+            //if (choice == AFFIRMATIVE) //circles
+            //{
+            //    Console.WriteLine("Enter how many circles you want to draw: ");
+            //    int inputAmount = Convert.ToInt32(Console.ReadLine());
 
-                for (int i = 0; i < inputAmount; i++)
-                {
-                    Console.Clear();
+            //    Console.WriteLine("Enter how many triangles you want to circle to consist of: ");
+            //    int triangleAmount = Convert.ToInt32(Console.ReadLine());
 
-                    Console.WriteLine(string.Format("Enter the value for radius of the {0}. triangle: ", i + 1));
-                    int inputRadius = Convert.ToInt32(Console.ReadLine());
+            //    for (int i = 0; i < inputAmount; i++)
+            //    {
+            //        Console.Clear();
 
-                    Console.WriteLine("Enter the value for x: ");
-                    int x = Convert.ToInt32(Console.ReadLine());
+            //        Console.WriteLine(string.Format("Enter the value for radius of the {0}. circle: ", i + 1));
+            //        int inputRadius = Convert.ToInt32(Console.ReadLine());
 
-                    Console.WriteLine("Enter the value for y: ");
-                    int y = Convert.ToInt32(Console.ReadLine());
+            //        Console.WriteLine("Enter the value for x: ");
+            //        int x = Convert.ToInt32(Console.ReadLine());
 
-                    Console.WriteLine(string.Format("Do you want to enter float or byte values for color({0} for float, {1} for byte): ", AFFIRMATIVE, NEGATIVE));
-                    string colorType = Console.ReadLine();
+            //        Console.WriteLine("Enter the value for y: ");
+            //        int y = Convert.ToInt32(Console.ReadLine());
 
-                    Console.Clear();
+            //        Console.WriteLine(string.Format("Do you want to enter float or byte values for color({0} for float, {1} for byte): ", AFFIRMATIVE, NEGATIVE));
+            //        string colorType = Console.ReadLine();
 
-                    if (colorType == AFFIRMATIVE)
-                    {
-                        Console.WriteLine("Choose color(enter 3 values 0-1 divided by a space): ");
-                        string colorFloat = Console.ReadLine();
+            //        Console.Clear();
 
-                        string[] colors = colorFloat.Split(' ');
+            //        if (colorType == AFFIRMATIVE)
+            //        {
+            //            Console.WriteLine("Choose color(enter 3 values 0-1 divided by a space): ");
+            //            string colorFloat = Console.ReadLine();
 
-                        float[] rgb = new float[3];
+            //            string[] colors = colorFloat.Split(' ');
 
-                        for (int j = 0; j < colors.Length; j++)
-                        {
-                            rgb[j] += float.Parse(colors[j]);
-                        }
+            //            float[] rgb = new float[3];
 
-                        drawables.Add(new Circle(new Vector(x, y), inputRadius, new Color(rgb[0], rgb[1], rgb[2]), triangleAmount));
-                    }
-                    else if (colorType == NEGATIVE)
-                    {
-                        Console.WriteLine("Choose color(enter 3 values 0-255 divided by a space): ");
-                        string colorFloat = Console.ReadLine();
+            //            for (int j = 0; j < colors.Length; j++)
+            //            {
+            //                rgb[j] += float.Parse(colors[j]);
+            //            }
 
-                        string[] colors = colorFloat.Split(' ');
+            //            drawables.Add(new Circle(new Vector(x, y), inputRadius, new Color(rgb[0], rgb[1], rgb[2]), triangleAmount));
+            //        }
+            //        else if (colorType == NEGATIVE)
+            //        {
+            //            Console.WriteLine("Choose color(enter 3 values 0-255 divided by a space): ");
+            //            string colorFloat = Console.ReadLine();
 
-                        byte[] rgb = new byte[3];
+            //            string[] colors = colorFloat.Split(' ');
 
-                        for (int j = 0; j < colors.Length; j++)
-                        {
-                            rgb[j] += byte.Parse(colors[j]);
-                        }
+            //            byte[] rgb = new byte[3];
 
-                        drawables.Add(new Circle(new Vector(x, y), inputRadius, new Color(rgb[0], rgb[1], rgb[2]), triangleAmount));
-                    }
-                }
-            }
-            else if (choice == NEGATIVE) //triangles
-            {
-                Console.WriteLine("Enter how many triangles you want to draw: ");
-                int inputAmount = Convert.ToInt32(Console.ReadLine());
+            //            for (int j = 0; j < colors.Length; j++)
+            //            {
+            //                rgb[j] += byte.Parse(colors[j]);
+            //            }
 
-                for (int i = 0; i < inputAmount; i++)
-                {
-                    Console.Clear();
+            //            drawables.Add(new Circle(new Vector(x, y), inputRadius, new Color(rgb[0], rgb[1], rgb[2]), triangleAmount));
+            //        }
+            //    }
+            //}
+            //else if (choice == NEGATIVE) //triangles
+            //{
+            //    Console.WriteLine("Enter how many triangles you want to draw: ");
+            //    int inputAmount = Convert.ToInt32(Console.ReadLine());
 
-                    Console.WriteLine(string.Format("Enter the value for size of the {0}. triangle: ", i + 1));
-                    int inputSize = Convert.ToInt32(Console.ReadLine());
+            //    for (int i = 0; i < inputAmount; i++)
+            //    {
+            //        Console.Clear();
 
-                    Console.WriteLine("Enter the value for x: ");
-                    int x = Convert.ToInt32(Console.ReadLine());
+            //        Console.WriteLine(string.Format("Enter the value for size of the {0}. triangle: ", i + 1));
+            //        int inputSize = Convert.ToInt32(Console.ReadLine());
 
-                    Console.WriteLine("Enter the value for y: ");
-                    int y = Convert.ToInt32(Console.ReadLine());
+            //        Console.WriteLine("Enter the value for x: ");
+            //        int x = Convert.ToInt32(Console.ReadLine());
 
-                    Console.WriteLine(string.Format("Do you want to enter float or byte values for color({0} for float, {1} for byte): ", AFFIRMATIVE, NEGATIVE));
-                    string colorType = Console.ReadLine();
+            //        Console.WriteLine("Enter the value for y: ");
+            //        int y = Convert.ToInt32(Console.ReadLine());
 
-                    Console.Clear();
+            //        Console.WriteLine(string.Format("Do you want to enter float or byte values for color({0} for float, {1} for byte): ", AFFIRMATIVE, NEGATIVE));
+            //        string colorType = Console.ReadLine();
 
-                    if (colorType == AFFIRMATIVE)
-                    {
-                        Console.WriteLine("Choose color(enter 3 values 0-1 divided by a space): ");
-                        string colorFloat = Console.ReadLine();
+            //        Console.Clear();
 
-                        string[] colors = colorFloat.Split(' ');
+            //        if (colorType == AFFIRMATIVE)
+            //        {
+            //            Console.WriteLine("Choose color(enter 3 values 0-1 divided by a space): ");
+            //            string colorFloat = Console.ReadLine();
 
-                        float[] rgb = new float[3];
+            //            string[] colors = colorFloat.Split(' ');
 
-                        for (int j = 0; j < colors.Length; j++)
-                        {
-                            rgb[j] += float.Parse(colors[j]);
-                        }
+            //            float[] rgb = new float[3];
 
-                        drawables.Add(new Triangle(new Vector(x, y), inputSize, new Color(rgb[0], rgb[1], rgb[2])));
-                    }
-                    else if (colorType == NEGATIVE)
-                    {
-                        Console.WriteLine("Choose color(enter 3 values 0-255 divided by a space): ");
-                        string colorFloat = Console.ReadLine();
+            //            for (int j = 0; j < colors.Length; j++)
+            //            {
+            //                rgb[j] += float.Parse(colors[j]);
+            //            }
 
-                        string[] colors = colorFloat.Split(' ');
+            //            drawables.Add(new Triangle(new Vector(x, y), inputSize, new Color(rgb[0], rgb[1], rgb[2])));
+            //        }
+            //        else if (colorType == NEGATIVE)
+            //        {
+            //            Console.WriteLine("Choose color(enter 3 values 0-255 divided by a space): ");
+            //            string colorFloat = Console.ReadLine();
 
-                        byte[] rgb = new byte[3];
+            //            string[] colors = colorFloat.Split(' ');
 
-                        for (int j = 0; j < colors.Length; j++)
-                        {
-                            rgb[j] += byte.Parse(colors[j]);
-                        }
+            //            byte[] rgb = new byte[3];
 
-                        drawables.Add(new Triangle(new Vector(x, y), inputSize, new Color(rgb[0], rgb[1], rgb[2])));
-                    }
-                }
-            }
+            //            for (int j = 0; j < colors.Length; j++)
+            //            {
+            //                rgb[j] += byte.Parse(colors[j]);
+            //            }
+
+            //            drawables.Add(new Triangle(new Vector(x, y), inputSize, new Color(rgb[0], rgb[1], rgb[2])));
+            //        }
+            //    }
+            //}
 
             return drawables;
         }
