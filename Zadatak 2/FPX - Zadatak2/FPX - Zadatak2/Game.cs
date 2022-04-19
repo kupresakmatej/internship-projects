@@ -5,6 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using OpenTK;
 using OpenTK.Graphics.OpenGL;
+using System.Drawing.Imaging;
+using System.Drawing;
 
 namespace FPX___Zadatak2
 {
@@ -29,8 +31,16 @@ namespace FPX___Zadatak2
             //Console.WriteLine(string.Format("Do you want to draw circles or triangles({0} for circles, {1} for triangles): ", AFFIRMATIVE, NEGATIVE));
             //string choice = Console.ReadLine();
 
-            CircleHole circleHole = new CircleHole(new Vector(0f, 0f), 50, 30, new Color(255, 0, 255), 250);
-            drawables.Add(circleHole);
+            //CircleHole circleHole = new CircleHole(new Vector(0f, 0f), 50, 30, new Color(255, 0, 255), 250);
+            //drawables.Add(circleHole);
+
+            //Circle circle = new Circle(new Vector(0f, 0f), 100, new Color(255, 0, 123), 250);
+            //drawables.Add(circle);
+
+            Texture texture = new Texture();
+
+            Quad quad = new Quad(new Vector(0f, 0f), 250, texture.GenerateTexture());
+            drawables.Add(quad);
 
             //if (choice == AFFIRMATIVE) //circles
             //{
@@ -150,6 +160,7 @@ namespace FPX___Zadatak2
             //    }
             //}
 
+            drawables.Sort((x, y) => x.Layer.CompareTo(y.Layer));
             return drawables;
         }
 

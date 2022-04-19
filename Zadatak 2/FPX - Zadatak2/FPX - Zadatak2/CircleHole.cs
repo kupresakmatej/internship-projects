@@ -15,6 +15,7 @@ namespace FPX___Zadatak2
         private float RadiusIn { get; set; }
         private Color Color { get; set; }
         private int AmountOfTriangles { get; set; }
+        public override int Layer { get => base.Layer; set => base.Layer = value; }
 
         public CircleHole(Vector position, float radiusOut, float radiusIn, Color color, int amountOfTriangles)
         {
@@ -29,25 +30,18 @@ namespace FPX___Zadatak2
         {
             GL.Translate(Position.X + RadiusOut, Position.Y + RadiusOut, 0.0);
 
-            GL.Begin(BeginMode.TriangleFan);
-
             GL.Color3(Color.R, Color.G, Color.B);
             GL.Vertex2(Position.X, Position.Y);
+
+            GL.Begin(BeginMode.QuadStrip);
             
             for (int i = 0; i <= AmountOfTriangles; i++)
             {
-                GL.Vertex2(Position.X + (RadiusOut * Math.Cos(i * (2 * Math.PI) / AmountOfTriangles)), Position.Y + (RadiusOut * Math.Sin(i * (2 * Math.PI) / AmountOfTriangles)));
+                float angle = (i / (float)AmountOfTriangles) * 3.14159f * 2f;
+                GL.Vertex2(RadiusIn * Math.Cos(angle), RadiusIn * Math.Sin(angle));
+                GL.Vertex2(RadiusOut * Math.Cos(angle), RadiusOut * Math.Sin(angle));
             }
-
             GL.End();
-
-            for (int j = 0; j <= AmountOfTriangles; j++)
-            {
-                GL.Enable(EnableCap.ScissorTest);
-                GL.Scissor((int)(Position.X + RadiusOut), (int)(Position.Y + RadiusOut), (int)(Position.X + (RadiusIn * Math.Cos(j + (4 * Math.PI) / AmountOfTriangles))), (int)(Position.Y + (RadiusIn * Math.Sin(j + (2 * Math.PI) / AmountOfTriangles))));
-                GL.Clear(ClearBufferMask.ColorBufferBit);
-                GL.Disable(EnableCap.ScissorTest);
-            }
         }
     }
 }

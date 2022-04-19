@@ -40,6 +40,7 @@
     <Reference Include="PresentationCore" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -51,6 +52,8 @@
     <Compile Include="Circle.cs" />
     <Compile Include="CircleHole.cs" />
     <Compile Include="Color.cs" />
+    <Compile Include="Quad.cs" />
+    <Compile Include="Texture.cs" />
     <Compile Include="Vector.cs" />
     <Compile Include="Drawable.cs" />
     <Compile Include="Game.cs" />

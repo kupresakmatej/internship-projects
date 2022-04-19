@@ -29,6 +29,10 @@ namespace FPX___Zadatak2
             //{
             //    Console.WriteLine(rgb);
             //}
+
+            //Circle circle = new Circle(new Vector(0f, 0f), 50, new Color(255, 0, 123), 250, 4);
+
+            //Console.WriteLine(circle.Layer);
         }
     }
 }

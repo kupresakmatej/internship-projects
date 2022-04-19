@@ -14,6 +14,7 @@ namespace FPX___Zadatak2
         private float Radius { get; set; }
         private Color Color { get; set; }
         private int AmountOfTriangles { get; set; }
+        public override int Layer { get => base.Layer; set => base.Layer = value; }
 
         public Circle(Vector position, float radius, Color color, int amountOfTriangles)
         {
