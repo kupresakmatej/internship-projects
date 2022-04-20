@@ -17,8 +17,12 @@ namespace FPX___Zadatak2
 
         public Texture(string[] texturePath)
         {
+            TextureInt = new int[2];
             GenerateTexture(texturePath);
-            Console.WriteLine(TextureInt);
+            for(int i = 0; i < TextureInt.Length; i++)
+            {
+                Console.WriteLine(TextureInt[i]);
+            }
         }
 
         //~Texture()
@@ -34,7 +38,7 @@ namespace FPX___Zadatak2
 
             for (int i = 0; i < texture.Length; i++)
             {
-                TextureInt = texture;
+                TextureInt[i] = texture[i];
 
                 BitmapData texData = LoadImage(texturePath[i]);
 
