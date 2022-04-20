@@ -24,6 +24,7 @@ namespace FPX___Zadatak2
             RadiusIn = radiusIn;
             Color = color;
             AmountOfTriangles = amountOfTriangles;
+            Layer = 1;
         }
 
         public override void Draw()

@@ -49,10 +49,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Board.cs" />
     <Compile Include="Circle.cs" />
     <Compile Include="CircleHole.cs" />
     <Compile Include="Color.cs" />
     <Compile Include="Quad.cs" />
+    <Compile Include="QuadTexture.cs" />
     <Compile Include="Texture.cs" />
     <Compile Include="Vector.cs" />
     <Compile Include="Drawable.cs" />

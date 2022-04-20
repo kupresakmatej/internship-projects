@@ -11,7 +11,7 @@ namespace FPX___Zadatak2
     {
         static void Main(string[] args)
         {
-            GameWindow window = new GameWindow(500, 500);
+            GameWindow window = new GameWindow(1280, 720);
             Game game = new Game(window);
 
             //string colorFloat = "1 0 0";

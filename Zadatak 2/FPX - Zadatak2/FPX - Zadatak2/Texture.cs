@@ -13,7 +13,7 @@ namespace FPX___Zadatak2
     {
         int texture;
 
-        public int TextureInt { get; private set; }
+        public int TextureInt => texture;
 
         public Texture(string texturePath)
         {
@@ -30,8 +30,7 @@ namespace FPX___Zadatak2
             GL.Enable(EnableCap.Texture2D);
 
             GL.GenTextures(1, out texture);
-
-            TextureInt = texture;
+            GL.BindTexture(TextureTarget.Texture2D, texture);
 
             BitmapData texData = LoadImage(texturePath);
 
