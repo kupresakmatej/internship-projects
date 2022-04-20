@@ -11,41 +11,33 @@ namespace FPX___Zadatak2
 {
     class Texture
     {
-        int[] texture = new int[2];
+        int texture;
 
-        public int[] TextureInt { get; private set; }
+        public int TextureInt { get; private set; }
 
-        public Texture(string[] texturePath)
+        public Texture(string texturePath)
         {
-            TextureInt = new int[2];
             GenerateTexture(texturePath);
-            for(int i = 0; i < TextureInt.Length; i++)
-            {
-                Console.WriteLine(TextureInt[i]);
-            }
         }
 
-        //~Texture()
-        //{
-        //    GL.DeleteTexture(TextureInt);
-        //}
+        ~Texture()
+        {
+            GL.DeleteTexture(TextureInt);
+        }
 
-        private void GenerateTexture(string[] texturePath)
+        private void GenerateTexture(string texturePath)
         {
             GL.Enable(EnableCap.Texture2D);
 
-            GL.GenTextures(2, texture);
+            GL.GenTextures(1, out texture);
 
-            for (int i = 0; i < texture.Length; i++)
-            {
-                TextureInt[i] = texture[i];
+            TextureInt = texture;
 
-                BitmapData texData = LoadImage(texturePath[i]);
+            BitmapData texData = LoadImage(texturePath);
 
-                GL.TexImage2D(TextureTarget.Texture2D, 0, PixelInternalFormat.Rgb, texData.Width, texData.Height, 0, OpenTK.Graphics.OpenGL.PixelFormat.Bgr, PixelType.UnsignedByte, texData.Scan0);
+            GL.TexImage2D(TextureTarget.Texture2D, 0, PixelInternalFormat.Rgb, texData.Width, texData.Height, 0, OpenTK.Graphics.OpenGL.PixelFormat.Bgr, PixelType.UnsignedByte, texData.Scan0);
 
-                GL.GenerateMipmap(GenerateMipmapTarget.Texture2D);
-            }      
+            GL.GenerateMipmap(GenerateMipmapTarget.Texture2D);    
         }
 
         public BitmapData LoadImage(string texturePath)

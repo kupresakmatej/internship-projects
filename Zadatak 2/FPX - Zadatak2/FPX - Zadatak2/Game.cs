@@ -37,15 +37,16 @@ namespace FPX___Zadatak2
             //Circle circle = new Circle(new Vector(0f, 0f), 100, new Color(255, 0, 123), 250);
             //drawables.Add(circle);
 
-            string[] textures = new string[2] { @"C:\Users\Reroot\Desktop\FPX\crate_texture.bmp", @"C:\Users\Reroot\Desktop\FPX\wood_texture.bmp" };
-            Texture texture = new Texture(textures);
+            Texture crateTexture = new Texture(@"C:\Users\Reroot\Desktop\FPX\crate_texture.bmp");
+            Texture woodTexture = new Texture(@"C:\Users\Reroot\Desktop\FPX\wood_texture.bmp");
 
-            Quad newQuad = new Quad(new Vector(50f, 50f), 250, texture);
+            Quad newQuad = new Quad(new Vector(50f, 50f), 250, woodTexture);
             drawables.Add(newQuad);
 
             
-            Quad quad = new Quad(new Vector(0f, 0f), 250, texture);
+            Quad quad = new Quad(new Vector(0f, 0f), 250, crateTexture);
             drawables.Add(quad);
+
 
 
             //if (choice == AFFIRMATIVE) //circles
