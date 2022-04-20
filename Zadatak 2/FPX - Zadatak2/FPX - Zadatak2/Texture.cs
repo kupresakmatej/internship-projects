@@ -11,27 +11,37 @@ namespace FPX___Zadatak2
 {
     class Texture
     {
-        public int TextureInt { get; set; }
+        int[] texture = new int[2];
 
-        public Texture()
+        public int[] TextureInt { get; private set; }
+
+        public Texture(string[] texturePath)
         {
-            TextureInt = 0;
+            GenerateTexture(texturePath);
+            Console.WriteLine(TextureInt);
         }
 
-        public int GenerateTexture()
+        //~Texture()
+        //{
+        //    GL.DeleteTexture(TextureInt);
+        //}
+
+        private void GenerateTexture(string[] texturePath)
         {
-            int texture;
-
             GL.Enable(EnableCap.Texture2D);
-            GL.GenTextures(1, out texture);
 
-            BitmapData texData = LoadImage(@"C:\Users\Reroot\Desktop\FPX\crate_texture.bmp");
+            GL.GenTextures(2, texture);
 
-            GL.TexImage2D(TextureTarget.Texture2D, 0, PixelInternalFormat.Rgb, texData.Width, texData.Height, 0, OpenTK.Graphics.OpenGL.PixelFormat.Bgr, PixelType.UnsignedByte, texData.Scan0);
+            for (int i = 0; i < texture.Length; i++)
+            {
+                TextureInt = texture;
 
-            GL.GenerateMipmap(GenerateMipmapTarget.Texture2D);
+                BitmapData texData = LoadImage(texturePath[i]);
 
-            return texture;
+                GL.TexImage2D(TextureTarget.Texture2D, 0, PixelInternalFormat.Rgb, texData.Width, texData.Height, 0, OpenTK.Graphics.OpenGL.PixelFormat.Bgr, PixelType.UnsignedByte, texData.Scan0);
+
+                GL.GenerateMipmap(GenerateMipmapTarget.Texture2D);
+            }      
         }
 
         public BitmapData LoadImage(string texturePath)
