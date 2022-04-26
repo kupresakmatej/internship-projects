@@ -31,27 +31,45 @@ namespace FPX___Zadatak2
                 }
             }
 
+            for(int i = 0; i < 6; i++)
+            {
+                for (int j = 0; j < 5; j++)
+                {
+                    FillHole(i * 50f, j * 50f);
+                }
+            }
+
             return drawables;
         }
 
         public void DrawFrame(float x, float y)
         {
-            Quad quad = new Quad(new Vector(x + 150f, y + 25f), 110f, 10f, new Color(0, 0, 255));
-            Quad quad2 = new Quad(new Vector(x + 150f, y + 25f), 10f, 110f, new Color(0, 0, 255));
-            Quad quad3 = new Quad(new Vector(x + 200f, y + 25f), 10f, 110f, new Color(0, 0, 255));
-            Quad quad4 = new Quad(new Vector(x + 150f, y + 75f), 110f, 10f, new Color(0, 0, 255));
+            Quad quad = new Quad(new Vector(x + 150f, y + 25f), 118f, 18f, new Color(0, 0, 255));
+            Quad quad2 = new Quad(new Vector(x + 150f, y + 25f), 18f, 110f, new Color(0, 0, 255));
+            Quad quad3 = new Quad(new Vector(x + 200f, y + 25f), 18f, 110f, new Color(0, 0, 255));
+            Quad quad4 = new Quad(new Vector(x + 150f, y + 75f), 118f, 18f, new Color(0, 0, 255));
+
+            //Circle circle = new Circle(new Vector(162.5f, 37f), 35f, new Color(255, 255, 0), 250);
 
             drawables.Add(quad);
             drawables.Add(quad2);
             drawables.Add(quad3);
             drawables.Add(quad4);
+            //drawables.Add(circle);
         }
         
         public void DrawHole(float x, float y)
         {
-            CircleHole hole = new CircleHole(new Vector(x + 305f, y + 55f), 50f, 40f, new Color(0, 0, 255), 250);
+            CircleHole hole = new CircleHole(new Vector(x + 300f, y + 50f), 59f, 40f, new Color(0, 0, 255), 250);
 
             drawables.Add(hole);
+        }
+
+        public void FillHole(float x, float y)
+        {
+            Circle circle = new Circle(new Vector(x + 191.5f, y + 66.5f), 26f, new Color(0, 0, 255), 250);
+
+            drawables.Add(circle);
         }
     }
 }

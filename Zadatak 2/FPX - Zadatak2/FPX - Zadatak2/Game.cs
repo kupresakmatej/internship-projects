@@ -55,6 +55,8 @@ namespace FPX___Zadatak2
 
         public void Resize(object o, EventArgs e)
         {
+            //OnResize.Invoke();
+
             GL.Viewport(0, 0, gameWindow.Width, gameWindow.Height);
             GL.MatrixMode(MatrixMode.Projection);
             GL.LoadIdentity();
@@ -62,6 +64,8 @@ namespace FPX___Zadatak2
 
             GL.MatrixMode(MatrixMode.Modelview);
         }
+
+        //public event Action OnResize;
 
         public void Loaded(object o, EventArgs e)
         {
