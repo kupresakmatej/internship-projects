@@ -28,22 +28,15 @@ namespace FPX___Zadatak2
 
         private List<Drawable> Input()
         {
-            Board board = new Board(new Color(255, 255, 123));
+            Board board = new Board();
+            List<Drawable> drawBoard;
+            drawBoard = board.DrawBoard();
 
-            Quad quad = new Quad(new Vector(30f, 2f), 1137f, 10f, new Color(255, 0, 0));
-            Quad quad2 = new Quad(new Vector(30f, 2f), 1137f, 10f, new Color(255, 0, 0));
-            drawables.Add(quad);
-
-            for(int j = 0; j < 6; j++)
+            foreach(Drawable drawable in drawBoard)
             {
-                for (int i = 0; i < 7; i++)
-                {
-                    CircleHole circleHole = new CircleHole(new Vector(65f + (i * 170), 15f + (j * 117f)), 55f, 45f, new Color(255, 0, 0), 250);
-                    drawables.Add(circleHole);
-                }
+                drawables.Add(drawable);
             }
 
-            drawables.Add(board);
             drawables.Sort((x, y) => x.Layer.CompareTo(y.Layer));
             return drawables;
         }
