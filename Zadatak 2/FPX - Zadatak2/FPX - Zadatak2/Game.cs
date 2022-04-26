@@ -17,18 +17,25 @@ namespace FPX___Zadatak2
 
         GameWindow gameWindow;
         List<Drawable> drawables;
+        Board board;
 
         public Game(GameWindow window)
         {
             this.gameWindow = window;
             drawables = new List<Drawable>();
+            board = new Board(gameWindow.Width, gameWindow.Height);
+
             Input();
             Start();
         }
 
+        public Game()
+        {
+
+        }
+
         private List<Drawable> Input()
         {
-            Board board = new Board();
             List<Drawable> drawBoard;
             drawBoard = board.DrawBoard();
 
@@ -55,9 +62,12 @@ namespace FPX___Zadatak2
 
         public void Resize(object o, EventArgs e)
         {
-            OnResize.Invoke();
+            int aspect = gameWindow.Width / gameWindow.Height;
 
-            GL.Viewport(0, 0, gameWindow.Width, gameWindow.Height);
+            OnResize?.Invoke();
+            OnResize += board.WindowReshape;
+
+            GL.Viewport(0, 0, gameWindow.Width * aspect, gameWindow.Height * aspect);
             GL.MatrixMode(MatrixMode.Projection);
             GL.LoadIdentity();
             GL.Ortho(0.0, gameWindow.Width, 0.0, gameWindow.Height, -1.0, 1.0);
@@ -66,6 +76,19 @@ namespace FPX___Zadatak2
         }
 
         public event Action OnResize;
+
+        public void Reshape(int w, int h)
+        {
+            if (h == 0)
+                h = 1;
+
+            float aspect = (float)gameWindow.Width / gameWindow.Height;
+            GL.MatrixMode(MatrixMode.Projection);
+            GL.LoadIdentity();
+            GL.Viewport(0, 0, w, h);
+            
+            GL.MatrixMode(MatrixMode.Modelview);
+        }
 
         public void Loaded(object o, EventArgs e)
         {

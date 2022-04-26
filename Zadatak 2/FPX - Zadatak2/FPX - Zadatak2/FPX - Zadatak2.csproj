@@ -53,6 +53,7 @@
     <Compile Include="Circle.cs" />
     <Compile Include="CircleHole.cs" />
     <Compile Include="Color.cs" />
+    <Compile Include="IUpdateable.cs" />
     <Compile Include="Quad.cs" />
     <Compile Include="QuadTexture.cs" />
     <Compile Include="Texture.cs" />
