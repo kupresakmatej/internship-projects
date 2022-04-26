@@ -12,9 +12,6 @@ namespace FPX___Zadatak2
 {
     public class Game
     {
-        private static string AFFIRMATIVE = "x";
-        private static string NEGATIVE = "y";
-
         GameWindow gameWindow;
         List<Drawable> drawables;
         Board board;
@@ -64,8 +61,8 @@ namespace FPX___Zadatak2
         {
             int aspect = gameWindow.Width / gameWindow.Height;
 
-            OnResize?.Invoke();
-            OnResize += board.WindowReshape(gameWindow.Width, gameWindow.Height);
+            OnResize.Invoke();
+            OnResize += board.WindowReshape;
 
             GL.Viewport(0, 0, gameWindow.Width * aspect, gameWindow.Height * aspect);
             GL.MatrixMode(MatrixMode.Projection);
