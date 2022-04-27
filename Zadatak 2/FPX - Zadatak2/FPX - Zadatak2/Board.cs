@@ -81,21 +81,7 @@ namespace FPX___Zadatak2
 
         public void WindowReshape(int width, int height)
         {
-            float aspect = (float)width / height;
-            float xSpan = 1;
-            float ySpan = 1;
-
-            if(aspect > 1)
-            {
-                xSpan *= aspect;
-            }
-            else
-            {
-                ySpan = ySpan / aspect;
-            }
-
-            GL.Ortho(0, xSpan, 0, ySpan, -1, 1);
-            GL.Viewport(0, 0, width, height);
+            DrawBoard();
 
             Console.WriteLine("asdasd");
         }
