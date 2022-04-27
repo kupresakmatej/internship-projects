@@ -27,7 +27,7 @@ namespace FPX___Zadatak2
 
         public override void Draw()
         {
-            GL.Translate(Position.X + Radius, Position.Y + Radius, 0.0);
+            GL.Translate(Position.X, Position.Y, 0.0);
 
             GL.Begin(BeginMode.TriangleFan);
 
