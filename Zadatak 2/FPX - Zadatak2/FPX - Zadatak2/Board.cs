@@ -13,6 +13,7 @@ namespace FPX___Zadatak2
     class Board
     {
         private List<Drawable> drawables = new List<Drawable>();
+        Color color = new Color();
 
         private float Width { get; set; }
         private float Height { get; set; }
@@ -75,23 +76,28 @@ namespace FPX___Zadatak2
             Circle circle = new Circle(new Vector(x + 191.5f, y + 66.5f), 26f, new Color(0, 0, 255), 250);
 
             drawables.Add(circle);
-        }       
+        }
+
 
         public void WindowReshape(int width, int height)
         {
-            GL.MatrixMode(MatrixMode.Projection);
-            GL.LoadIdentity();
-            GL.Ortho(0.0, Width, Height, 0.0, 1.0, -1.0);
-            var ratioX = width / (float)Width;
-            var ratioY = height / (float)Height;
-            var ratio = ratioX < ratioY ? ratioX : ratioY;
-            var viewWidth = Convert.ToInt32(Width * ratio);
-            var viewHeight = Convert.ToInt32(Height * ratio);
-            var viewX = Convert.ToInt32((width - Width * ratio) / 2);
-            var viewY = Convert.ToInt32((height - Height * ratio) / 2);
-            GL.Viewport(viewX, viewY, viewWidth, viewHeight);
-            GL.MatrixMode(MatrixMode.Modelview);
-            GL.LoadIdentity();
+            float aspect = (float)width / height;
+            float xSpan = 1;
+            float ySpan = 1;
+
+            if(aspect > 1)
+            {
+                xSpan *= aspect;
+            }
+            else
+            {
+                ySpan = ySpan / aspect;
+            }
+
+            GL.Ortho(0, xSpan, 0, ySpan, -1, 1);
+            GL.Viewport(0, 0, width, height);
+
+            Console.WriteLine("asdasd");
         }
     }
 }

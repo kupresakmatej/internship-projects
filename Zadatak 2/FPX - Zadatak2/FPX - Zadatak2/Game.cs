@@ -51,6 +51,8 @@ namespace FPX___Zadatak2
 
             //GL.Viewport(0, 0, gameWindow.Width, gameWindow.Height);
 
+            OnResize += () => board.WindowReshape(gameWindow.Width, gameWindow.Height);
+
             gameWindow.Load += Loaded;
             gameWindow.Resize += Resize;
             gameWindow.RenderFrame += renderer.RenderF;
@@ -59,15 +61,12 @@ namespace FPX___Zadatak2
 
         public void Resize(object o, EventArgs e)
         {
-            int aspect = gameWindow.Width / gameWindow.Height;
+            OnResize?.Invoke();
 
-            OnResize.Invoke();
-            OnResize += board.WindowReshape;
-
-            GL.Viewport(0, 0, gameWindow.Width * aspect, gameWindow.Height * aspect);
+            GL.Viewport(0, 0, gameWindow.Width, gameWindow.Height);
             GL.MatrixMode(MatrixMode.Projection);
             GL.LoadIdentity();
-            GL.Ortho(0.0, gameWindow.Width, 0.0, gameWindow.Height, -1.0, 1.0);
+            GL.Ortho(0, gameWindow.Width, 0, gameWindow.Height, -1.0, 1.0);
 
             GL.MatrixMode(MatrixMode.Modelview);
         }
