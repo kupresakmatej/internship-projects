@@ -10,7 +10,7 @@ namespace FPX___Zadatak2
 {
     class CircleHole : Drawable
     {
-        private Vector Position { get; set; }
+        public Vector Position { get; set; }
         private float RadiusOut { get; set; }
         private float RadiusIn { get; set; }
         private Color Color { get; set; }

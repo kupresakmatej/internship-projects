@@ -10,7 +10,7 @@ namespace FPX___Zadatak2
 {
     class Circle : Drawable
     {
-        private Vector Position { get; set; }
+        public Vector Position { get; set; }
         private float Radius { get; set; }
         private Color Color { get; set; }
         private int AmountOfTriangles { get; set; }

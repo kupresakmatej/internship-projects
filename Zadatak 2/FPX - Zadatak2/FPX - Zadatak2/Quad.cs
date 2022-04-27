@@ -13,7 +13,7 @@ namespace FPX___Zadatak2
 {
     class Quad : Drawable
     {
-        private Vector Position { get; set; }
+        public Vector Position { get; set; }
         private float A { get; set; }
         private float B { get; set; }
         private Color Color { get; set; }

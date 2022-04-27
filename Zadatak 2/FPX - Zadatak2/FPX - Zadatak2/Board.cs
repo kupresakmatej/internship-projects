@@ -13,6 +13,10 @@ namespace FPX___Zadatak2
     class Board
     {
         private List<Drawable> drawables = new List<Drawable>();
+        private List<Quad> quads = new List<Quad>();
+        private List<CircleHole> circleHoles = new List<CircleHole>();
+        private List<Circle> circles = new List<Circle>();
+
         Color color = new Color();
 
         private float Width { get; set; }
@@ -26,7 +30,7 @@ namespace FPX___Zadatak2
             Height = height;
         }
 
-        public List<Drawable> DrawBoard()
+        public List<Drawable> GenerateBoard()
         {
             for (int i = 0; i < 7; i++)
             {
@@ -61,6 +65,11 @@ namespace FPX___Zadatak2
             drawables.Add(quad2);
             drawables.Add(quad3);
             drawables.Add(quad4);
+
+            quads.Add(quad);
+            quads.Add(quad2);
+            quads.Add(quad3);
+            quads.Add(quad4);
             //drawables.Add(circle);
         }
 
@@ -69,6 +78,8 @@ namespace FPX___Zadatak2
             CircleHole hole = new CircleHole(new Vector(x + 300f, y + 50f), 60f, 40f, new Color(0, 0, 255), 250);
 
             drawables.Add(hole);
+
+            circleHoles.Add(hole);
         }
 
         public void FillHole(float x, float y)
@@ -76,12 +87,25 @@ namespace FPX___Zadatak2
             Circle circle = new Circle(new Vector(x + 191.5f, y + 66.5f), 26f, new Color(0, 0, 255), 250);
 
             drawables.Add(circle);
+
+            circles.Add(circle);
         }
 
 
         public void WindowReshape(int width, int height)
         {
-            DrawBoard();
+            foreach (Quad quad in quads)
+            {
+                quad.Position = new Vector(quad.Position.X, quad.Position.Y);
+            }
+            foreach (CircleHole hole in circleHoles)
+            {
+                hole.Position = new Vector(hole.Position.X, hole.Position.Y);
+            }
+            foreach (Circle circle in circles)
+            {
+                circle.Position = new Vector(circle.Position.X, circle.Position.Y);
+            }
 
             Console.WriteLine("asdasd");
         }
