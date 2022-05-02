@@ -24,3 +24,14 @@ C:\Users\Reroot\Desktop\FPX\fpx-repository\Zadatak 2\FPX - Zadatak2\FPX - Zadata
 C:\Users\Reroot\Desktop\FPX\fpx-repository\Zadatak 2\FPX - Zadatak2\FPX - Zadatak2\obj\Debug\FPX - Zadatak2.csproj.CopyComplete
 C:\Users\Reroot\Desktop\FPX\fpx-repository\Zadatak 2\FPX - Zadatak2\FPX - Zadatak2\obj\Debug\FPX - Zadatak2.exe
 C:\Users\Reroot\Desktop\FPX\fpx-repository\Zadatak 2\FPX - Zadatak2\FPX - Zadatak2\obj\Debug\FPX - Zadatak2.pdb
+C:\Users\vrisa\Desktop\fpx-repository\Zadatak 2\FPX - Zadatak2\FPX - Zadatak2\bin\Debug\FPX - Zadatak2.exe.config
+C:\Users\vrisa\Desktop\fpx-repository\Zadatak 2\FPX - Zadatak2\FPX - Zadatak2\bin\Debug\FPX - Zadatak2.exe
+C:\Users\vrisa\Desktop\fpx-repository\Zadatak 2\FPX - Zadatak2\FPX - Zadatak2\bin\Debug\FPX - Zadatak2.pdb
+C:\Users\vrisa\Desktop\fpx-repository\Zadatak 2\FPX - Zadatak2\FPX - Zadatak2\bin\Debug\OpenTK.dll
+C:\Users\vrisa\Desktop\fpx-repository\Zadatak 2\FPX - Zadatak2\FPX - Zadatak2\bin\Debug\OpenTK.pdb
+C:\Users\vrisa\Desktop\fpx-repository\Zadatak 2\FPX - Zadatak2\FPX - Zadatak2\bin\Debug\OpenTK.xml
+C:\Users\vrisa\Desktop\fpx-repository\Zadatak 2\FPX - Zadatak2\FPX - Zadatak2\bin\Debug\OpenTK.dll.config
+C:\Users\vrisa\Desktop\fpx-repository\Zadatak 2\FPX - Zadatak2\FPX - Zadatak2\obj\Debug\FPX - Zadatak2.csproj.AssemblyReference.cache
+C:\Users\vrisa\Desktop\fpx-repository\Zadatak 2\FPX - Zadatak2\FPX - Zadatak2\obj\Debug\FPX - Zadatak2.csproj.CoreCompileInputs.cache
+C:\Users\vrisa\Desktop\fpx-repository\Zadatak 2\FPX - Zadatak2\FPX - Zadatak2\obj\Debug\FPX - Zadatak2.exe
+C:\Users\vrisa\Desktop\fpx-repository\Zadatak 2\FPX - Zadatak2\FPX - Zadatak2\obj\Debug\FPX - Zadatak2.pdb

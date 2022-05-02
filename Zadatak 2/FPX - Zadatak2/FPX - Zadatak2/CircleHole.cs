@@ -29,7 +29,7 @@ namespace FPX___Zadatak2
 
         public override void Draw()
         {
-            GL.Translate(Position.X + RadiusOut, Position.Y + RadiusOut, 0.0);
+            GL.Translate(Position.X, Position.Y, 0.0);
 
             GL.Color3(Color.R, Color.G, Color.B);
             GL.Vertex2(Position.X, Position.Y);

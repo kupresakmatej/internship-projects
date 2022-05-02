@@ -33,11 +33,11 @@ namespace FPX___Zadatak2
 
         public List<Drawable> GenerateBoard()
         {
-            for(int i = 0; i < 7; i++)
+            for (int i = -4; i < 3; i++)
             {
-                for(int j = 0; j < 6; j++)
+                for (int j = -3; j < 3; j++)
                 {
-                    DrawFrame(i * 100f, j* 100f);
+                    DrawFrame(i * 100f, j * 100f);
                     DrawHole(i * 200f, j * 200f);
                 }
             }
@@ -58,34 +58,39 @@ namespace FPX___Zadatak2
                 }
             }
 
-            for(int i = 0; i < 7; i++)
+            for (int i = 0; i < 7; i++)
             {
                 FillHoleUp(i * 100f, 0);
             }
 
-            //drawables.Add(circle);
-            //drawables.Add(circle1);
+            drawables.Add(circle);
+            drawables.Add(circle1);
             return drawables;
         }
 
         public void DrawFrame(float x, float y)
         {
-            Quad quad = new Quad(new Vector((GameWindow.Width/2 - 375f) + x, (GameWindow.Height/ 2 - 300f) + y), 200f, 40f, color.Blue);
-            Quad quad2 = new Quad(new Vector((GameWindow.Width / 2 - 375f) + x, (GameWindow.Height / 2 - 300f) + y), 42f, 200f, color.Blue);
-            Quad quad3 = new Quad(new Vector((GameWindow.Width / 2 - 275f) + x, (GameWindow.Height / 2 - 300f) + y), 42f, 200f, color.Blue);
-            Quad quad4 = new Quad(new Vector((GameWindow.Width / 2 - 375f) + x, (GameWindow.Height / 2 - 200f) + y), 242f, 40f, color.Blue);
+            Quad quad = new Quad(new Vector((GameWindow.Width / 2) + x, (GameWindow.Height/ 2) + y), 200f, 40f, color.Blue);
+            Quad quad2 = new Quad(new Vector((GameWindow.Width / 2) + x, (GameWindow.Height / 2) + y), 42f, 200f, color.Blue);
+            Quad quad3 = new Quad(new Vector((GameWindow.Width / 2 + 100f) + x, (GameWindow.Height / 2) + y), 42f, 200f, color.Blue);
+            Quad quad4 = new Quad(new Vector((GameWindow.Width / 2) + x, (GameWindow.Height / 2 + 100f) + y), 242f, 40f, color.Blue);
 
             drawables.Add(quad);
             drawables.Add(quad2);
             drawables.Add(quad3);
             drawables.Add(quad4);
 
+            quads.Add(quad);
+            quads.Add(quad2);
+            quads.Add(quad3);
+            quads.Add(quad4);
+
             //Circle circle = new Circle(new Vector(162.5f, 37f), 35f, new Color(255, 255, 0), 250);
         }
 
         public void DrawHole(float x, float y)
         {
-            CircleHole hole = new CircleHole(new Vector((GameWindow.Width / 2 - 100f) + x, (GameWindow.Height / 2 - 235f) + y), 115f, 70f, color.Blue, 250);
+            CircleHole hole = new CircleHole(new Vector((GameWindow.Width / 2 + 760f) + x, (GameWindow.Height / 2 + 485f) + y), 115f, 70f, color.Blue, 250);
 
             drawables.Add(hole);
 
@@ -96,14 +101,14 @@ namespace FPX___Zadatak2
         {
             Circle circle = new Circle(new Vector((GameWindow.Width / 2 - 275f) + x, (GameWindow.Height / 2 - 195f) + y), 40f, color.Blue, 250);
 
-            drawables.Add(circle);
+            //drawables.Add(circle);
 
             circles.Add(circle);
         }
 
         public void FillHoleDown(float x, float y)
         {
-            Circle circle = new Circle(new Vector((GameWindow.Width / 2 - 275f) + x, (GameWindow.Height / 2 - 275f) + y), 25f, color.Blue, 250);
+            Circle circle = new Circle(new Vector((GameWindow.Width / 2 - 300f) + x, (GameWindow.Height / 2 - 275f) + y), 25f, color.Blue, 250);
 
             drawables.Add(circle);
 
@@ -114,29 +119,37 @@ namespace FPX___Zadatak2
         {
             Circle circle = new Circle(new Vector((GameWindow.Width / 2 - 275f) + x, (GameWindow.Height / 2 + 300f) + y), 25f, color.Blue, 250);
 
-            drawables.Add(circle);
+            //drawables.Add(circle);
 
             circles.Add(circle);
         }
 
         public void WindowReshape(int width, int height)
         {
-            //foreach (Quad quad in quads)
-            //{
-            //    quad.Position = new Vector(quad.Position.X, quad.Position.Y);
-            //}
-            //foreach (CircleHole hole in circleHoles)
-            //{
-            //    hole.Position = new Vector(hole.Position.X, hole.Position.Y);
-            //}
-            //foreach (Circle circle in circles)
-            //{
-            //    circle.Position = new Vector(circle.Position.X, circle.Position.Y);
-            //}
+            float x = width / 2 + 760f;
+            float y = height / 2 + 485f;
 
-            //circle.Position = new Vector(width / 2, height / 2);
-            //circle1.Position = new Vector((width / 2) + 50f, height / 2);
-            //Console.WriteLine(string.Format("{0} {1}", circle.Position.X, circle.Position.Y));
+            float pomakX = 0f;
+            float pomakY = 0f;
+
+            circle.Position = new Vector(width / 2, height / 2);
+            circle1.Position = new Vector((width / 2) + 50f, height / 2);
+
+            for (int j = 0; j < circleHoles.Count; j++)
+            {
+                for (int i = 0; i < 7; i++)
+                {
+                    for(int k = 0; k < 6; k++)
+                    {
+                        circleHoles[j].Position = new Vector((x - 975f) + (i * pomakX), y - 600f + pomakY);
+                        
+                    }
+                    pomakX += 5f;
+                    pomakY += 35f;
+                }
+            }
+
+            Console.WriteLine("asd");
         }
     }
 }
