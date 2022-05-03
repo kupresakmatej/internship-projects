@@ -9,7 +9,7 @@ using System.Drawing.Imaging;
 using System.Drawing;
 
 namespace FPX___Zadatak2
-{
+{ 
     public class Game
     {
         GameWindow gameWindow;
@@ -34,7 +34,7 @@ namespace FPX___Zadatak2
         private List<Drawable> Input()
         {
             List<Drawable> drawBoard;
-            drawBoard = board.GenerateBoard();
+            drawBoard = board.GenerateBoard(gameWindow.Width, gameWindow.Height);
 
             foreach(Drawable drawable in drawBoard)
             {

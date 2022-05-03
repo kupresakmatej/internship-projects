@@ -20,6 +20,7 @@ namespace FPX___Zadatak2
         Color color = new Color();
 
         private static GameWindow GameWindow;
+        static float aspect;
 
         Game game = new Game();
 
@@ -29,16 +30,16 @@ namespace FPX___Zadatak2
         public Board(GameWindow gameWindow)
         {
             GameWindow = gameWindow;
-        }
+            aspect = GameWindow.Width / gameWindow.Height;        }
 
-        public List<Drawable> GenerateBoard()
+        public List<Drawable> GenerateBoard(float width, float height)
         {
             for (int i = -4; i < 3; i++)
             {
                 for (int j = -3; j < 3; j++)
                 {
-                    DrawFrame(i * 100f, j * 100f);
-                    DrawHole(i * 200f, j * 200f);
+                    DrawFrame(i * 100f, j * 100f, width, height);
+                    DrawHole(i * 200f, j * 200f, width, height);
                 }
             }
 
@@ -46,7 +47,7 @@ namespace FPX___Zadatak2
             {
                 for (int j = 0; j < 5; j++)
                 {
-                    FillHole(i * 100f, j * 100f);
+                    FillHole(i * 100f, j * 100f, width, height);
                 }
             }
 
@@ -54,13 +55,13 @@ namespace FPX___Zadatak2
             {
                 for (int j = 0; j < 6; j++)
                 {
-                    FillHoleDown(i * 100f, j * 100f);
+                    FillHoleDown(i * 100f, j * 100f, width, height);
                 }
             }
 
             for (int i = 0; i < 7; i++)
             {
-                FillHoleUp(i * 100f, 0);
+                FillHoleUp(i * 100f, 0, width, height);
             }
 
             drawables.Add(circle);
@@ -68,12 +69,12 @@ namespace FPX___Zadatak2
             return drawables;
         }
 
-        public void DrawFrame(float x, float y)
+        public void DrawFrame(float x, float y, float widht, float height)
         {
-            Quad quad = new Quad(new Vector((GameWindow.Width / 2) + x, (GameWindow.Height/ 2) + y), 200f, 40f, color.Blue);
-            Quad quad2 = new Quad(new Vector((GameWindow.Width / 2) + x, (GameWindow.Height / 2) + y), 42f, 200f, color.Blue);
-            Quad quad3 = new Quad(new Vector((GameWindow.Width / 2 + 100f) + x, (GameWindow.Height / 2) + y), 42f, 200f, color.Blue);
-            Quad quad4 = new Quad(new Vector((GameWindow.Width / 2) + x, (GameWindow.Height / 2 + 100f) + y), 242f, 40f, color.Blue);
+            Quad quad = new Quad(new Vector((widht / 2) + x + 75f, (height / 2) + y), 200f, 40f, color.Blue);
+            Quad quad2 = new Quad(new Vector((widht / 2) + x + 75f, (height / 2) + y), 42f, 200f, color.Blue);
+            Quad quad3 = new Quad(new Vector((widht / 2 + 100f) + x + 75f, (height / 2) + y), 42f, 200f, color.Blue);
+            Quad quad4 = new Quad(new Vector((widht / 2) + x + 75f, (height / 2 + 100f) + y), 242f, 40f, color.Blue);
 
             drawables.Add(quad);
             drawables.Add(quad2);
@@ -88,36 +89,36 @@ namespace FPX___Zadatak2
             //Circle circle = new Circle(new Vector(162.5f, 37f), 35f, new Color(255, 255, 0), 250);
         }
 
-        public void DrawHole(float x, float y)
+        public void DrawHole(float x, float y, float width, float height)
         {
-            CircleHole hole = new CircleHole(new Vector((GameWindow.Width / 2 + 760f) + x, (GameWindow.Height / 2 + 485f) + y), 115f, 70f, color.Blue, 250);
+            CircleHole hole = new CircleHole(new Vector((width / 2 + 921f) + x + 150f, (height / 2 + 565f) + y), 115f, 70f, color.Blue, 250);
 
             drawables.Add(hole);
 
             circleHoles.Add(hole);
         }
 
-        public void FillHole(float x, float y)
+        public void FillHole(float x, float y, float width, float height)
         {
-            Circle circle = new Circle(new Vector((GameWindow.Width / 2 - 275f) + x, (GameWindow.Height / 2 - 195f) + y), 40f, color.Blue, 250);
+            Circle circle = new Circle(new Vector((width / 2 - 275f) + x, (height / 2 - 195f) + y), 40f, color.Blue, 250);
 
             //drawables.Add(circle);
 
             circles.Add(circle);
         }
 
-        public void FillHoleDown(float x, float y)
+        public void FillHoleDown(float x, float y, float width, float height)
         {
-            Circle circle = new Circle(new Vector((GameWindow.Width / 2 - 300f) + x, (GameWindow.Height / 2 - 275f) + y), 25f, color.Blue, 250);
+            Circle circle = new Circle(new Vector((width / 2 - 300f) + x, (height / 2 - 275f) + y), 25f, color.Blue, 250);
 
             drawables.Add(circle);
 
             circles.Add(circle);
         }
 
-        public void FillHoleUp(float x, float y)
+        public void FillHoleUp(float x, float y, float width, float height)
         {
-            Circle circle = new Circle(new Vector((GameWindow.Width / 2 - 275f) + x, (GameWindow.Height / 2 + 300f) + y), 25f, color.Blue, 250);
+            Circle circle = new Circle(new Vector((width / 2 - 275f) + x, (height / 2 + 300f) + y), 25f, color.Blue, 250);
 
             //drawables.Add(circle);
 
@@ -126,8 +127,8 @@ namespace FPX___Zadatak2
 
         public void WindowReshape(int width, int height)
         {
-            float x = width / 2 + 760f;
-            float y = height / 2 + 485f;
+            float x = width / 2;
+            float y = height / 2;
 
             float pomakX = 0f;
             float pomakY = 0f;
@@ -135,17 +136,17 @@ namespace FPX___Zadatak2
             circle.Position = new Vector(width / 2, height / 2);
             circle1.Position = new Vector((width / 2) + 50f, height / 2);
 
-            for (int j = 0; j < circleHoles.Count; j++)
+            for (int i = 0; i < circleHoles.Count; i++)
             {
-                for (int i = 0; i < 7; i++)
+                if (GameWindow.Width / GameWindow.Height >= 1)
                 {
-                    for(int k = 0; k < 6; k++)
-                    {
-                        circleHoles[j].Position = new Vector((x - 975f) + (i * pomakX), y - 600f + pomakY);
-                        
-                    }
-                    pomakX += 5f;
-                    pomakY += 35f;
+                    float posx = circleHoles[i].Position.X + (width / height);
+                    circleHoles[i].Position = new Vector(posx, circleHoles[i].Position.Y);
+                }
+                else
+                {
+                    float posx = circleHoles[i].Position.X - (width / height);
+                    circleHoles[i].Position = new Vector(posx, circleHoles[i].Position.Y);
                 }
             }
 
