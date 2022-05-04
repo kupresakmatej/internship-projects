@@ -130,9 +130,6 @@ namespace FPX___Zadatak2
             float x = width / 2;
             float y = height / 2;
 
-            float pomakX = 0f;
-            float pomakY = 0f;
-
             circle.Position = new Vector(width / 2, height / 2);
             circle1.Position = new Vector((width / 2) + 50f, height / 2);
 
