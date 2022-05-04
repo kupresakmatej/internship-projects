@@ -35,13 +35,12 @@ namespace FPX___Zadatak2
         {
             w = width;
             h = height;
-            wh = w / h;
 
             for(int i = -3; i < 4; i++)
             {
                 for(int j = -3; j < 3; j++)
                 {
-                    //DrawFrame(i * 100f, j * 100f, width, height);
+                    DrawFrame(i * 100f, j * 100f, width, height);
                     DrawHole(i * 100f, j * 100f, width, height);
                 }
             }
@@ -86,17 +85,31 @@ namespace FPX___Zadatak2
             {
                 if(width < w)
                 {
-                    quad[0].Position = new Vector(quad[0].Position.X + (width / 2 - w / 2), quad[0].Position.Y + (height / 2 - h / 2));
-                    quad[1].Position = new Vector(quad[0].Position.X + (width / 2 - w / 2) - 40f, quad[0].Position.Y + (height / 2 - h / 2) + 50f);
-                    quad[2].Position = new Vector(quad[0].Position.X + (width / 2 - w / 2) + 60f, quad[0].Position.Y + (height / 2 - h / 2) + 45f);
-                    quad[3].Position = new Vector(quad[0].Position.X + (width / 2 - w / 2) + 10f, quad[0].Position.Y + (height / 2 - h / 2) + 100f);
+                    quad[0].Position = new Vector(quad[0].Position.X + (width / 2 - w / 2), quad[0].Position.Y);
+                    quad[1].Position = new Vector(quad[1].Position.X + (width / 2 - w / 2), quad[1].Position.Y);
+                    quad[2].Position = new Vector(quad[2].Position.X + (width / 2 - w / 2), quad[2].Position.Y);
+                    quad[3].Position = new Vector(quad[3].Position.X + (width / 2 - w / 2), quad[3].Position.Y);
                 }
                 if(width > w)
                 {
-                    quad[0].Position = new Vector(quad[0].Position.X + (width / 2 - w / 2), quad[0].Position.Y + (height / 2 - h / 2));
-                    quad[1].Position = new Vector(quad[0].Position.X + (width / 2 - w / 2) - 40f, quad[0].Position.Y + (height / 2 - h / 2) + 50f);
-                    quad[2].Position = new Vector(quad[0].Position.X + (width / 2 - w / 2) + 60f, quad[0].Position.Y + (height / 2 - h / 2) + 45f);
-                    quad[3].Position = new Vector(quad[0].Position.X + (width / 2 - w / 2) + 10f, quad[0].Position.Y + (height / 2 - h / 2) + 100f);
+                    quad[0].Position = new Vector(quad[0].Position.X + (width / 2 - w / 2), quad[0].Position.Y);
+                    quad[1].Position = new Vector(quad[1].Position.X + (width / 2 - w / 2), quad[1].Position.Y);
+                    quad[2].Position = new Vector(quad[2].Position.X + (width / 2 - w / 2), quad[2].Position.Y);
+                    quad[3].Position = new Vector(quad[3].Position.X + (width / 2 - w / 2), quad[3].Position.Y);
+                }
+                if (height < h)
+                {
+                    quad[0].Position = new Vector(quad[0].Position.X, quad[0].Position.Y + (height / 2 - h / 2));
+                    quad[1].Position = new Vector(quad[1].Position.X, quad[1].Position.Y + (height / 2 - h / 2));
+                    quad[2].Position = new Vector(quad[2].Position.X, quad[2].Position.Y + (height / 2 - h / 2));
+                    quad[3].Position = new Vector(quad[3].Position.X, quad[3].Position.Y + (height / 2 - h / 2));
+                }
+                if (height > h)
+                {
+                    quad[0].Position = new Vector(quad[0].Position.X, quad[0].Position.Y + (height / 2 - h / 2));
+                    quad[1].Position = new Vector(quad[1].Position.X, quad[1].Position.Y + (height / 2 - h / 2));
+                    quad[2].Position = new Vector(quad[2].Position.X, quad[2].Position.Y + (height / 2 - h / 2));
+                    quad[3].Position = new Vector(quad[3].Position.X, quad[3].Position.Y + (height / 2 - h / 2));
                 }
             }
 
@@ -104,26 +117,24 @@ namespace FPX___Zadatak2
             {
                 if(width < w)
                 {
-                    hole.Position = new Vector(hole.Position.X + (width / 2 - w / 2), hole.Position.Y + (height / 2 - h / 2));
+                    hole.Position = new Vector(hole.Position.X + (width / 2 - w / 2), hole.Position.Y);
                 }
                 if(width > w)
                 {
-                    hole.Position = new Vector(hole.Position.X + (width / 2 - w / 2), hole.Position.Y + (height / 2 - h / 2));
+                    hole.Position = new Vector(hole.Position.X + (width / 2 - w / 2), hole.Position.Y);
                 }
                 if(height < h)
                 {
-                    hole.Position = new Vector(hole.Position.X + (width / 2 - w / 2), hole.Position.Y + (height / 2 - h / 2));
+                    hole.Position = new Vector(hole.Position.X, hole.Position.Y + (height / 2 - h / 2));
                 }
                 if (height > h)
                 {
-                    hole.Position = new Vector(hole.Position.X + (width / 2 - w / 2), hole.Position.Y + (height / 2 - h / 2));
+                    hole.Position = new Vector(hole.Position.X, hole.Position.Y + (height / 2 - h / 2));
                 }
             }
 
             w = width;
             h = height;
-
-            Console.WriteLine("asd");
         }
     }
 }

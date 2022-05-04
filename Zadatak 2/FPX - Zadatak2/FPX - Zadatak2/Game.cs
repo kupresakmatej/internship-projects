@@ -51,8 +51,6 @@ namespace FPX___Zadatak2
 
             //GL.Viewport(0, 0, gameWindow.Width, gameWindow.Height);
 
-            
-
             gameWindow.Load += Loaded;
             gameWindow.Resize += Resize;
             gameWindow.RenderFrame += renderer.RenderF;
