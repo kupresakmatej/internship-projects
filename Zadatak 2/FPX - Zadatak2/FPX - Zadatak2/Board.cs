@@ -25,7 +25,6 @@ namespace FPX___Zadatak2
         Game game = new Game();
 
         private Circle circle = new Circle(new Vector(0f, 0f), 50f, new Color(0, 255, 0), 250);
-        private Circle circle1 = new Circle(new Vector(10f, 10f), 50f, new Color(0, 255, 0), 250);
 
         public Board(GameWindow gameWindow)
         {
@@ -65,7 +64,6 @@ namespace FPX___Zadatak2
             }
 
             drawables.Add(circle);
-            drawables.Add(circle1);
             return drawables;
         }
 
@@ -91,7 +89,7 @@ namespace FPX___Zadatak2
 
         public void DrawHole(float x, float y, float width, float height)
         {
-            CircleHole hole = new CircleHole(new Vector((width / 2 + 921f) + x + 150f, (height / 2 + 565f) + y), 115f, 70f, color.Blue, 250);
+            CircleHole hole = new CircleHole(new Vector((width / 2 + 765f) + x + 150f, (height / 2 + 485f) + y), 115f, 70f, color.Blue, 250);
 
             drawables.Add(hole);
 
@@ -131,21 +129,20 @@ namespace FPX___Zadatak2
             float y = height / 2;
 
             circle.Position = new Vector(width / 2, height / 2);
-            circle1.Position = new Vector((width / 2) + 50f, height / 2);
 
-            for (int i = 0; i < circleHoles.Count; i++)
-            {
-                if (GameWindow.Width / GameWindow.Height >= 1)
-                {
-                    float posx = circleHoles[i].Position.X + (width / height);
-                    circleHoles[i].Position = new Vector(posx, circleHoles[i].Position.Y);
-                }
-                else
-                {
-                    float posx = circleHoles[i].Position.X - (width / height);
-                    circleHoles[i].Position = new Vector(posx, circleHoles[i].Position.Y);
-                }
-            }
+            //for (int i = 0; i < circleHoles.Count; i++)
+            //{
+            //    if (GameWindow.Width / GameWindow.Height >= 1)
+            //    {
+            //        float posx = circleHoles[i].Position.X + (width / height);
+            //        circleHoles[i].Position = new Vector(posx, circleHoles[i].Position.Y);
+            //    }
+            //    else
+            //    {
+            //        float posx = circleHoles[i].Position.X - (width / height);
+            //        circleHoles[i].Position = new Vector(posx, circleHoles[i].Position.Y);
+            //    }
+            //}
 
             Console.WriteLine("asd");
         }
