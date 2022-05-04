@@ -30,16 +30,14 @@ namespace FPX___Zadatak2
 
         public override void Draw()
         {
-            GL.Translate(Position.X, Position.Y, 0.0);
-
             GL.Begin(BeginMode.Quads);
 
             GL.Color3(Color.R, Color.G, Color.B);
 
-            GL.Vertex2(Position.X, Position.Y);
-            GL.Vertex2(Position.X + A, Position.Y);
-            GL.Vertex2(Position.X + A, Position.Y + B);
-            GL.Vertex2(Position.X, Position.Y + B);
+            GL.Vertex2(Position.X - A/2, Position.Y - B/2);
+            GL.Vertex2(Position.X + A / 2, Position.Y - B/2);
+            GL.Vertex2(Position.X + A/2, Position.Y + B/2);
+            GL.Vertex2(Position.X - A / 2, Position.Y + B/2);
 
             GL.End();
         }

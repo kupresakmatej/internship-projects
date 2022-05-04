@@ -66,7 +66,7 @@ namespace FPX___Zadatak2
             GL.Viewport(0, 0, gameWindow.Width, gameWindow.Height);
             GL.MatrixMode(MatrixMode.Projection);
             GL.LoadIdentity();
-            GL.Ortho(0, gameWindow.Width * 2, 0, gameWindow.Height * 2, -1, 1);
+            GL.Ortho(0, gameWindow.Width, 0, gameWindow.Height, -1, 1);
 
             GL.MatrixMode(MatrixMode.Modelview);
         }

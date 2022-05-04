@@ -29,18 +29,22 @@ namespace FPX___Zadatak2
 
         public override void Draw()
         {
-            GL.Translate(Position.X, Position.Y, 0.0);
+            //GL.Translate(Position.X, Position.Y, 0.0);
 
             GL.Color3(Color.R, Color.G, Color.B);
-            GL.Vertex2(Position.X, Position.Y);
+            //GL.Vertex2(Position.X, Position.Y);
 
-            GL.Begin(BeginMode.QuadStrip);
+            GL.Begin(BeginMode.TriangleStrip);
             
             for (int i = 0; i <= AmountOfTriangles; i++)
             {
-                float angle = (i / (float)AmountOfTriangles) * 3.14159f * 2f;
-                GL.Vertex2(RadiusIn * Math.Cos(angle), RadiusIn * Math.Sin(angle));
-                GL.Vertex2(RadiusOut * Math.Cos(angle), RadiusOut * Math.Sin(angle));
+                float angle = i * ((3.14159f/(float)AmountOfTriangles) * 2f);
+
+                GL.Vertex2(Position.X + RadiusIn * Math.Cos(angle), Position.Y + RadiusIn * Math.Sin(angle));
+                GL.Vertex2(Position.X + RadiusOut * Math.Cos(angle), Position.Y + RadiusOut * Math.Sin(angle));
+
+                //GL.Vertex2(RadiusIn * Math.Cos(angle), RadiusIn * Math.Sin(angle));
+                //GL.Vertex2(RadiusOut * Math.Cos(angle), RadiusOut * Math.Sin(angle));
             }
             GL.End();
         }

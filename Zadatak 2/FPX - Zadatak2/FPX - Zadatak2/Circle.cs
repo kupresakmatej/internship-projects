@@ -22,13 +22,11 @@ namespace FPX___Zadatak2
             Radius = radius;
             Color = color;
             AmountOfTriangles = amountOfTriangles;
-            Layer = 1;
+            Layer = 2;
         }
 
         public override void Draw()
         {
-            GL.Translate(Position.X, Position.Y, 0.0);
-
             GL.Begin(BeginMode.TriangleFan);
 
             GL.Color3(Color.R, Color.G, Color.B);

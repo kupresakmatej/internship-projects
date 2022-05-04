@@ -25,45 +25,52 @@ namespace FPX___Zadatak2
         Game game = new Game();
 
         private Circle circle = new Circle(new Vector(0f, 0f), 50f, new Color(0, 255, 0), 250);
+        private CircleHole hole;
+        private Quad quadS;
 
         public Board(GameWindow gameWindow)
         {
             GameWindow = gameWindow;
-            aspect = GameWindow.Width / gameWindow.Height;        }
+            aspect = GameWindow.Width / gameWindow.Height;       
+            hole = new CircleHole(new Vector(GameWindow.Width/2, GameWindow.Height/2), 115f, 70f, new Color(0, 0, 255), 250);
+            quadS = new Quad(new Vector(GameWindow.Width / 2, GameWindow.Height / 2), 100f, 100f, new Color(0, 0, 255));
+        }
 
         public List<Drawable> GenerateBoard(float width, float height)
         {
-            for (int i = -4; i < 3; i++)
-            {
-                for (int j = -3; j < 3; j++)
-                {
-                    DrawFrame(i * 100f, j * 100f, width, height);
-                    DrawHole(i * 200f, j * 200f, width, height);
-                }
-            }
+            //for (int i = -4; i < 3; i++)
+            //{
+            //    for (int j = -3; j < 3; j++)
+            //    {
+            //        DrawFrame(i * 100f, j * 100f, width, height);
+            //        DrawHole(i * 200f, j * 200f, width, height);
+            //    }
+            //}
 
-            for (int i = 0; i < 7; i++)
-            {
-                for (int j = 0; j < 5; j++)
-                {
-                    FillHole(i * 100f, j * 100f, width, height);
-                }
-            }
+            //for (int i = 0; i < 7; i++)
+            //{
+            //    for (int j = 0; j < 5; j++)
+            //    {
+            //        FillHole(i * 100f, j * 100f, width, height);
+            //    }
+            //}
 
-            for (int i = 0; i < 7; i++)
-            {
-                for (int j = 0; j < 6; j++)
-                {
-                    FillHoleDown(i * 100f, j * 100f, width, height);
-                }
-            }
+            //for (int i = 0; i < 7; i++)
+            //{
+            //    for (int j = 0; j < 6; j++)
+            //    {
+            //        FillHoleDown(i * 100f, j * 100f, width, height);
+            //    }
+            //}
 
-            for (int i = 0; i < 7; i++)
-            {
-                FillHoleUp(i * 100f, 0, width, height);
-            }
+            //for (int i = 0; i < 7; i++)
+            //{
+            //    FillHoleUp(i * 100f, 0, width, height);
+            //}
 
             drawables.Add(circle);
+            drawables.Add(hole);
+            drawables.Add(quadS);
             return drawables;
         }
 
@@ -89,7 +96,7 @@ namespace FPX___Zadatak2
 
         public void DrawHole(float x, float y, float width, float height)
         {
-            CircleHole hole = new CircleHole(new Vector((width / 2 + 765f) + x + 150f, (height / 2 + 485f) + y), 115f, 70f, color.Blue, 250);
+            CircleHole hole = new CircleHole(new Vector(0, 0), 115f, 70f, color.Blue, 250);
 
             drawables.Add(hole);
 
@@ -130,19 +137,9 @@ namespace FPX___Zadatak2
 
             circle.Position = new Vector(width / 2, height / 2);
 
-            //for (int i = 0; i < circleHoles.Count; i++)
-            //{
-            //    if (GameWindow.Width / GameWindow.Height >= 1)
-            //    {
-            //        float posx = circleHoles[i].Position.X + (width / height);
-            //        circleHoles[i].Position = new Vector(posx, circleHoles[i].Position.Y);
-            //    }
-            //    else
-            //    {
-            //        float posx = circleHoles[i].Position.X - (width / height);
-            //        circleHoles[i].Position = new Vector(posx, circleHoles[i].Position.Y);
-            //    }
-            //}
+            hole.Position = new Vector(width / 2, height / 2);
+
+            quadS.Position = new Vector(width / 2, height / 2);
 
             Console.WriteLine("asd");
         }
