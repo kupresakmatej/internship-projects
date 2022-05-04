@@ -13,9 +13,12 @@ namespace FPX___Zadatak2
     class Board
     {
         private List<Drawable> drawables = new List<Drawable>();
-        private List<Quad> quads = new List<Quad>();
-        private List<CircleHole> circleHoles = new List<CircleHole>();
-        private List<Circle> circles = new List<Circle>();
+        //private List<Quad> quads = new List<Quad>();
+        //private List<CircleHole> circleHoles = new List<CircleHole>();
+        //private List<Circle> circles = new List<Circle>();
+
+        private List<Quad[]> quadList = new List<Quad[]>();
+        private List<CircleHole[]> holeList = new List<CircleHole[]>();
 
         Color color = new Color();
 
@@ -24,122 +27,87 @@ namespace FPX___Zadatak2
 
         Game game = new Game();
 
-        private Circle circle = new Circle(new Vector(0f, 0f), 50f, new Color(0, 255, 0), 250);
-        private CircleHole hole;
-        private Quad quadS;
 
         public Board(GameWindow gameWindow)
         {
             GameWindow = gameWindow;
             aspect = GameWindow.Width / gameWindow.Height;       
-            hole = new CircleHole(new Vector(GameWindow.Width/2, GameWindow.Height/2), 115f, 70f, new Color(0, 0, 255), 250);
-            quadS = new Quad(new Vector(GameWindow.Width / 2, GameWindow.Height / 2), 100f, 100f, new Color(0, 0, 255));
         }
 
         public List<Drawable> GenerateBoard(float width, float height)
         {
-            //for (int i = -4; i < 3; i++)
-            //{
-            //    for (int j = -3; j < 3; j++)
-            //    {
-            //        DrawFrame(i * 100f, j * 100f, width, height);
-            //        DrawHole(i * 200f, j * 200f, width, height);
-            //    }
-            //}
-
-            //for (int i = 0; i < 7; i++)
-            //{
-            //    for (int j = 0; j < 5; j++)
-            //    {
-            //        FillHole(i * 100f, j * 100f, width, height);
-            //    }
-            //}
-
-            //for (int i = 0; i < 7; i++)
-            //{
-            //    for (int j = 0; j < 6; j++)
-            //    {
-            //        FillHoleDown(i * 100f, j * 100f, width, height);
-            //    }
-            //}
-
-            //for (int i = 0; i < 7; i++)
-            //{
-            //    FillHoleUp(i * 100f, 0, width, height);
-            //}
-
-            drawables.Add(circle);
-            drawables.Add(hole);
-            drawables.Add(quadS);
+            for(int i = -3; i < 4; i++)
+            {
+                for(int j = -3; j < 3; j++)
+                {
+                    DrawFrame(i * 100f, j * 100f, width, height);
+                    //DrawHole(i * 100f, j * 100f, width, height);            
+                }
+            }
             return drawables;
         }
 
-        public void DrawFrame(float x, float y, float widht, float height)
+        public void DrawFrame(float x, float y, float width, float height)
         {
-            Quad quad = new Quad(new Vector((widht / 2) + x + 75f, (height / 2) + y), 200f, 40f, color.Blue);
-            Quad quad2 = new Quad(new Vector((widht / 2) + x + 75f, (height / 2) + y), 42f, 200f, color.Blue);
-            Quad quad3 = new Quad(new Vector((widht / 2 + 100f) + x + 75f, (height / 2) + y), 42f, 200f, color.Blue);
-            Quad quad4 = new Quad(new Vector((widht / 2) + x + 75f, (height / 2 + 100f) + y), 242f, 40f, color.Blue);
+            Quad[] quads = new Quad[4];
+
+            Quad quad = new Quad(new Vector((width / 2) + x, (height / 2) + y), 100f, 20f, color.Blue);
+            Quad quad2 = new Quad(new Vector((width / 2) + x - 40f, (height / 2) + y + 50f), 20f, 100f, color.Blue);
+            Quad quad3 = new Quad(new Vector((width / 2 + 60f) + x, (height / 2) + y + 45f), 20f, 110f, color.Blue);
+            Quad quad4 = new Quad(new Vector((width / 2) + x + 10f, (height / 2 + 100f) + y), 120f, 20f, color.Blue);
 
             drawables.Add(quad);
             drawables.Add(quad2);
             drawables.Add(quad3);
             drawables.Add(quad4);
 
-            quads.Add(quad);
-            quads.Add(quad2);
-            quads.Add(quad3);
-            quads.Add(quad4);
+            quads[0] = quad;
+            quads[1] = quad2;
+            quads[2] = quad3;
+            quads[3] = quad4;
+
+            quadList.Add(quads);
 
             //Circle circle = new Circle(new Vector(162.5f, 37f), 35f, new Color(255, 255, 0), 250);
         }
 
         public void DrawHole(float x, float y, float width, float height)
         {
-            CircleHole hole = new CircleHole(new Vector(0, 0), 115f, 70f, color.Blue, 250);
+            CircleHole hole = new CircleHole(new Vector((width/2) + 10f + x, (height/2) + 50f + y), 60f, 35f, color.Blue, 250);
 
             drawables.Add(hole);
-
-            circleHoles.Add(hole);
-        }
-
-        public void FillHole(float x, float y, float width, float height)
-        {
-            Circle circle = new Circle(new Vector((width / 2 - 275f) + x, (height / 2 - 195f) + y), 40f, color.Blue, 250);
-
-            //drawables.Add(circle);
-
-            circles.Add(circle);
-        }
-
-        public void FillHoleDown(float x, float y, float width, float height)
-        {
-            Circle circle = new Circle(new Vector((width / 2 - 300f) + x, (height / 2 - 275f) + y), 25f, color.Blue, 250);
-
-            drawables.Add(circle);
-
-            circles.Add(circle);
-        }
-
-        public void FillHoleUp(float x, float y, float width, float height)
-        {
-            Circle circle = new Circle(new Vector((width / 2 - 275f) + x, (height / 2 + 300f) + y), 25f, color.Blue, 250);
-
-            //drawables.Add(circle);
-
-            circles.Add(circle);
         }
 
         public void WindowReshape(int width, int height)
         {
-            float x = width / 2;
-            float y = height / 2;
+            //foreach(Quad[] quad in quadList)
+            //{
+            //    for(int i = 0; i < quad.Length; i++)
+            //    {
+            //        quad[i].Position = new Vector((width / 2), (height / 2));
+            //    }
+            //}
 
-            circle.Position = new Vector(width / 2, height / 2);
+            float pomakX = -400f;
+            float pomakY = -200f;
 
-            hole.Position = new Vector(width / 2, height / 2);
+            foreach(Quad[] quad in quadList)
+            {
+                for(int i = 0; i < 7; i++)
+                {
+                    quad[0].Position = new Vector((width / 2) + pomakX, (height / 2) + pomakY);
+                    quad[1].Position = new Vector((width / 2) - 40f + pomakX, (height / 2) + 50f + pomakY);
+                    quad[2].Position = new Vector((width / 2) + 60f + pomakX, (height / 2) + 45f + pomakY);
+                    quad[3].Position = new Vector((width / 2) + 10f + pomakX, (height / 2) + 100f + pomakY);
+                    pomakX += 15f;
+                }
+                pomakY += 50f;
+            }
 
-            quadS.Position = new Vector(width / 2, height / 2);
+            for(int i = 0; i < quadList.Count; i++)
+            {
+
+            }
 
             Console.WriteLine("asd");
         }
