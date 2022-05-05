@@ -11,13 +11,15 @@ using OpenTK.Graphics.OpenGL;
 
 namespace FPX___Zadatak2
 {
-    class Quad : Drawable
+    class Quad : IDrawable
     {
         public Vector Position { get; set; }
         private float A { get; set; }
         private float B { get; set; }
         private Color Color { get; set; }
-        public override int Layer { get => base.Layer; set => base.Layer = value; }
+
+        private int layer;
+        public int Layer { get { return this.layer; } set { this.layer = value; } }
 
         public Quad(Vector position, float a, float b, Color color)
         {
@@ -28,7 +30,7 @@ namespace FPX___Zadatak2
             Layer = 1;
         }
 
-        public override void Draw()
+        public void Draw()
         {
             GL.Begin(BeginMode.Quads);
 

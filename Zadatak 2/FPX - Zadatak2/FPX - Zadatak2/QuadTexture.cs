@@ -11,11 +11,13 @@ using OpenTK.Graphics.OpenGL;
 
 namespace FPX___Zadatak2
 {
-    class QuadTexture : Drawable
+    class QuadTexture : IDrawable
     {
         private Vector Position { get; set; }
         private float A { get; set; }
-        public override int Layer { get => base.Layer; set => base.Layer = value; }
+
+        private int layer;
+        public int Layer { get { return this.layer; } set { this.layer = value; } }
         private Texture TextureInstance { get; set; }
 
         public QuadTexture(Vector position, float a, Texture texture)
@@ -25,7 +27,7 @@ namespace FPX___Zadatak2
             TextureInstance = texture;
         }
 
-        public override void Draw()
+        public void Draw()
         {
             GL.BindTexture(TextureTarget.Texture2D, TextureInstance.TextureInt);
 

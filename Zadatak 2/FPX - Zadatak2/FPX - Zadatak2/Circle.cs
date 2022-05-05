@@ -8,13 +8,15 @@ using OpenTK.Graphics.OpenGL;
 
 namespace FPX___Zadatak2
 {
-    class Circle : Drawable
+    class Circle : IDrawable
     {
         public Vector Position { get; set; }
         private float Radius { get; set; }
         private Color Color { get; set; }
         private int AmountOfTriangles { get; set; }
-        public override int Layer { get => base.Layer; set => base.Layer = value; }
+
+        private int layer;
+        public int Layer { get { return this.layer; } set { this.layer = value; } }
 
         public Circle(Vector position, float radius, Color color, int amountOfTriangles)
         {
@@ -25,7 +27,7 @@ namespace FPX___Zadatak2
             Layer = 2;
         }
 
-        public override void Draw()
+        public void Draw()
         {
             GL.Begin(BeginMode.TriangleFan);
 

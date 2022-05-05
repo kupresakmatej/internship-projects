@@ -8,11 +8,14 @@ using OpenTK.Graphics.OpenGL;
 
 namespace FPX___Zadatak2
 {
-    class Triangle : Drawable
+    class Triangle : IDrawable
     {
         private Vector Position { get; set; }
         private float Size { get; set; }
         private Color Color { get; set; }
+
+        private int layer;
+        public int Layer { get { return this.layer; } set { this.layer = value; } }
 
         public Triangle(Vector position, float size, Color color)
         {
@@ -21,7 +24,7 @@ namespace FPX___Zadatak2
             Color = color;
         }
 
-        public override void Draw()
+        public void Draw()
         {
             GL.Translate(Position.X, Position.Y, 0.0);
             GL.Begin(BeginMode.Triangles);

@@ -6,13 +6,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using OpenTK;
+using OpenTK.Input;
 using OpenTK.Graphics.OpenGL;
 
 namespace FPX___Zadatak2
 {
     class Board
     {
-        private List<Drawable> drawables = new List<Drawable>();
+        private List<IDrawable> drawables = new List<IDrawable>();
 
         private List<Quad[]> quadList = new List<Quad[]>();
         private List<CircleHole> holeList = new List<CircleHole>();
@@ -24,21 +25,20 @@ namespace FPX___Zadatak2
 
         float w;
         float h;
-        float wh;
 
         public Board(GameWindow gameWindow)
         {
             GameWindow = gameWindow;  
         }
 
-        public List<Drawable> GenerateBoard(float width, float height)
+        public List<IDrawable> GenerateBoard(float width, float height)
         {
             w = width;
             h = height;
 
-            for(int i = -3; i < 4; i++)
+            for (int i = -3; i < 4; i++)
             {
-                for(int j = -3; j < 3; j++)
+                for (int j = -3; j < 3; j++)
                 {
                     DrawFrame(i * 100f, j * 100f, width, height);
                     DrawHole(i * 100f, j * 100f, width, height);

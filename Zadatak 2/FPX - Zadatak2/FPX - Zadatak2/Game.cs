@@ -13,14 +13,18 @@ namespace FPX___Zadatak2
     public class Game
     {
         GameWindow gameWindow;
-        List<Drawable> drawables;
+        List<IDrawable> drawables;
         Board board;
+
+        private Circle circle;
 
         public Game(GameWindow window)
         {
             this.gameWindow = window;
-            drawables = new List<Drawable>();
+            drawables = new List<IDrawable>();
             board = new Board(gameWindow);
+
+            circle = new Circle(new Vector(gameWindow.Width/2, gameWindow.Height/2), 50f, new Color(255, 0, 0), 250);
 
             Input();
             Start();
@@ -31,12 +35,12 @@ namespace FPX___Zadatak2
 
         }
 
-        private List<Drawable> Input()
+        private List<IDrawable> Input()
         {
-            List<Drawable> drawBoard;
+            List<IDrawable> drawBoard;
             drawBoard = board.GenerateBoard(gameWindow.Width, gameWindow.Height);
 
-            foreach(Drawable drawable in drawBoard)
+            foreach(IDrawable drawable in drawBoard)
             {
                 drawables.Add(drawable);
             }
@@ -49,11 +53,14 @@ namespace FPX___Zadatak2
         {
             Renderer renderer = new Renderer(drawables, gameWindow);
 
+            drawables.Add(circle);
+
             //GL.Viewport(0, 0, gameWindow.Width, gameWindow.Height);
 
             gameWindow.Load += Loaded;
             gameWindow.Resize += Resize;
             gameWindow.RenderFrame += renderer.RenderF;
+            gameWindow.MouseMove += FollowMouse;
             gameWindow.Run(1.0 / 60.0);
         }
 
@@ -72,6 +79,16 @@ namespace FPX___Zadatak2
         }
 
         public event Action OnResize;
+
+        public void FollowMouse(object o, EventArgs e)
+        {
+            var mouse = OpenTK.Input.Mouse.GetCursorState();
+            float x = mouse.X;
+            float y = gameWindow.Height - mouse.Y;
+
+
+            circle.Position = new Vector(x, y);
+        }
 
         public void Loaded(object o, EventArgs e)
         {

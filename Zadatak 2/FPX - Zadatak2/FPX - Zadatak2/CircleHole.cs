@@ -8,14 +8,16 @@ using OpenTK.Graphics.OpenGL;
 
 namespace FPX___Zadatak2
 {
-    class CircleHole : Drawable
+    class CircleHole : IDrawable
     {
         public Vector Position { get; set; }
         private float RadiusOut { get; set; }
         private float RadiusIn { get; set; }
         private Color Color { get; set; }
         private int AmountOfTriangles { get; set; }
-        public override int Layer { get => base.Layer; set => base.Layer = value; }
+
+        private int layer;
+        public int Layer { get { return this.layer; } set { this.layer = value; } }
 
         public CircleHole(Vector position, float radiusOut, float radiusIn, Color color, int amountOfTriangles)
         {
@@ -27,7 +29,7 @@ namespace FPX___Zadatak2
             Layer = 1;
         }
 
-        public override void Draw()
+        public void Draw()
         {
             //GL.Translate(Position.X, Position.Y, 0.0);
 

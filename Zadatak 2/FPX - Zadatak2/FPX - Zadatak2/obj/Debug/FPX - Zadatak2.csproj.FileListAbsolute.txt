@@ -33,5 +33,6 @@ C:\Users\vrisa\Desktop\fpx-repository\Zadatak 2\FPX - Zadatak2\FPX - Zadatak2\bi
 C:\Users\vrisa\Desktop\fpx-repository\Zadatak 2\FPX - Zadatak2\FPX - Zadatak2\obj\Debug\FPX - Zadatak2.csproj.CoreCompileInputs.cache
 C:\Users\vrisa\Desktop\fpx-repository\Zadatak 2\FPX - Zadatak2\FPX - Zadatak2\obj\Debug\FPX - Zadatak2.exe
 C:\Users\vrisa\Desktop\fpx-repository\Zadatak 2\FPX - Zadatak2\FPX - Zadatak2\obj\Debug\FPX - Zadatak2.pdb
-C:\Users\vrisa\Desktop\fpx-repository\Zadatak 2\FPX - Zadatak2\FPX - Zadatak2\obj\Debug\FPX - Zadatak2.csprojAssemblyReference.cache
 C:\Users\vrisa\Desktop\fpx-repository\Zadatak 2\FPX - Zadatak2\FPX - Zadatak2\obj\Debug\FPX - Zadatak2.csproj.CopyComplete
+C:\Users\vrisa\Desktop\fpx-repository\Zadatak 2\FPX - Zadatak2\FPX - Zadatak2\obj\Debug\FPX - Zadatak2.csproj.AssemblyReference.cache
+C:\Users\vrisa\Desktop\fpx-repository\Zadatak 2\FPX - Zadatak2\FPX - Zadatak2\obj\Debug\FPX - Zadatak2.csproj.SuggestedBindingRedirects.cache
