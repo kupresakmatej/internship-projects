@@ -20,13 +20,16 @@ namespace FPX___Zadatak2
 
         private Circle circle;
 
+        Color color = new Color();
+
         public Game(GameWindow window)
         {
             this.gameWindow = window;
             drawables = new List<IDrawable>();
             board = new Board(gameWindow);
 
-            circle = new Circle(new Vector(gameWindow.Width/2, gameWindow.Height/2), 10f, new Color(255, 0, 0), 250);
+            circle = new Circle(new Vector(gameWindow.Width/2, gameWindow.Height/2), 10f, color.Yellow, 250);
+            drawables.Add(circle);
 
             Input();
             Start();
@@ -64,7 +67,18 @@ namespace FPX___Zadatak2
             gameWindow.MouseMove += FollowMouse;
             gameWindow.MouseDown += DrawOnMouse;
             gameWindow.RenderFrame += renderer.RenderF;
+            gameWindow.RenderFrame += DropCoin;
             gameWindow.Run(1.0 / 60.0);
+        }
+
+        public void DropCoin(object o, EventArgs e)
+        {
+            foreach(Circle circle in circles)
+            {
+                circle.Position = new Vector(circle.Position.X, circle.Position.Y - 5f);
+            }
+
+            GL.Clear(ClearBufferMask.ColorBufferBit);
         }
 
         public void Resize(object o, EventArgs e)
@@ -92,8 +106,9 @@ namespace FPX___Zadatak2
 
             if (x > (gameWindow.Bounds.Width / 2 - 50f) && x < (gameWindow.Bounds.Width / 2 + 50f)) //4. column
             {
-                //Console.WriteLine(string.Format("x: {0} y: {1}", x, y));
-                Circle circle = new Circle(new Vector(gameWindow.Width / 2 + 10f, gameWindow.Height / 2 + 250f), 30f, new Color(0, 255, 0), 250);
+                Console.WriteLine(string.Format("x: {0} y: {1}", x, y));
+
+                Circle circle = new Circle(new Vector(gameWindow.Width / 2 + 10f, gameWindow.Height / 2 + 350f), 30f, color.Yellow, 250);
 
                 drawables.Add(circle);
                 circles.Add(circle);
@@ -102,7 +117,7 @@ namespace FPX___Zadatak2
             {
                 Console.WriteLine(string.Format("x: {0} y: {1}", x, y));
 
-                Circle circle = new Circle(new Vector(gameWindow.Width / 2 - 90f, gameWindow.Height / 2 + 250f), 30f, new Color(0, 255, 0), 250);
+                Circle circle = new Circle(new Vector(gameWindow.Width / 2 - 90f, gameWindow.Height / 2 + 350f), 30f, color.Yellow, 250);
 
                 drawables.Add(circle);
                 circles.Add(circle);
@@ -111,7 +126,7 @@ namespace FPX___Zadatak2
             {
                 Console.WriteLine(string.Format("x: {0} y: {1}", x, y));
 
-                Circle circle = new Circle(new Vector(gameWindow.Width / 2 - 190f, gameWindow.Height / 2 + 250f), 30f, new Color(0, 255, 0), 250);
+                Circle circle = new Circle(new Vector(gameWindow.Width / 2 - 190f, gameWindow.Height / 2 + 350f), 30f, color.Yellow, 250);
 
                 drawables.Add(circle);
                 circles.Add(circle);
@@ -120,7 +135,7 @@ namespace FPX___Zadatak2
             {
                 Console.WriteLine(string.Format("x: {0} y: {1}", x, y));
 
-                Circle circle = new Circle(new Vector(gameWindow.Width / 2 - 290f, gameWindow.Height / 2 + 250f), 30f, new Color(0, 255, 0), 250);
+                Circle circle = new Circle(new Vector(gameWindow.Width / 2 - 290f, gameWindow.Height / 2 + 350f), 30f, color.Yellow, 250);
 
                 drawables.Add(circle);
                 circles.Add(circle);
@@ -129,7 +144,7 @@ namespace FPX___Zadatak2
             {
                 Console.WriteLine(string.Format("x: {0} y: {1}", x, y));
 
-                Circle circle = new Circle(new Vector(gameWindow.Width / 2 + 110f, gameWindow.Height / 2 + 250f), 30f, new Color(0, 255, 0), 250);
+                Circle circle = new Circle(new Vector(gameWindow.Width / 2 + 110f, gameWindow.Height / 2 + 350f), 30f, color.Yellow, 250);
 
                 drawables.Add(circle);
                 circles.Add(circle);
@@ -138,7 +153,7 @@ namespace FPX___Zadatak2
             {
                 Console.WriteLine(string.Format("x: {0} y: {1}", x, y));
 
-                Circle circle = new Circle(new Vector(gameWindow.Width / 2 + 210f, gameWindow.Height / 2 + 250f), 30f, new Color(0, 255, 0), 250);
+                Circle circle = new Circle(new Vector(gameWindow.Width / 2 + 210f, gameWindow.Height / 2 + 350f), 30f, color.Yellow, 250);
 
                 drawables.Add(circle);
                 circles.Add(circle);
@@ -147,11 +162,13 @@ namespace FPX___Zadatak2
             {
                 Console.WriteLine(string.Format("x: {0} y: {1}", x, y));
 
-                Circle circle = new Circle(new Vector(gameWindow.Width / 2 + 310f, gameWindow.Height / 2 + 250f), 30f, new Color(0, 255, 0), 250);
+                Circle circle = new Circle(new Vector(gameWindow.Width / 2 + 310f, gameWindow.Height / 2 + 350f), 30f, color.Yellow, 250);
 
                 drawables.Add(circle);
                 circles.Add(circle);
             }
+
+            drawables.Sort((j, k) => j.Layer.CompareTo(k.Layer));
 
             GL.Clear(ClearBufferMask.ColorBufferBit);
         }
@@ -162,8 +179,6 @@ namespace FPX___Zadatak2
 
             float x = mouse.X - gameWindow.Bounds.X;
             float y = gameWindow.Height - (mouse.Y - gameWindow.Bounds.Y);
-
-            //Console.WriteLine(string.Format("x: {0} y: {1}", x, y));
 
             circle.Position = new Vector(x - 5f, y + 25f);
 
