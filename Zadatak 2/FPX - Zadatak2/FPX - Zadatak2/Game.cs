@@ -16,6 +16,8 @@ namespace FPX___Zadatak2
         List<IDrawable> drawables;
         Board board;
 
+        private List<Circle> circles = new List<Circle>();
+
         private Circle circle;
 
         public Game(GameWindow window)
@@ -24,7 +26,7 @@ namespace FPX___Zadatak2
             drawables = new List<IDrawable>();
             board = new Board(gameWindow);
 
-            circle = new Circle(new Vector(gameWindow.Width/2, gameWindow.Height/2), 50f, new Color(255, 0, 0), 250);
+            circle = new Circle(new Vector(gameWindow.Width/2, gameWindow.Height/2), 10f, new Color(255, 0, 0), 250);
 
             Input();
             Start();
@@ -59,8 +61,9 @@ namespace FPX___Zadatak2
 
             gameWindow.Load += Loaded;
             gameWindow.Resize += Resize;
-            gameWindow.RenderFrame += renderer.RenderF;
             gameWindow.MouseMove += FollowMouse;
+            gameWindow.MouseDown += DrawOnMouse;
+            gameWindow.RenderFrame += renderer.RenderF;
             gameWindow.Run(1.0 / 60.0);
         }
 
@@ -68,7 +71,7 @@ namespace FPX___Zadatak2
         {
             OnResize?.Invoke();
 
-            OnResize += () => board.WindowReshape(gameWindow.Width, gameWindow.Height);
+            OnResize += () => board.WindowReshape(gameWindow.Width, gameWindow.Height, circles);
 
             GL.Viewport(0, 0, gameWindow.Width, gameWindow.Height);
             GL.MatrixMode(MatrixMode.Projection);
@@ -80,14 +83,91 @@ namespace FPX___Zadatak2
 
         public event Action OnResize;
 
+        public void DrawOnMouse(object o, EventArgs e)
+        {
+            var mouse = OpenTK.Input.Mouse.GetCursorState();
+
+            float x = mouse.X - gameWindow.Bounds.X;
+            float y = gameWindow.Height - (mouse.Y - gameWindow.Bounds.Y);
+
+            if (x > (gameWindow.Bounds.Width / 2 - 50f) && x < (gameWindow.Bounds.Width / 2 + 50f)) //4. column
+            {
+                //Console.WriteLine(string.Format("x: {0} y: {1}", x, y));
+                Circle circle = new Circle(new Vector(gameWindow.Width / 2 + 10f, gameWindow.Height / 2 + 250f), 30f, new Color(0, 255, 0), 250);
+
+                drawables.Add(circle);
+                circles.Add(circle);
+            }
+            else if ((x < (gameWindow.Bounds.Width / 2 - 50f) && x > (gameWindow.Bounds.Width / 2 - 150f))) //3. column
+            {
+                Console.WriteLine(string.Format("x: {0} y: {1}", x, y));
+
+                Circle circle = new Circle(new Vector(gameWindow.Width / 2 - 90f, gameWindow.Height / 2 + 250f), 30f, new Color(0, 255, 0), 250);
+
+                drawables.Add(circle);
+                circles.Add(circle);
+            }
+            else if ((x < (gameWindow.Bounds.Width / 2 - 150f) && x > (gameWindow.Bounds.Width / 2 - 250f))) //2. column
+            {
+                Console.WriteLine(string.Format("x: {0} y: {1}", x, y));
+
+                Circle circle = new Circle(new Vector(gameWindow.Width / 2 - 190f, gameWindow.Height / 2 + 250f), 30f, new Color(0, 255, 0), 250);
+
+                drawables.Add(circle);
+                circles.Add(circle);
+            }
+            else if ((x < (gameWindow.Bounds.Width / 2 - 250f) && x > (gameWindow.Bounds.Width / 2 - 350f))) //1. column
+            {
+                Console.WriteLine(string.Format("x: {0} y: {1}", x, y));
+
+                Circle circle = new Circle(new Vector(gameWindow.Width / 2 - 290f, gameWindow.Height / 2 + 250f), 30f, new Color(0, 255, 0), 250);
+
+                drawables.Add(circle);
+                circles.Add(circle);
+            }
+            else if ((x > (gameWindow.Bounds.Width / 2 + 50f) && x < (gameWindow.Bounds.Width / 2 + 150f))) //5. column
+            {
+                Console.WriteLine(string.Format("x: {0} y: {1}", x, y));
+
+                Circle circle = new Circle(new Vector(gameWindow.Width / 2 + 110f, gameWindow.Height / 2 + 250f), 30f, new Color(0, 255, 0), 250);
+
+                drawables.Add(circle);
+                circles.Add(circle);
+            }
+            else if ((x > (gameWindow.Bounds.Width / 2 + 150f) && x < (gameWindow.Bounds.Width / 2 + 250f))) //6. column
+            {
+                Console.WriteLine(string.Format("x: {0} y: {1}", x, y));
+
+                Circle circle = new Circle(new Vector(gameWindow.Width / 2 + 210f, gameWindow.Height / 2 + 250f), 30f, new Color(0, 255, 0), 250);
+
+                drawables.Add(circle);
+                circles.Add(circle);
+            }
+            else if ((x > (gameWindow.Bounds.Width / 2 + 250f) && x < (gameWindow.Bounds.Width / 2 + 350f))) //7. column
+            {
+                Console.WriteLine(string.Format("x: {0} y: {1}", x, y));
+
+                Circle circle = new Circle(new Vector(gameWindow.Width / 2 + 310f, gameWindow.Height / 2 + 250f), 30f, new Color(0, 255, 0), 250);
+
+                drawables.Add(circle);
+                circles.Add(circle);
+            }
+
+            GL.Clear(ClearBufferMask.ColorBufferBit);
+        }
+
         public void FollowMouse(object o, EventArgs e)
         {
             var mouse = OpenTK.Input.Mouse.GetCursorState();
-            float x = mouse.X;
-            float y = gameWindow.Height - mouse.Y;
 
+            float x = mouse.X - gameWindow.Bounds.X;
+            float y = gameWindow.Height - (mouse.Y - gameWindow.Bounds.Y);
 
-            circle.Position = new Vector(x, y);
+            //Console.WriteLine(string.Format("x: {0} y: {1}", x, y));
+
+            circle.Position = new Vector(x - 5f, y + 25f);
+
+            GL.Clear(ClearBufferMask.ColorBufferBit);
         }
 
         public void Loaded(object o, EventArgs e)

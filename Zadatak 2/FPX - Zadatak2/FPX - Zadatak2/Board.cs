@@ -79,7 +79,7 @@ namespace FPX___Zadatak2
             holeList.Add(hole);
         }
 
-        public void WindowReshape(int width, int height)
+        public void WindowReshape(int width, int height, List<Circle> circles)
         {
             foreach (Quad[] quad in quadList)
             {
@@ -130,6 +130,26 @@ namespace FPX___Zadatak2
                 if (height > h)
                 {
                     hole.Position = new Vector(hole.Position.X, hole.Position.Y + (height / 2 - h / 2));
+                }
+            }
+
+            foreach (Circle circle in circles)
+            {
+                if (width < w)
+                {
+                    circle.Position = new Vector(circle.Position.X + (width / 2 - w / 2), circle.Position.Y);
+                }
+                if (width > w)
+                {
+                    circle.Position = new Vector(circle.Position.X + (width / 2 - w / 2), circle.Position.Y);
+                }
+                if (height < h)
+                {
+                    circle.Position = new Vector(circle.Position.X, circle.Position.Y + (height / 2 - h / 2));
+                }
+                if (height > h)
+                {
+                    circle.Position = new Vector(circle.Position.X, circle.Position.Y + (height / 2 - h / 2));
                 }
             }
 
