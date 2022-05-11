@@ -13,7 +13,7 @@ namespace FPX___Zadatak2
 {
     class Board
     {
-        private List<IDrawable> drawables = new List<IDrawable>();
+        private List<IRenderable> drawables = new List<IRenderable>();
 
         private List<Quad[]> quadList = new List<Quad[]>();
         private List<CircleHole> holeList = new List<CircleHole>();
@@ -31,7 +31,7 @@ namespace FPX___Zadatak2
             GameWindow = gameWindow;  
         }
 
-        public List<IDrawable> GenerateBoard(float width, float height)
+        public List<IRenderable> GenerateBoard(float width, float height)
         {
             w = width/2;
             h = height/2;

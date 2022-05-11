@@ -10,11 +10,11 @@ namespace FPX___Zadatak2
 {
     class Renderer
     {
-        List<IDrawable> drawableObjects;
+        List<IRenderable> drawableObjects;
 
         private static GameWindow gameWindow;
 
-        public Renderer(List<IDrawable> objects, GameWindow window)
+        public Renderer(List<IRenderable> objects, GameWindow window)
         {
             drawableObjects = objects;
             gameWindow = window;
@@ -22,7 +22,7 @@ namespace FPX___Zadatak2
 
         public void RenderF(object o, EventArgs e)
         {
-            foreach (IDrawable drawable in drawableObjects)
+            foreach (IRenderable drawable in drawableObjects)
             {
                 GL.LoadIdentity();
                 drawable.Draw();

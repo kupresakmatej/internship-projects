@@ -8,7 +8,7 @@ using OpenTK.Graphics.OpenGL;
 
 namespace FPX___Zadatak2
 {
-    class Circle : IDrawable
+    class Circle : IRenderable
     {
         public Vector Position { get; set; }
         private float Radius { get; set; }
@@ -25,6 +25,11 @@ namespace FPX___Zadatak2
             Color = color;
             AmountOfTriangles = amountOfTriangles;
             Layer = 0;
+        }
+
+        public Circle()
+        {
+            
         }
 
         public void Draw()

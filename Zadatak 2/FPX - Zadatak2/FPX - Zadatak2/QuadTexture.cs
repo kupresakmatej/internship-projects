@@ -11,7 +11,7 @@ using OpenTK.Graphics.OpenGL;
 
 namespace FPX___Zadatak2
 {
-    class QuadTexture : IDrawable
+    class QuadTexture : IRenderable
     {
         private Vector Position { get; set; }
         private float A { get; set; }

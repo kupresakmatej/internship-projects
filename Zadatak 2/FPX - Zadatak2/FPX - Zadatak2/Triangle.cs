@@ -8,7 +8,7 @@ using OpenTK.Graphics.OpenGL;
 
 namespace FPX___Zadatak2
 {
-    class Triangle : IDrawable
+    class Triangle : IRenderable
     {
         private Vector Position { get; set; }
         private float Size { get; set; }

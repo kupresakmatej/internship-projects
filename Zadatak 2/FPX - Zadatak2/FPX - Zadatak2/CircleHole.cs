@@ -8,7 +8,7 @@ using OpenTK.Graphics.OpenGL;
 
 namespace FPX___Zadatak2
 {
-    class CircleHole : IDrawable
+    class CircleHole : IRenderable
     {
         public Vector Position { get; set; }
         private float RadiusOut { get; set; }
