@@ -14,9 +14,9 @@ namespace FPX___Zadatak2
     class Quad : IRenderable
     {
         public Vector Position { get; set; }
-        private float A { get; set; }
-        private float B { get; set; }
-        private Color Color { get; set; }
+        public float A { get; set; }
+        public float B { get; set; }
+        public Color Color { get; set; }
 
         private int layer;
         public int Layer { get { return this.layer; } set { this.layer = value; } }
@@ -28,6 +28,11 @@ namespace FPX___Zadatak2
             B = b;
             Color = color;
             Layer = 1;
+        }
+
+        public Quad()
+        {
+
         }
 
         public void Draw()

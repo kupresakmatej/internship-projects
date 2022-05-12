@@ -13,17 +13,19 @@ namespace FPX___Zadatak2
 {
     class QuadTexture : IRenderable
     {
-        private Vector Position { get; set; }
+        public Vector Position { get; set; }
         private float A { get; set; }
+        private float B { get; set; }
 
         private int layer;
         public int Layer { get { return this.layer; } set { this.layer = value; } }
         private Texture TextureInstance { get; set; }
 
-        public QuadTexture(Vector position, float a, Texture texture)
+        public QuadTexture(Vector position, float a, float b, Texture texture)
         {
             Position = position;
             A = a;
+            B = b;
             TextureInstance = texture;
         }
 
@@ -31,18 +33,16 @@ namespace FPX___Zadatak2
         {
             GL.BindTexture(TextureTarget.Texture2D, TextureInstance.TextureInt);
 
-            GL.Translate(Position.X, Position.Y, 0.0);
-
             GL.Begin(BeginMode.Quads);
 
             GL.TexCoord2(0, 0);
-            GL.Vertex2(Position.X, Position.Y);
+            GL.Vertex2(Position.X - A / 2, Position.Y - B / 2);
             GL.TexCoord2(1, 0);
-            GL.Vertex2(Position.X + A, Position.Y);
+            GL.Vertex2(Position.X + A / 2, Position.Y - B / 2);
             GL.TexCoord2(1, 1);
-            GL.Vertex2(Position.X + A, Position.Y + A);
+            GL.Vertex2(Position.X + A / 2, Position.Y + B / 2);
             GL.TexCoord2(0, 1);
-            GL.Vertex2(Position.X, Position.Y + A);
+            GL.Vertex2(Position.X - A / 2, Position.Y + B / 2);
 
             GL.End();
 

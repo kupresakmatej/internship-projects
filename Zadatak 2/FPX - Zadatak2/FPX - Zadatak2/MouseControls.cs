@@ -12,6 +12,8 @@ namespace FPX___Zadatak2
 {
     class MouseControls
     {
+        GameOver gameOver;
+
         private List<IRenderable> drawables;
         private List<Circle> circles;
 
@@ -19,7 +21,8 @@ namespace FPX___Zadatak2
 
         private Color color = new Color();
 
-        private Circle circleFollow = new Circle();
+        private Circle circleFollow;
+        private Quad quad;
 
         private static int[] columnDrop;
 
@@ -30,7 +33,14 @@ namespace FPX___Zadatak2
 
         private int playerCounter;
 
-        public MouseControls(List<IRenderable> Drawables, List<Circle> Circles, GameWindow GameWindow, int[] ColumnDrop, Game CanDrop, int PlayerCounter)
+        private static BoardGFX Board;
+        private static BoardLogic BoardLogic;
+
+        Logic logic;
+
+        public int ColumnIdx { get; set; }
+
+        public MouseControls(List<IRenderable> Drawables, List<Circle> Circles, GameWindow GameWindow, int[] ColumnDrop, Game CanDrop, int PlayerCounter, BoardGFX board, BoardLogic boardLogic)
         {
             drawables = Drawables;
             circles = Circles;
@@ -38,10 +48,42 @@ namespace FPX___Zadatak2
             columnDrop = ColumnDrop;
             Game = CanDrop;
             playerCounter = PlayerCounter;
+            Board = board;
+            BoardLogic = boardLogic;
+
+            logic = new Logic(BoardLogic);
+
+            ColumnIdx = 0;
 
             circleFollow = new Circle(new Vector(gameWindow.Width / 2, gameWindow.Height / 2), 10f, color.Yellow, 250);
             circleFollow.Layer = 2;
             drawables.Add(circleFollow);
+
+            quad = new Quad(new Vector(-10000, -10000), 100000, 100000, color.Black);
+        }
+
+        public void CallLogic(object o, EventArgs e)
+        {
+            if (Game.canDrop && !logic.GameOver())
+            {
+                logic.DropIntoBoard(ColumnIdx, playerCounter);
+                Console.WriteLine(ColumnIdx);
+                BoardLogic.PrintBoard();
+            }
+            if (logic.GameOver())
+            {
+                Console.WriteLine("over");
+
+                GameOver();
+            }
+        }
+
+        public async void GameOver()
+        {
+            await Task.Delay(2500);
+
+            quad.Position = new Vector(gameWindow.Width / 2, gameWindow.Height / 2);
+            drawables.Add(quad);
         }
 
         public void FollowMouse(object o, EventArgs e)
@@ -63,22 +105,50 @@ namespace FPX___Zadatak2
             xClick = mouse.X - gameWindow.Bounds.X;
             yClick = gameWindow.Height - (mouse.Y - gameWindow.Bounds.Y);
 
+            ColumnIdx = 0;
+
             if(Game.canDrop)
             {
                 if(playerCounter % 2 == 0)
                 {
                     DrawOnClick(xClick, yClick, color.Red);
                     playerCounter++;
+                    ChangePlayerColor(color.Yellow, color.White);
                 }
                 else
                 {
                     DrawOnClick(xClick, yClick, color.Yellow);
                     playerCounter++;
+                    ChangePlayerColor(color.White, color.Red);
                 }
             }
             else
             {
-                Console.WriteLine("wait");
+                Console.WriteLine("wait");      
+            }
+        }
+
+        public void ChangePlayerColor(Color p1Color, Color p2Color)
+        {
+            foreach(Quad[] quad in Board.p1List)
+            {
+                quad[0].Color = p1Color;
+                quad[1].Color = p1Color;
+                quad[2].Color = p1Color;
+                quad[3].Color = p1Color;
+                quad[4].Color = p1Color;
+            }
+            foreach (Quad[] quad in Board.p2List)
+            {
+                quad[0].Color = p2Color;
+                quad[1].Color = p2Color;
+                quad[2].Color = p2Color;
+                quad[3].Color = p2Color;
+                quad[4].Color = p2Color;
+                quad[5].Color = p2Color;
+                quad[6].Color = p2Color;
+                quad[7].Color = p2Color;
+                quad[8].Color = p2Color;
             }
         }
 
@@ -88,9 +158,11 @@ namespace FPX___Zadatak2
             {
                 Console.WriteLine(string.Format("x: {0} y: {1}", x, y));
 
-                Circle circle = new Circle(new Vector(gameWindow.Width / 2 + 10.5f, gameWindow.Height / 2 + 350f), 30f, color, 250);
+                Circle circle = new Circle(new Vector(gameWindow.Width / 2 + 0.5f, gameWindow.Height / 2 + 350f), 30f, color, 250);
 
                 columnDrop[3] += 1;
+
+                ColumnIdx = 3;
 
                 drawables.Add(circle);
                 circles.Add(circle);
@@ -99,9 +171,11 @@ namespace FPX___Zadatak2
             {
                 Console.WriteLine(string.Format("x: {0} y: {1}", x, y));
 
-                Circle circle = new Circle(new Vector(gameWindow.Width / 2 - 89.5f, gameWindow.Height / 2 + 350f), 30f, color, 250);
+                Circle circle = new Circle(new Vector(gameWindow.Width / 2 - 99.5f, gameWindow.Height / 2 + 350f), 30f, color, 250);
 
                 columnDrop[2] += 1;
+
+                ColumnIdx = 2;
 
                 drawables.Add(circle);
                 circles.Add(circle);
@@ -110,9 +184,11 @@ namespace FPX___Zadatak2
             {
                 Console.WriteLine(string.Format("x: {0} y: {1}", x, y));
 
-                Circle circle = new Circle(new Vector(gameWindow.Width / 2 - 189.5f, gameWindow.Height / 2 + 350f), 30f, color, 250);
+                Circle circle = new Circle(new Vector(gameWindow.Width / 2 - 199.5f, gameWindow.Height / 2 + 350f), 30f, color, 250);
 
                 columnDrop[1] += 1;
+
+                ColumnIdx = 1;
 
                 drawables.Add(circle);
                 circles.Add(circle);
@@ -121,9 +197,11 @@ namespace FPX___Zadatak2
             {
                 Console.WriteLine(string.Format("x: {0} y: {1}", x, y));
 
-                Circle circle = new Circle(new Vector(gameWindow.Width / 2 - 289.5f, gameWindow.Height / 2 + 350f), 30f, color, 250);
+                Circle circle = new Circle(new Vector(gameWindow.Width / 2 - 299.5f, gameWindow.Height / 2 + 350f), 30f, color, 250);
 
                 columnDrop[0] += 1;
+
+                ColumnIdx = 0;
 
                 drawables.Add(circle);
                 circles.Add(circle);
@@ -132,9 +210,11 @@ namespace FPX___Zadatak2
             {
                 Console.WriteLine(string.Format("x: {0} y: {1}", x, y));
 
-                Circle circle = new Circle(new Vector(gameWindow.Width / 2 + 110.5f, gameWindow.Height / 2 + 350f), 30f, color, 250);
+                Circle circle = new Circle(new Vector(gameWindow.Width / 2 + 100.5f, gameWindow.Height / 2 + 350f), 30f, color, 250);
 
                 columnDrop[4] += 1;
+
+                ColumnIdx = 4;
 
                 drawables.Add(circle);
                 circles.Add(circle);
@@ -143,9 +223,11 @@ namespace FPX___Zadatak2
             {
                 Console.WriteLine(string.Format("x: {0} y: {1}", x, y));
 
-                Circle circle = new Circle(new Vector(gameWindow.Width / 2 + 210.5f, gameWindow.Height / 2 + 350f), 30f, color, 250);
+                Circle circle = new Circle(new Vector(gameWindow.Width / 2 + 200.5f, gameWindow.Height / 2 + 350f), 30f, color, 250);
 
                 columnDrop[5] += 1;
+
+                ColumnIdx = 5;
 
                 drawables.Add(circle);
                 circles.Add(circle);
@@ -154,9 +236,11 @@ namespace FPX___Zadatak2
             {
                 Console.WriteLine(string.Format("x: {0} y: {1}", x, y));
 
-                Circle circle = new Circle(new Vector(gameWindow.Width / 2 + 310.5f, gameWindow.Height / 2 + 350f), 30f, color, 250);
+                Circle circle = new Circle(new Vector(gameWindow.Width / 2 + 300.5f, gameWindow.Height / 2 + 350f), 30f, color, 250);
 
                 columnDrop[6] += 1;
+
+                ColumnIdx = 6;
 
                 drawables.Add(circle);
                 circles.Add(circle);
@@ -164,7 +248,7 @@ namespace FPX___Zadatak2
 
             drawables.Sort((j, k) => j.Layer.CompareTo(k.Layer));
 
-            GL.Clear(ClearBufferMask.ColorBufferBit);
+            GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.ColorBufferBit);
         }
     }
 }

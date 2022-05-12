@@ -34,7 +34,7 @@ namespace FPX___Zadatak2
         {
             foreach (Circle circle in circles)
             {
-                if (circle.Position.X == gameWindow.Width / 2 - 289.5f) //1. column
+                if (circle.Position.X == gameWindow.Width / 2 - 299.5f) //1. column
                 {
                     miliseconds = 2400 - (columnDrop[0] * 350);
                     if (circle.Position.Y > (columnDrop[0] * 100) + (gameWindow.Height / 2 - 250f))
@@ -44,7 +44,7 @@ namespace FPX___Zadatak2
                     }
                 }
 
-                else if (circle.Position.X == gameWindow.Width / 2 - 189.5f) //2. column
+                else if (circle.Position.X == gameWindow.Width / 2 - 199.5f) //2. column
                 {
                     miliseconds = 2400 - (columnDrop[1] * 350);
                     if (circle.Position.Y > (columnDrop[1] * 100) + (gameWindow.Height / 2 - 250f))
@@ -54,7 +54,7 @@ namespace FPX___Zadatak2
                     }
                 }
 
-                else if (circle.Position.X == gameWindow.Width / 2 - 89.5f) //3. column
+                else if (circle.Position.X == gameWindow.Width / 2 - 99.5f) //3. column
                 {
                     miliseconds = 2400 - (columnDrop[2] * 350);
                     if (circle.Position.Y > (columnDrop[2] * 100) + (gameWindow.Height / 2 - 250f))
@@ -64,7 +64,7 @@ namespace FPX___Zadatak2
                     }
                 }
 
-                else if (circle.Position.X == gameWindow.Width / 2 + 10.5f) //4. column
+                else if (circle.Position.X == gameWindow.Width / 2 + 0.5f) //4. column
                 {
                     miliseconds = 2400 - (columnDrop[3] * 350);
                     if (circle.Position.Y > (columnDrop[3] * 100) + (gameWindow.Height / 2 - 250f))
@@ -74,7 +74,7 @@ namespace FPX___Zadatak2
                     }
                 }
 
-                else if (circle.Position.X == gameWindow.Width / 2 + 110.5f) //5. column
+                else if (circle.Position.X == gameWindow.Width / 2 + 100.5f) //5. column
                 {
                     miliseconds = 2400 - (columnDrop[4] * 350);
                     if (circle.Position.Y > (columnDrop[4] * 100) + (gameWindow.Height / 2 - 250f))
@@ -84,7 +84,7 @@ namespace FPX___Zadatak2
                     }
                 }
 
-                else if (circle.Position.X == gameWindow.Width / 2 + 210.5f) //6. column
+                else if (circle.Position.X == gameWindow.Width / 2 + 200.5f) //6. column
                 {
                     miliseconds = 2400 - (columnDrop[5] * 350);
                     if (circle.Position.Y > (columnDrop[5] * 100) + (gameWindow.Height / 2 - 250f))
@@ -94,7 +94,7 @@ namespace FPX___Zadatak2
                     }
                 }
 
-                else if (circle.Position.X == gameWindow.Width / 2 + 310.5f) //7. column
+                else if (circle.Position.X == gameWindow.Width / 2 + 300.5f) //7. column
                 {
                     miliseconds = 2400 - (columnDrop[6] * 350);
                     if (circle.Position.Y > (columnDrop[6] * 100) + (gameWindow.Height / 2 - 250f))

@@ -15,7 +15,7 @@ namespace FPX___Zadatak2
     {
         GameWindow gameWindow;
         List<IRenderable> drawables;
-        Board board;
+        BoardGFX board;
 
         private List<Circle> circles = new List<Circle>();
 
@@ -27,20 +27,22 @@ namespace FPX___Zadatak2
 
         private int playerCounter;
 
-        public Game(GameWindow window)
+        public int ColumnIdx { get; set; }
+
+        BoardLogic BoardLogic;
+
+        public Game(GameWindow window, BoardLogic boardLogic)
         {
             this.gameWindow = window;
             drawables = new List<IRenderable>();
-            board = new Board(gameWindow);
+            board = new BoardGFX(gameWindow);
             canDrop = true;
+            board.DrawPlayers(gameWindow.Width, gameWindow.Height, color.Yellow, color.White);
+
+            BoardLogic = boardLogic;
 
             Input();
             Start();
-        }
-
-        public Game()
-        {
-
         }
 
         private List<IRenderable> Input()
@@ -62,12 +64,13 @@ namespace FPX___Zadatak2
             playerCounter = 1;
 
             Renderer renderer = new Renderer(drawables, gameWindow);
-            MouseControls mouseControls = new MouseControls(drawables, circles, gameWindow, columnDrop, this, playerCounter);
+            MouseControls mouseControls = new MouseControls(drawables, circles, gameWindow, columnDrop, this, playerCounter, board, BoardLogic);
             CoinDrop coinDrop = new CoinDrop(circles, columnDrop, gameWindow, this);
 
             gameWindow.Load += Loaded;
             gameWindow.MouseMove += mouseControls.FollowMouse;
             gameWindow.MouseDown += mouseControls.DropOnMouse;
+            gameWindow.MouseDown += mouseControls.CallLogic;
             gameWindow.RenderFrame += renderer.RenderF;
             gameWindow.RenderFrame += coinDrop.DropCoin;
             gameWindow.RenderFrame += coinDrop.WaitForDrop;
