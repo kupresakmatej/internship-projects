@@ -12,8 +12,6 @@ namespace FPX___Zadatak2
 {
     class MouseControls
     {
-        GameOver gameOver;
-
         private List<IRenderable> drawables;
         private List<Circle> circles;
 
@@ -35,6 +33,7 @@ namespace FPX___Zadatak2
 
         private static BoardGFX Board;
         private static BoardLogic BoardLogic;
+        public GameOver gameOver;
 
         Logic logic;
 
@@ -59,31 +58,25 @@ namespace FPX___Zadatak2
             circleFollow.Layer = 2;
             drawables.Add(circleFollow);
 
-            quad = new Quad(new Vector(-10000, -10000), 100000, 100000, color.Black);
+            gameOver = new GameOver(Drawables, this, GameWindow, circleFollow, Game, BoardLogic);
+            Board.winList = gameOver.winList;
+            Board.buttonList = gameOver.buttonList;
         }
 
-        public void CallLogic(object o, EventArgs e)
+        public async void CallLogic(object o, EventArgs e)
         {
             if (Game.canDrop && !logic.GameOver())
             {
-                logic.DropIntoBoard(ColumnIdx, playerCounter);
-                Console.WriteLine(ColumnIdx);
-                BoardLogic.PrintBoard();
+                //BoardLogic.PrintBoard();
             }
             if (logic.GameOver())
             {
                 Console.WriteLine("over");
 
-                GameOver();
+                await Task.Delay(2500);
+
+                gameOver.EndScreen();
             }
-        }
-
-        public async void GameOver()
-        {
-            await Task.Delay(2500);
-
-            quad.Position = new Vector(gameWindow.Width / 2, gameWindow.Height / 2);
-            drawables.Add(quad);
         }
 
         public void FollowMouse(object o, EventArgs e)
@@ -107,54 +100,76 @@ namespace FPX___Zadatak2
 
             ColumnIdx = 0;
 
-            if(Game.canDrop)
+            if (Game.canDrop)
             {
-                if(playerCounter % 2 == 0)
+                if (playerCounter % 2 == 0)
                 {
                     DrawOnClick(xClick, yClick, color.Red);
-                    playerCounter++;
-                    ChangePlayerColor(color.Yellow, color.White);
                 }
                 else
                 {
                     DrawOnClick(xClick, yClick, color.Yellow);
-                    playerCounter++;
-                    ChangePlayerColor(color.White, color.Red);
                 }
             }
             else
             {
-                Console.WriteLine("wait");      
+                Console.WriteLine("wait");
             }
         }
 
-        public void ChangePlayerColor(Color p1Color, Color p2Color)
+        public void ChangePlayerColor(object o, EventArgs e)
         {
-            foreach(Quad[] quad in Board.p1List)
+            if(playerCounter % 2 != 0 && (xClick >= (gameWindow.Bounds.Width/2 - 350f) || xClick <= (gameWindow.Bounds.Width/2 + 350f)))
             {
-                quad[0].Color = p1Color;
-                quad[1].Color = p1Color;
-                quad[2].Color = p1Color;
-                quad[3].Color = p1Color;
-                quad[4].Color = p1Color;
+                foreach (Quad[] quad in Board.p1List)
+                {
+                    quad[0].Color = color.Yellow;
+                    quad[1].Color = color.Yellow;
+                    quad[2].Color = color.Yellow;
+                    quad[3].Color = color.Yellow;
+                    quad[4].Color = color.Yellow;
+                }
+                foreach (Quad[] quad in Board.p2List)
+                {
+                    quad[0].Color = color.White;
+                    quad[1].Color = color.White;
+                    quad[2].Color = color.White;
+                    quad[3].Color = color.White;
+                    quad[4].Color = color.White;
+                    quad[5].Color = color.White;
+                    quad[6].Color = color.White;
+                    quad[7].Color = color.White;
+                    quad[8].Color = color.White;
+                }
             }
-            foreach (Quad[] quad in Board.p2List)
+            else if(playerCounter % 2 == 0 && (xClick >= (gameWindow.Bounds.Width / 2 - 350f) || xClick <= (gameWindow.Bounds.Width / 2 + 350f)))
             {
-                quad[0].Color = p2Color;
-                quad[1].Color = p2Color;
-                quad[2].Color = p2Color;
-                quad[3].Color = p2Color;
-                quad[4].Color = p2Color;
-                quad[5].Color = p2Color;
-                quad[6].Color = p2Color;
-                quad[7].Color = p2Color;
-                quad[8].Color = p2Color;
+                foreach (Quad[] quad in Board.p1List)
+                {
+                    quad[0].Color = color.White;
+                    quad[1].Color = color.White;
+                    quad[2].Color = color.White;
+                    quad[3].Color = color.White;
+                    quad[4].Color = color.White;
+                }
+                foreach (Quad[] quad in Board.p2List)
+                {
+                    quad[0].Color = color.Red;
+                    quad[1].Color = color.Red;
+                    quad[2].Color = color.Red;
+                    quad[3].Color = color.Red;
+                    quad[4].Color = color.Red;
+                    quad[5].Color = color.Red;
+                    quad[6].Color = color.Red;
+                    quad[7].Color = color.Red;
+                    quad[8].Color = color.Red;
+                }
             }
         }
 
         public void DrawOnClick(float x, float y, Color color)
         {
-            if (x > (gameWindow.Bounds.Width / 2 - 50f) && x < (gameWindow.Bounds.Width / 2 + 50f) && Game.canDrop) //4. column
+            if (x > (gameWindow.Bounds.Width / 2 - 50f) && x < (gameWindow.Bounds.Width / 2 + 50f)) //4. column
             {
                 Console.WriteLine(string.Format("x: {0} y: {1}", x, y));
 
@@ -163,6 +178,10 @@ namespace FPX___Zadatak2
                 columnDrop[3] += 1;
 
                 ColumnIdx = 3;
+
+                playerCounter++;
+
+                logic.DropIntoBoard(ColumnIdx, playerCounter);
 
                 drawables.Add(circle);
                 circles.Add(circle);
@@ -177,6 +196,10 @@ namespace FPX___Zadatak2
 
                 ColumnIdx = 2;
 
+                playerCounter++;
+
+                logic.DropIntoBoard(ColumnIdx, playerCounter);
+
                 drawables.Add(circle);
                 circles.Add(circle);
             }
@@ -189,6 +212,10 @@ namespace FPX___Zadatak2
                 columnDrop[1] += 1;
 
                 ColumnIdx = 1;
+
+                playerCounter++;
+
+                logic.DropIntoBoard(ColumnIdx, playerCounter);
 
                 drawables.Add(circle);
                 circles.Add(circle);
@@ -203,6 +230,10 @@ namespace FPX___Zadatak2
 
                 ColumnIdx = 0;
 
+                playerCounter++;
+
+                logic.DropIntoBoard(ColumnIdx, playerCounter);
+
                 drawables.Add(circle);
                 circles.Add(circle);
             }
@@ -215,6 +246,10 @@ namespace FPX___Zadatak2
                 columnDrop[4] += 1;
 
                 ColumnIdx = 4;
+
+                playerCounter++;
+
+                logic.DropIntoBoard(ColumnIdx, playerCounter);
 
                 drawables.Add(circle);
                 circles.Add(circle);
@@ -229,6 +264,10 @@ namespace FPX___Zadatak2
 
                 ColumnIdx = 5;
 
+                playerCounter++;
+
+                logic.DropIntoBoard(ColumnIdx, playerCounter);
+
                 drawables.Add(circle);
                 circles.Add(circle);
             }
@@ -241,6 +280,10 @@ namespace FPX___Zadatak2
                 columnDrop[6] += 1;
 
                 ColumnIdx = 6;
+
+                playerCounter++;
+
+                logic.DropIntoBoard(ColumnIdx, playerCounter);
 
                 drawables.Add(circle);
                 circles.Add(circle);

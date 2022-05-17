@@ -22,7 +22,7 @@ namespace FPX___Zadatak2
 
         public bool GameOver()
         {
-            if(coin != Coin.Empty)
+            if (coin != Coin.Empty)
             {
                 return true;
             }

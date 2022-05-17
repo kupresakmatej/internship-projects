@@ -10,7 +10,7 @@ using System.Drawing;
 using System.Diagnostics;
 
 namespace FPX___Zadatak2
-{ 
+{
     public class Game
     {
         GameWindow gameWindow;
@@ -50,7 +50,7 @@ namespace FPX___Zadatak2
             List<IRenderable> drawBoard;
             drawBoard = board.GenerateBoard(gameWindow.Width, gameWindow.Height);
 
-            foreach(IRenderable drawable in drawBoard)
+            foreach (IRenderable drawable in drawBoard)
             {
                 drawables.Add(drawable);
             }
@@ -74,6 +74,7 @@ namespace FPX___Zadatak2
             gameWindow.RenderFrame += renderer.RenderF;
             gameWindow.RenderFrame += coinDrop.DropCoin;
             gameWindow.RenderFrame += coinDrop.WaitForDrop;
+            gameWindow.RenderFrame += mouseControls.ChangePlayerColor;
             gameWindow.Resize += Resize;
             gameWindow.Run(1.0 / 60.0);
 
@@ -94,7 +95,7 @@ namespace FPX___Zadatak2
             GL.MatrixMode(MatrixMode.Modelview);
         }
 
-        public event Action OnResize;      
+        public event Action OnResize;
 
         public void Loaded(object o, EventArgs e)
         {

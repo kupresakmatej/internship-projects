@@ -19,6 +19,8 @@ namespace FPX___Zadatak2
         private List<CircleHole> holeList = new List<CircleHole>();
         public List<Quad[]> p1List = new List<Quad[]>();
         public List<Quad[]> p2List = new List<Quad[]>();
+        public List<Quad[]> winList = new List<Quad[]>();
+        public List<Quad[]> buttonList = new List<Quad[]>();
 
         private static GameWindow GameWindow;
 
@@ -299,6 +301,86 @@ namespace FPX___Zadatak2
                     quad[2].Position = new Vector(quad[2].Position.X, quad[2].Position.Y + (height / 2 - h));
                     quad[3].Position = new Vector(quad[3].Position.X, quad[3].Position.Y + (height / 2 - h));
                     quad[4].Position = new Vector(quad[4].Position.X, quad[4].Position.Y + (height / 2 - h));
+                }
+            }
+
+            foreach(Quad[] quad in winList)
+            {
+                if (width < w)
+                {
+                    quad[0].Position = new Vector(quad[0].Position.X + (width / 2 - w), quad[0].Position.Y);
+                    quad[1].Position = new Vector(quad[1].Position.X + (width / 2 - w), quad[1].Position.Y);
+                    quad[2].Position = new Vector(quad[2].Position.X + (width / 2 - w), quad[2].Position.Y);
+                    quad[3].Position = new Vector(quad[3].Position.X + (width / 2 - w), quad[3].Position.Y);
+                    quad[4].Position = new Vector(quad[4].Position.X + (width / 2 - w), quad[4].Position.Y);
+                    quad[5].Position = new Vector(quad[5].Position.X + (width / 2 - w), quad[5].Position.Y);
+                    quad[6].Position = new Vector(quad[6].Position.X + (width / 2 - w), quad[6].Position.Y);
+                    quad[7].Position = new Vector(quad[7].Position.X + (width / 2 - w), quad[7].Position.Y);
+                    quad[8].Position = new Vector(quad[8].Position.X + (width / 2 - w), quad[8].Position.Y);
+                    quad[9].Position = new Vector(quad[9].Position.X + (width / 2 - w), quad[9].Position.Y);
+                }
+                if (width > w)
+                {
+                    quad[0].Position = new Vector(quad[0].Position.X + (width / 2 - w), quad[0].Position.Y);
+                    quad[1].Position = new Vector(quad[1].Position.X + (width / 2 - w), quad[1].Position.Y);
+                    quad[2].Position = new Vector(quad[2].Position.X + (width / 2 - w), quad[2].Position.Y);
+                    quad[3].Position = new Vector(quad[3].Position.X + (width / 2 - w), quad[3].Position.Y);
+                    quad[4].Position = new Vector(quad[4].Position.X + (width / 2 - w), quad[4].Position.Y);
+                    quad[5].Position = new Vector(quad[5].Position.X + (width / 2 - w), quad[5].Position.Y);
+                    quad[6].Position = new Vector(quad[6].Position.X + (width / 2 - w), quad[6].Position.Y);
+                    quad[7].Position = new Vector(quad[7].Position.X + (width / 2 - w), quad[7].Position.Y);
+                    quad[8].Position = new Vector(quad[8].Position.X + (width / 2 - w), quad[8].Position.Y);
+                    quad[9].Position = new Vector(quad[9].Position.X + (width / 2 - w), quad[9].Position.Y);
+                }
+                if (height < h)
+                {
+                    quad[0].Position = new Vector(quad[0].Position.X, quad[0].Position.Y + (height / 2 - h));
+                    quad[1].Position = new Vector(quad[1].Position.X, quad[1].Position.Y + (height / 2 - h));
+                    quad[2].Position = new Vector(quad[2].Position.X, quad[2].Position.Y + (height / 2 - h));
+                    quad[3].Position = new Vector(quad[3].Position.X, quad[3].Position.Y + (height / 2 - h));
+                    quad[4].Position = new Vector(quad[4].Position.X, quad[4].Position.Y + (height / 2 - h));
+                    quad[5].Position = new Vector(quad[5].Position.X, quad[5].Position.Y + (height / 2 - h));
+                    quad[6].Position = new Vector(quad[6].Position.X, quad[6].Position.Y + (height / 2 - h));
+                    quad[7].Position = new Vector(quad[7].Position.X, quad[7].Position.Y + (height / 2 - h));
+                    quad[8].Position = new Vector(quad[8].Position.X, quad[8].Position.Y + (height / 2 - h));
+                    quad[9].Position = new Vector(quad[9].Position.X, quad[9].Position.Y + (height / 2 - h));
+                }
+                if (height > h)
+                {
+                    quad[0].Position = new Vector(quad[0].Position.X, quad[0].Position.Y + (height / 2 - h));
+                    quad[1].Position = new Vector(quad[1].Position.X, quad[1].Position.Y + (height / 2 - h));
+                    quad[2].Position = new Vector(quad[2].Position.X, quad[2].Position.Y + (height / 2 - h));
+                    quad[3].Position = new Vector(quad[3].Position.X, quad[3].Position.Y + (height / 2 - h));
+                    quad[4].Position = new Vector(quad[4].Position.X, quad[4].Position.Y + (height / 2 - h));
+                    quad[5].Position = new Vector(quad[5].Position.X, quad[5].Position.Y + (height / 2 - h));
+                    quad[6].Position = new Vector(quad[6].Position.X, quad[6].Position.Y + (height / 2 - h));
+                    quad[7].Position = new Vector(quad[7].Position.X, quad[7].Position.Y + (height / 2 - h));
+                    quad[8].Position = new Vector(quad[8].Position.X, quad[8].Position.Y + (height / 2 - h));
+                    quad[9].Position = new Vector(quad[9].Position.X, quad[9].Position.Y + (height / 2 - h));
+                }
+            }
+
+            foreach(Quad[] quad in buttonList)
+            {
+                if (width < w)
+                {
+                    quad[0].Position = new Vector(quad[0].Position.X + (width / 2 - w), quad[0].Position.Y);
+                    quad[1].Position = new Vector(quad[1].Position.X + (width / 2 - w), quad[1].Position.Y);
+                }
+                if (width > w)
+                {
+                    quad[0].Position = new Vector(quad[0].Position.X + (width / 2 - w), quad[0].Position.Y);
+                    quad[1].Position = new Vector(quad[1].Position.X + (width / 2 - w), quad[1].Position.Y);
+                }
+                if (height < h)
+                {
+                    quad[0].Position = new Vector(quad[0].Position.X, quad[0].Position.Y + (height / 2 - h));
+                    quad[1].Position = new Vector(quad[1].Position.X, quad[1].Position.Y + (height / 2 - h));
+                }
+                if (height > h)
+                {
+                    quad[0].Position = new Vector(quad[0].Position.X, quad[0].Position.Y + (height / 2 - h));
+                    quad[1].Position = new Vector(quad[1].Position.X, quad[1].Position.Y + (height / 2 - h));
                 }
             }
 

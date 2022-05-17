@@ -60,6 +60,7 @@ namespace FPX___Zadatak2
         public Color Cyan { get { return new Color(0, 255, 255); } }
         public Color Black { get { return new Color(0, 0, 0); } }
         public Color White { get { return new Color(255, 255, 255); }  }
+        public Color Gray { get { return new Color(142, 142, 142); } }
 
         public Color() { }
 
