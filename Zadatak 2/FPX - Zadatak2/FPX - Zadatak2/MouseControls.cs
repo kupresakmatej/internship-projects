@@ -54,7 +54,7 @@ namespace FPX___Zadatak2
 
             ColumnIdx = 0;
 
-            circleFollow = new Circle(new Vector(gameWindow.Width / 2, gameWindow.Height / 2), 10f, color.Yellow, 250);
+            circleFollow = new Circle(new Vector(gameWindow.Width / 2, gameWindow.Height / 2), 10f, color.Cyan, 250);
             circleFollow.Layer = 2;
             drawables.Add(circleFollow);
 
@@ -67,18 +67,22 @@ namespace FPX___Zadatak2
         {
             if (Game.canDrop && !logic.GameOver())
             {
-                BoardLogic.PrintBoard();
+               
             }
             else if (logic.GameOver())
             {
                 BoardLogic.ClearBoard();
                 logic.coin = Coin.Empty;
+
                 Console.WriteLine("over");
+
                 Game.canDrop = false;
 
                 if (playerCounter % 2 != 0)
                 {
                     await Task.Delay(2500);
+
+                    System.Threading.Thread.Sleep(100);
                     drawables.Clear();
 
                     gameOver.EndScreen(color.Red);
@@ -86,6 +90,8 @@ namespace FPX___Zadatak2
                 else
                 {
                     await Task.Delay(2500);
+
+                    System.Threading.Thread.Sleep(100);
                     drawables.Clear();
 
                     gameOver.EndScreen(color.Yellow);
@@ -185,8 +191,6 @@ namespace FPX___Zadatak2
         {
             if (x > (gameWindow.Bounds.Width / 2 - 50f) && x < (gameWindow.Bounds.Width / 2 + 50f) && Game.canDrop) //4. column
             {
-                Console.WriteLine(string.Format("x: {0} y: {1}", x, y));
-
                 Circle circle = new Circle(new Vector(gameWindow.Width / 2 + 0.5f, gameWindow.Height / 2 + 350f), 30f, color, 250);
 
                 columnDrop[3] += 1;
@@ -202,8 +206,6 @@ namespace FPX___Zadatak2
             }
             else if (x < (gameWindow.Bounds.Width / 2 - 50f) && x > (gameWindow.Bounds.Width / 2 - 150f) && Game.canDrop) //3. column
             {
-                Console.WriteLine(string.Format("x: {0} y: {1}", x, y));
-
                 Circle circle = new Circle(new Vector(gameWindow.Width / 2 - 99.5f, gameWindow.Height / 2 + 350f), 30f, color, 250);
 
                 columnDrop[2] += 1;
@@ -219,8 +221,6 @@ namespace FPX___Zadatak2
             }
             else if (x < (gameWindow.Bounds.Width / 2 - 150f) && x > (gameWindow.Bounds.Width / 2 - 250f) && Game.canDrop) //2. column
             {
-                Console.WriteLine(string.Format("x: {0} y: {1}", x, y));
-
                 Circle circle = new Circle(new Vector(gameWindow.Width / 2 - 199.5f, gameWindow.Height / 2 + 350f), 30f, color, 250);
 
                 columnDrop[1] += 1;
@@ -236,8 +236,6 @@ namespace FPX___Zadatak2
             }
             else if (x < (gameWindow.Bounds.Width / 2 - 250f) && x > (gameWindow.Bounds.Width / 2 - 350f) && Game.canDrop) //1. column
             {
-                Console.WriteLine(string.Format("x: {0} y: {1}", x, y));
-
                 Circle circle = new Circle(new Vector(gameWindow.Width / 2 - 299.5f, gameWindow.Height / 2 + 350f), 30f, color, 250);
 
                 columnDrop[0] += 1;
@@ -253,8 +251,6 @@ namespace FPX___Zadatak2
             }
             else if (x > (gameWindow.Bounds.Width / 2 + 50f) && x < (gameWindow.Bounds.Width / 2 + 150f) && Game.canDrop) //5. column
             {
-                Console.WriteLine(string.Format("x: {0} y: {1}", x, y));
-
                 Circle circle = new Circle(new Vector(gameWindow.Width / 2 + 100.5f, gameWindow.Height / 2 + 350f), 30f, color, 250);
 
                 columnDrop[4] += 1;
@@ -270,8 +266,6 @@ namespace FPX___Zadatak2
             }
             else if (x > (gameWindow.Bounds.Width / 2 + 150f) && x < (gameWindow.Bounds.Width / 2 + 250f) && Game.canDrop) //6. column
             {
-                Console.WriteLine(string.Format("x: {0} y: {1}", x, y));
-
                 Circle circle = new Circle(new Vector(gameWindow.Width / 2 + 200.5f, gameWindow.Height / 2 + 350f), 30f, color, 250);
 
                 columnDrop[5] += 1;
@@ -287,8 +281,6 @@ namespace FPX___Zadatak2
             }
             else if (x > (gameWindow.Bounds.Width / 2 + 250f) && x < (gameWindow.Bounds.Width / 2 + 350f) && Game.canDrop) //7. column
             {
-                Console.WriteLine(string.Format("x: {0} y: {1}", x, y));
-
                 Circle circle = new Circle(new Vector(gameWindow.Width / 2 + 300.5f, gameWindow.Height / 2 + 350f), 30f, color, 250);
 
                 columnDrop[6] += 1;

@@ -111,6 +111,68 @@ namespace FPX___Zadatak2
             drawables.Add(p2_quad_9);
         }
 
+        public List<IRenderable> DrawMainMenuIndicators(float width, float height)
+        {
+            //players
+            Quad[] p1Quads = new Quad[5];
+            Quad[] p2Quads = new Quad[9];
+
+            Quad p1_quad_1 = new Quad(new Vector(width / 2 - 500f, height / 2 - 210f), 30f, 200f, color.White);
+
+            Quad p1_quad_2 = new Quad(new Vector(width / 2 - 535f, height / 2 + 210f), 30f, 200f, color.White);
+            Quad p1_quad_3 = new Quad(new Vector(width / 2 - 435f, height / 2 + 270f), 30f, 80f, color.White);
+            Quad p1_quad_4 = new Quad(new Vector(width / 2 - 470f, height / 2 + 215f), 100f, 30f, color.White);
+            Quad p1_quad_5 = new Quad(new Vector(width / 2 - 470f, height / 2 + 295f), 100f, 30f, color.White);
+
+            p1Quads[0] = p1_quad_1;
+            p1Quads[1] = p1_quad_2;
+            p1Quads[2] = p1_quad_3;
+            p1Quads[3] = p1_quad_4;
+            p1Quads[4] = p1_quad_5;
+            p1List.Add(p1Quads);
+
+            Quad p2_quad_1 = new Quad(new Vector(width / 2 + 435f, height / 2 + 210f), 30f, 200f, color.White);
+            Quad p2_quad_2 = new Quad(new Vector(width / 2 + 535f, height / 2 + 270f), 30f, 80f, color.White);
+            Quad p2_quad_3 = new Quad(new Vector(width / 2 + 500f, height / 2 + 215f), 100f, 30f, color.White);
+            Quad p2_quad_4 = new Quad(new Vector(width / 2 + 480f, height / 2 + 295f), 100f, 30f, color.White);
+
+            Quad p2_quad_5 = new Quad(new Vector(width / 2 + 490f, height / 2 - 95f), 120f, 30f, color.White);
+            Quad p2_quad_6 = new Quad(new Vector(width / 2 + 535f, height / 2 - 130f), 30f, 100f, color.White);
+            Quad p2_quad_7 = new Quad(new Vector(width / 2 + 490f, height / 2 - 195f), 120f, 30f, color.White);
+            Quad p2_quad_8 = new Quad(new Vector(width / 2 + 445f, height / 2 - 230f), 30f, 100f, color.White);
+            Quad p2_quad_9 = new Quad(new Vector(width / 2 + 490f, height / 2 - 295f), 120f, 30f, color.White);
+
+            p2Quads[0] = p2_quad_1;
+            p2Quads[1] = p2_quad_2;
+            p2Quads[2] = p2_quad_3;
+            p2Quads[3] = p2_quad_4;
+            p2Quads[4] = p2_quad_5;
+            p2Quads[5] = p2_quad_6;
+            p2Quads[6] = p2_quad_7;
+            p2Quads[7] = p2_quad_8;
+            p2Quads[8] = p2_quad_9;
+            p2List.Add(p2Quads);
+
+            drawables.Add(p1_quad_1);
+            drawables.Add(p1_quad_2);
+            drawables.Add(p1_quad_3);
+            drawables.Add(p1_quad_4);
+            drawables.Add(p1_quad_5);
+
+            drawables.Add(p2_quad_1);
+            drawables.Add(p2_quad_2);
+            drawables.Add(p2_quad_3);
+            drawables.Add(p2_quad_4);
+
+            drawables.Add(p2_quad_5);
+            drawables.Add(p2_quad_6);
+            drawables.Add(p2_quad_7);
+            drawables.Add(p2_quad_8);
+            drawables.Add(p2_quad_9);
+
+            return drawables;
+        }
+
         public void DrawFrame(float x, float y, float width, float height)
         {
             Quad[] quads = new Quad[4];

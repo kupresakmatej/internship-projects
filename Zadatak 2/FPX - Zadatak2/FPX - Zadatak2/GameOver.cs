@@ -67,11 +67,9 @@ namespace FPX___Zadatak2
             //gameWindow.Exit();
         }
 
-        public async void DrawButtons(float width, float height)
+        public void DrawButtons(float width, float height)
         {
             Quad[] buttonsArray = new Quad[2];
-
-            await Task.Delay(1500);
 
             restartButton = new Quad(new Vector((width / 2) - 200f, (height / 2) - 200f), 100f, 100f, color.Gray);
             exitButton = new Quad(new Vector((width / 2) + 175f, (height / 2) - 200f), 100f, 100f, color.Gray);
@@ -138,8 +136,6 @@ namespace FPX___Zadatak2
         public async void DrawEndScreen(float width, float height, Color color)
         {
             Quad[] winArray = new Quad[19];
-
-            await Task.Delay(1500);
 
             //W
             Quad quad1 = new Quad(new Vector((width/2 - 160f), height/2 + 100f), 25f, 150f, color);

@@ -27,6 +27,7 @@ namespace FPX___Zadatak2
                 GL.LoadIdentity();
                 drawable.Draw();
             }
+            GL.LoadIdentity();
             gameWindow.SwapBuffers();
         }
     }

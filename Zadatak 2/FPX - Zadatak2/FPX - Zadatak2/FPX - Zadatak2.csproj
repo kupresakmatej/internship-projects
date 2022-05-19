@@ -60,6 +60,7 @@
     <Compile Include="GameOver.cs" />
     <Compile Include="IUpdateable.cs" />
     <Compile Include="Logic.cs" />
+    <Compile Include="MainMenu.cs" />
     <Compile Include="MouseControls.cs" />
     <Compile Include="Quad.cs" />
     <Compile Include="QuadTexture.cs" />

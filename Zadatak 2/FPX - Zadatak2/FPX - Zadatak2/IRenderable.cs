@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FPX___Zadatak2
 {
-    interface IRenderable
+    public interface IRenderable
     {
         int Layer { get; set; }
         void Draw();
