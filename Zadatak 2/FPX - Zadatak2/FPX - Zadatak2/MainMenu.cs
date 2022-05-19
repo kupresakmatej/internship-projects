@@ -108,10 +108,13 @@ namespace FPX___Zadatak2
             else if (StartTwoPlayerGame(GameWindow.Width, GameWindow.Height, xClick, yClick))
             {
                 System.Threading.Thread.Sleep(100);
-                Drawables.Clear();
 
                 GL.Clear(ClearBufferMask.DepthBufferBit | ClearBufferMask.ColorBufferBit);
+
+                Drawables.Clear();
+
                 GL.LoadIdentity();
+
                 GameWindow.SwapBuffers();
 
                 Game.Input();
