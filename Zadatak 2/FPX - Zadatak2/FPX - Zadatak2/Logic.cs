@@ -13,7 +13,7 @@ namespace FPX___Zadatak2
 
         private static BoardLogic board;
 
-        public static Coin coin = new Coin();
+        public Coin coin = new Coin();
 
         public Logic(BoardLogic Board)
         {

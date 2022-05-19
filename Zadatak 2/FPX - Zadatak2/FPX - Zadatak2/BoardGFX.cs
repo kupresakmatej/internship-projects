@@ -36,8 +36,8 @@ namespace FPX___Zadatak2
 
         public List<IRenderable> GenerateBoard(float width, float height)
         {
-            w = width/2;
-            h = height/2;
+            w = width / 2;
+            h = height / 2;
 
             for (int i = -3; i < 4; i++)
             {
@@ -118,7 +118,7 @@ namespace FPX___Zadatak2
             Quad quad = new Quad(new Vector((width / 2 - 10f) + x, (height / 2) + y), 100f, 20f, color.Blue);
             Quad quad2 = new Quad(new Vector((width / 2 - 10f) + x - 40f, (height / 2) + y + 50f), 20f, 100f, color.Blue);
             Quad quad3 = new Quad(new Vector((width / 2 + 50f) + x, (height / 2) + y + 45f), 20f, 110f, color.Blue);
-            Quad quad4 = new Quad(new Vector((width / 2 - 10f) + x + 10f, (height / 2 + 100f) + y), 120f, 20f, color.Blue);        
+            Quad quad4 = new Quad(new Vector((width / 2 - 10f) + x + 10f, (height / 2 + 100f) + y), 120f, 20f, color.Blue);
 
             drawables.Add(quad);
             drawables.Add(quad2);
@@ -130,12 +130,12 @@ namespace FPX___Zadatak2
             quads[2] = quad3;
             quads[3] = quad4;
 
-            quadList.Add(quads);         
+            quadList.Add(quads);
         }
 
         public void DrawHole(float x, float y, float width, float height)
         {
-            CircleHole hole = new CircleHole(new Vector((width/2 - 10f) + 10f + x, (height/2) + 50f + y), 60f, 35f, color.Blue, 250);
+            CircleHole hole = new CircleHole(new Vector((width / 2 - 10f) + 10f + x, (height / 2) + 50f + y), 60f, 35f, color.Blue, 250);
 
             drawables.Add(hole);
 
@@ -146,47 +146,47 @@ namespace FPX___Zadatak2
         {
             foreach (Quad[] quad in quadList)
             {
-                if(width < w)
+                if (width < w)
                 {
-                    quad[0].Position = new Vector(quad[0].Position.X + (width / 2 - w), quad[0].Position.Y);
-                    quad[1].Position = new Vector(quad[1].Position.X + (width / 2 - w), quad[1].Position.Y);
-                    quad[2].Position = new Vector(quad[2].Position.X + (width / 2 - w), quad[2].Position.Y);
-                    quad[3].Position = new Vector(quad[3].Position.X + (width / 2 - w), quad[3].Position.Y);
+                    for(int i = 0; i < quad.Length; i++)
+                    {
+                        quad[i].Position = new Vector(quad[i].Position.X + (width / 2 - w), quad[i].Position.Y);
+                    }
                 }
-                if(width > w)
+                if (width > w)
                 {
-                    quad[0].Position = new Vector(quad[0].Position.X + (width / 2 - w), quad[0].Position.Y);
-                    quad[1].Position = new Vector(quad[1].Position.X + (width / 2 - w), quad[1].Position.Y);
-                    quad[2].Position = new Vector(quad[2].Position.X + (width / 2 - w), quad[2].Position.Y);
-                    quad[3].Position = new Vector(quad[3].Position.X + (width / 2 - w), quad[3].Position.Y);
+                    for (int i = 0; i < quad.Length; i++)
+                    {
+                        quad[i].Position = new Vector(quad[i].Position.X + (width / 2 - w), quad[i].Position.Y);
+                    }
                 }
                 if (height < h)
                 {
-                    quad[0].Position = new Vector(quad[0].Position.X, quad[0].Position.Y + (height / 2 - h));
-                    quad[1].Position = new Vector(quad[1].Position.X, quad[1].Position.Y + (height / 2 - h));
-                    quad[2].Position = new Vector(quad[2].Position.X, quad[2].Position.Y + (height / 2 - h));
-                    quad[3].Position = new Vector(quad[3].Position.X, quad[3].Position.Y + (height / 2 - h));
+                    for (int i = 0; i < quad.Length; i++)
+                    {
+                        quad[i].Position = new Vector(quad[i].Position.X, quad[i].Position.Y + (height / 2 - h));
+                    }
                 }
                 if (height > h)
                 {
-                    quad[0].Position = new Vector(quad[0].Position.X, quad[0].Position.Y + (height / 2 - h));
-                    quad[1].Position = new Vector(quad[1].Position.X, quad[1].Position.Y + (height / 2 - h));
-                    quad[2].Position = new Vector(quad[2].Position.X, quad[2].Position.Y + (height / 2 - h));
-                    quad[3].Position = new Vector(quad[3].Position.X, quad[3].Position.Y + (height / 2 - h));
+                    for (int i = 0; i < quad.Length; i++)
+                    {
+                        quad[i].Position = new Vector(quad[i].Position.X, quad[i].Position.Y + (height / 2 - h));
+                    }
                 }
             }
 
             foreach (CircleHole hole in holeList)
             {
-                if(width < w)
+                if (width < w)
                 {
                     hole.Position = new Vector(hole.Position.X + (width / 2 - w), hole.Position.Y);
                 }
-                if(width > w)
+                if (width > w)
                 {
                     hole.Position = new Vector(hole.Position.X + (width / 2 - w), hole.Position.Y);
                 }
-                if(height < h)
+                if (height < h)
                 {
                     hole.Position = new Vector(hole.Position.X, hole.Position.Y + (height / 2 - h));
                 }
@@ -220,51 +220,31 @@ namespace FPX___Zadatak2
             {
                 if (width < w)
                 {
-                    quad[0].Position = new Vector(quad[0].Position.X + (width / 2 - w), quad[0].Position.Y);
-                    quad[1].Position = new Vector(quad[1].Position.X + (width / 2 - w), quad[1].Position.Y);
-                    quad[2].Position = new Vector(quad[2].Position.X + (width / 2 - w), quad[2].Position.Y);
-                    quad[3].Position = new Vector(quad[3].Position.X + (width / 2 - w), quad[3].Position.Y);
-                    quad[4].Position = new Vector(quad[4].Position.X + (width / 2 - w), quad[4].Position.Y);
-                    quad[5].Position = new Vector(quad[5].Position.X + (width / 2 - w), quad[5].Position.Y);
-                    quad[6].Position = new Vector(quad[6].Position.X + (width / 2 - w), quad[6].Position.Y);
-                    quad[7].Position = new Vector(quad[7].Position.X + (width / 2 - w), quad[7].Position.Y);
-                    quad[8].Position = new Vector(quad[8].Position.X + (width / 2 - w), quad[8].Position.Y);
+                    for(int i = 0; i < quad.Length; i++)
+                    {
+                        quad[i].Position = new Vector(quad[i].Position.X + (width / 2 - w), quad[i].Position.Y);
+                    }
                 }
                 if (width > w)
                 {
-                    quad[0].Position = new Vector(quad[0].Position.X + (width / 2 - w), quad[0].Position.Y);
-                    quad[1].Position = new Vector(quad[1].Position.X + (width / 2 - w), quad[1].Position.Y);
-                    quad[2].Position = new Vector(quad[2].Position.X + (width / 2 - w), quad[2].Position.Y);
-                    quad[3].Position = new Vector(quad[3].Position.X + (width / 2 - w), quad[3].Position.Y);
-                    quad[4].Position = new Vector(quad[4].Position.X + (width / 2 - w), quad[4].Position.Y);
-                    quad[5].Position = new Vector(quad[5].Position.X + (width / 2 - w), quad[5].Position.Y);
-                    quad[6].Position = new Vector(quad[6].Position.X + (width / 2 - w), quad[6].Position.Y);
-                    quad[7].Position = new Vector(quad[7].Position.X + (width / 2 - w), quad[7].Position.Y);
-                    quad[8].Position = new Vector(quad[8].Position.X + (width / 2 - w), quad[8].Position.Y);
+                    for (int i = 0; i < quad.Length; i++)
+                    {
+                        quad[i].Position = new Vector(quad[i].Position.X + (width / 2 - w), quad[i].Position.Y);
+                    }
                 }
                 if (height < h)
                 {
-                    quad[0].Position = new Vector(quad[0].Position.X, quad[0].Position.Y + (height / 2 - h));
-                    quad[1].Position = new Vector(quad[1].Position.X, quad[1].Position.Y + (height / 2 - h));
-                    quad[2].Position = new Vector(quad[2].Position.X, quad[2].Position.Y + (height / 2 - h));
-                    quad[3].Position = new Vector(quad[3].Position.X, quad[3].Position.Y + (height / 2 - h));
-                    quad[4].Position = new Vector(quad[4].Position.X, quad[4].Position.Y + (height / 2 - h));
-                    quad[5].Position = new Vector(quad[5].Position.X, quad[5].Position.Y + (height / 2 - h));
-                    quad[6].Position = new Vector(quad[6].Position.X, quad[6].Position.Y + (height / 2 - h));
-                    quad[7].Position = new Vector(quad[7].Position.X, quad[7].Position.Y + (height / 2 - h));
-                    quad[8].Position = new Vector(quad[8].Position.X, quad[8].Position.Y + (height / 2 - h));
+                    for (int i = 0; i < quad.Length; i++)
+                    {
+                        quad[i].Position = new Vector(quad[i].Position.X, quad[i].Position.Y + (height / 2 - h));
+                    }
                 }
                 if (height > h)
                 {
-                    quad[0].Position = new Vector(quad[0].Position.X, quad[0].Position.Y + (height / 2 - h));
-                    quad[1].Position = new Vector(quad[1].Position.X, quad[1].Position.Y + (height / 2 - h));
-                    quad[2].Position = new Vector(quad[2].Position.X, quad[2].Position.Y + (height / 2 - h));
-                    quad[3].Position = new Vector(quad[3].Position.X, quad[3].Position.Y + (height / 2 - h));
-                    quad[4].Position = new Vector(quad[4].Position.X, quad[4].Position.Y + (height / 2 - h));
-                    quad[5].Position = new Vector(quad[5].Position.X, quad[5].Position.Y + (height / 2 - h));
-                    quad[6].Position = new Vector(quad[6].Position.X, quad[6].Position.Y + (height / 2 - h));
-                    quad[7].Position = new Vector(quad[7].Position.X, quad[7].Position.Y + (height / 2 - h));
-                    quad[8].Position = new Vector(quad[8].Position.X, quad[8].Position.Y + (height / 2 - h));
+                    for (int i = 0; i < quad.Length; i++)
+                    {
+                        quad[i].Position = new Vector(quad[i].Position.X, quad[i].Position.Y + (height / 2 - h));
+                    }
                 }
             }
 
@@ -272,95 +252,68 @@ namespace FPX___Zadatak2
             {
                 if (width < w)
                 {
-                    quad[0].Position = new Vector(quad[0].Position.X + (width / 2 - w), quad[0].Position.Y);
-                    quad[1].Position = new Vector(quad[1].Position.X + (width / 2 - w), quad[1].Position.Y);
-                    quad[2].Position = new Vector(quad[2].Position.X + (width / 2 - w), quad[2].Position.Y);
-                    quad[3].Position = new Vector(quad[3].Position.X + (width / 2 - w), quad[3].Position.Y);
-                    quad[4].Position = new Vector(quad[4].Position.X + (width / 2 - w), quad[4].Position.Y);
+                    for(int i = 0; i < quad.Length; i++)
+                    {
+                        quad[i].Position = new Vector(quad[i].Position.X + (width / 2 - w), quad[i].Position.Y);
+                    }
                 }
                 if (width > w)
                 {
-                    quad[0].Position = new Vector(quad[0].Position.X + (width / 2 - w), quad[0].Position.Y);
-                    quad[1].Position = new Vector(quad[1].Position.X + (width / 2 - w), quad[1].Position.Y);
-                    quad[2].Position = new Vector(quad[2].Position.X + (width / 2 - w), quad[2].Position.Y);
-                    quad[3].Position = new Vector(quad[3].Position.X + (width / 2 - w), quad[3].Position.Y);
-                    quad[4].Position = new Vector(quad[4].Position.X + (width / 2 - w), quad[4].Position.Y);
+                    for (int i = 0; i < quad.Length; i++)
+                    {
+                        quad[i].Position = new Vector(quad[i].Position.X + (width / 2 - w), quad[i].Position.Y);
+                    }
                 }
                 if (height < h)
                 {
-                    quad[0].Position = new Vector(quad[0].Position.X, quad[0].Position.Y + (height / 2 - h));
-                    quad[1].Position = new Vector(quad[1].Position.X, quad[1].Position.Y + (height / 2 - h));
-                    quad[2].Position = new Vector(quad[2].Position.X, quad[2].Position.Y + (height / 2 - h));
-                    quad[3].Position = new Vector(quad[3].Position.X, quad[3].Position.Y + (height / 2 - h));
-                    quad[4].Position = new Vector(quad[4].Position.X, quad[4].Position.Y + (height / 2 - h));
+                    for (int i = 0; i < quad.Length; i++)
+                    {
+                        quad[i].Position = new Vector(quad[i].Position.X, quad[i].Position.Y + (height / 2 - h));
+                    }
                 }
                 if (height > h)
                 {
-                    quad[0].Position = new Vector(quad[0].Position.X, quad[0].Position.Y + (height / 2 - h));
-                    quad[1].Position = new Vector(quad[1].Position.X, quad[1].Position.Y + (height / 2 - h));
-                    quad[2].Position = new Vector(quad[2].Position.X, quad[2].Position.Y + (height / 2 - h));
-                    quad[3].Position = new Vector(quad[3].Position.X, quad[3].Position.Y + (height / 2 - h));
-                    quad[4].Position = new Vector(quad[4].Position.X, quad[4].Position.Y + (height / 2 - h));
+                    
+                    for(int i = 0; i < quad.Length; i++)
+                    {
+                        quad[i].Position = new Vector(quad[i].Position.X, quad[i].Position.Y + (height / 2 - h));
+                    }
                 }
             }
 
-            foreach(Quad[] quad in winList)
+            foreach (Quad[] quad in winList)
             {
                 if (width < w)
                 {
-                    quad[0].Position = new Vector(quad[0].Position.X + (width / 2 - w), quad[0].Position.Y);
-                    quad[1].Position = new Vector(quad[1].Position.X + (width / 2 - w), quad[1].Position.Y);
-                    quad[2].Position = new Vector(quad[2].Position.X + (width / 2 - w), quad[2].Position.Y);
-                    quad[3].Position = new Vector(quad[3].Position.X + (width / 2 - w), quad[3].Position.Y);
-                    quad[4].Position = new Vector(quad[4].Position.X + (width / 2 - w), quad[4].Position.Y);
-                    quad[5].Position = new Vector(quad[5].Position.X + (width / 2 - w), quad[5].Position.Y);
-                    quad[6].Position = new Vector(quad[6].Position.X + (width / 2 - w), quad[6].Position.Y);
-                    quad[7].Position = new Vector(quad[7].Position.X + (width / 2 - w), quad[7].Position.Y);
-                    quad[8].Position = new Vector(quad[8].Position.X + (width / 2 - w), quad[8].Position.Y);
-                    quad[9].Position = new Vector(quad[9].Position.X + (width / 2 - w), quad[9].Position.Y);
+                    for(int i = 0; i < quad.Length; i++)
+                    {
+                        quad[i].Position = new Vector(quad[i].Position.X + (width / 2 - w), quad[i].Position.Y);
+                    }
                 }
                 if (width > w)
                 {
-                    quad[0].Position = new Vector(quad[0].Position.X + (width / 2 - w), quad[0].Position.Y);
-                    quad[1].Position = new Vector(quad[1].Position.X + (width / 2 - w), quad[1].Position.Y);
-                    quad[2].Position = new Vector(quad[2].Position.X + (width / 2 - w), quad[2].Position.Y);
-                    quad[3].Position = new Vector(quad[3].Position.X + (width / 2 - w), quad[3].Position.Y);
-                    quad[4].Position = new Vector(quad[4].Position.X + (width / 2 - w), quad[4].Position.Y);
-                    quad[5].Position = new Vector(quad[5].Position.X + (width / 2 - w), quad[5].Position.Y);
-                    quad[6].Position = new Vector(quad[6].Position.X + (width / 2 - w), quad[6].Position.Y);
-                    quad[7].Position = new Vector(quad[7].Position.X + (width / 2 - w), quad[7].Position.Y);
-                    quad[8].Position = new Vector(quad[8].Position.X + (width / 2 - w), quad[8].Position.Y);
-                    quad[9].Position = new Vector(quad[9].Position.X + (width / 2 - w), quad[9].Position.Y);
+                    for (int i = 0; i < quad.Length; i++)
+                    {
+                        quad[i].Position = new Vector(quad[i].Position.X + (width / 2 - w), quad[i].Position.Y);
+                    }
                 }
                 if (height < h)
                 {
-                    quad[0].Position = new Vector(quad[0].Position.X, quad[0].Position.Y + (height / 2 - h));
-                    quad[1].Position = new Vector(quad[1].Position.X, quad[1].Position.Y + (height / 2 - h));
-                    quad[2].Position = new Vector(quad[2].Position.X, quad[2].Position.Y + (height / 2 - h));
-                    quad[3].Position = new Vector(quad[3].Position.X, quad[3].Position.Y + (height / 2 - h));
-                    quad[4].Position = new Vector(quad[4].Position.X, quad[4].Position.Y + (height / 2 - h));
-                    quad[5].Position = new Vector(quad[5].Position.X, quad[5].Position.Y + (height / 2 - h));
-                    quad[6].Position = new Vector(quad[6].Position.X, quad[6].Position.Y + (height / 2 - h));
-                    quad[7].Position = new Vector(quad[7].Position.X, quad[7].Position.Y + (height / 2 - h));
-                    quad[8].Position = new Vector(quad[8].Position.X, quad[8].Position.Y + (height / 2 - h));
-                    quad[9].Position = new Vector(quad[9].Position.X, quad[9].Position.Y + (height / 2 - h));
+                    for (int i = 0; i < quad.Length; i++)
+                    {
+                        quad[i].Position = new Vector(quad[i].Position.X, quad[i].Position.Y + (height / 2 - h));
+                    }
                 }
                 if (height > h)
                 {
-                    quad[0].Position = new Vector(quad[0].Position.X, quad[0].Position.Y + (height / 2 - h));
-                    quad[1].Position = new Vector(quad[1].Position.X, quad[1].Position.Y + (height / 2 - h));
-                    quad[2].Position = new Vector(quad[2].Position.X, quad[2].Position.Y + (height / 2 - h));
-                    quad[3].Position = new Vector(quad[3].Position.X, quad[3].Position.Y + (height / 2 - h));
-                    quad[4].Position = new Vector(quad[4].Position.X, quad[4].Position.Y + (height / 2 - h));
-                    quad[5].Position = new Vector(quad[5].Position.X, quad[5].Position.Y + (height / 2 - h));
-                    quad[6].Position = new Vector(quad[6].Position.X, quad[6].Position.Y + (height / 2 - h));
-                    quad[7].Position = new Vector(quad[7].Position.X, quad[7].Position.Y + (height / 2 - h));
-                    quad[8].Position = new Vector(quad[8].Position.X, quad[8].Position.Y + (height / 2 - h));
-                    quad[9].Position = new Vector(quad[9].Position.X, quad[9].Position.Y + (height / 2 - h));
+                    for (int i = 0; i < quad.Length; i++)
+                    {
+                        quad[i].Position = new Vector(quad[i].Position.X, quad[i].Position.Y + (height / 2 - h));
+                    }
                 }
             }
 
-            foreach(Quad[] quad in buttonList)
+            foreach (Quad[] quad in buttonList)
             {
                 if (width < w)
                 {
@@ -384,8 +337,8 @@ namespace FPX___Zadatak2
                 }
             }
 
-            w = width/2;
-            h = height/2;
+            w = width / 2;
+            h = height / 2;
         }
     }
 }

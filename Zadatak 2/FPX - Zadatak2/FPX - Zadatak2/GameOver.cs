@@ -13,6 +13,7 @@ namespace FPX___Zadatak2
     class GameOver
     {
         private static List<IRenderable> Drawables;
+        private static List<IRenderable> renderables;
 
         private Color color = new Color();
 
@@ -29,12 +30,12 @@ namespace FPX___Zadatak2
         Quad restartButton;
         Quad exitButton;
 
-        private static Game Game;
         private static BoardLogic BoardLogic;
 
-        public GameOver(List<IRenderable> drawables, MouseControls mouseControls, GameWindow gameWindow, Circle circleFollow, Game game, BoardLogic boardLogic)
+        public GameOver(List<IRenderable> drawables, MouseControls mouseControls, GameWindow gameWindow, Circle circleFollow, BoardLogic boardLogic)
         {
             Drawables = drawables;
+            renderables = drawables;
 
             MouseControls = mouseControls;
             CircleFollow = circleFollow;
@@ -44,12 +45,13 @@ namespace FPX___Zadatak2
             exitButton = new Quad();
 
             GameWindow = gameWindow;
-            Game = game;
             BoardLogic = boardLogic;
         }
 
-        public void EndScreen()
+        public void EndScreen(Color color)
         {
+            BoardLogic.ClearBoard();
+
             GL.Clear(ClearBufferMask.DepthBufferBit | ClearBufferMask.ColorBufferBit);
             Drawables.Clear();
 
@@ -57,7 +59,7 @@ namespace FPX___Zadatak2
             GameWindow.MouseDown -= MouseControls.CallLogic;
             GameWindow.MouseDown += MouseControls.gameOver.ButtonLogic;
 
-            DrawEndScreen(GameWindow.Width, GameWindow.Height);
+            DrawEndScreen(GameWindow.Width, GameWindow.Height, color);
             DrawButtons(GameWindow.Width, GameWindow.Height);
 
             GL.LoadIdentity();
@@ -91,34 +93,24 @@ namespace FPX___Zadatak2
             xClick = mouse.X - GameWindow.Bounds.X;
             yClick = GameWindow.Height - (mouse.Y - GameWindow.Bounds.Y);
 
-            foreach(Quad[] button in buttonList)
-            {
-                Console.WriteLine(string.Format("Button {0} {1}", button[0].Position.X, button[0].Position.Y));
-                Console.WriteLine(string.Format("Button {0} {1}", button[1].Position.X, button[1].Position.Y));
-            }
-
-            Console.WriteLine(string.Format("Click {0} {1}", xClick, yClick));
-            Console.WriteLine(string.Format("Click {0} {1}", exitButton.Position.X/2, exitButton.Position.Y/2));
-
             if(CheckIfInsideExitButton(GameWindow.Width, GameWindow.Height, xClick, yClick))
             {
                 GameWindow.Exit();
             }
-            //else if(CheckIfInsideRestartButton(GameWindow.Width, GameWindow.Height, xClick, yClick))
-            //{
-            //    await Task.Delay(500);
+            else if (CheckIfInsideRestartButton(GameWindow.Width, GameWindow.Height, xClick, yClick))
+            {
+                GL.Clear(ClearBufferMask.DepthBufferBit | ClearBufferMask.ColorBufferBit);
+                GL.LoadIdentity();
 
-            //    GL.Clear(ClearBufferMask.DepthBufferBit | ClearBufferMask.ColorBufferBit);
-            //    Drawables.Clear();
+                GameWindow.Exit();
 
-            //    await Task.Delay(1000);
+                GameWindow window = new GameWindow(GameWindow.Width, GameWindow.Height);
 
-            //    GameWindow.MouseDown += MouseControls.DropOnMouse;
-            //    GameWindow.MouseDown += MouseControls.CallLogic;
-            //    GameWindow.MouseDown -= MouseControls.gameOver.ButtonLogic;
+                BoardLogic boardLogic = new BoardLogic();
+                boardLogic.FillBoard();
 
-            //    GL.LoadIdentity();
-            //}
+                Game game = new Game(window, boardLogic);
+            }
             else
             {
                 Console.WriteLine("No buttons were clicked.");
@@ -143,27 +135,40 @@ namespace FPX___Zadatak2
             return false;
         }
 
-        public async void DrawEndScreen(float width, float height)
+        public async void DrawEndScreen(float width, float height, Color color)
         {
-            Quad[] winArray = new Quad[10];
+            Quad[] winArray = new Quad[19];
 
-            await Task.Delay(1000);
+            await Task.Delay(1500);
 
             //W
-            Quad quad1 = new Quad(new Vector((width/2 - 160f), height/2 + 100f), 25f, 150f, color.Blue);
-            Quad quad2 = new Quad(new Vector((width / 2 - 160f) + 50f, height / 2 + 80f), 25f, 90f, color.Blue);
-            Quad quad3 = new Quad(new Vector((width / 2 - 160f) + 100f, height / 2 + 100f), 25f, 150f, color.Blue);
-            Quad quad4 = new Quad(new Vector((width / 2 - 160f) + 50f, height / 2 + 25f), 125f, 25f, color.Blue);
+            Quad quad1 = new Quad(new Vector((width/2 - 160f), height/2 + 100f), 25f, 150f, color);
+            Quad quad2 = new Quad(new Vector((width / 2 - 160f) + 50f, height / 2 + 80f), 25f, 90f, color);
+            Quad quad3 = new Quad(new Vector((width / 2 - 160f) + 100f, height / 2 + 100f), 25f, 150f, color);
+            Quad quad4 = new Quad(new Vector((width / 2 - 160f) + 50f, height / 2 + 25f), 125f, 25f, color);
 
             //I
-            Quad quad5 = new Quad(new Vector((width / 2 - 160f) + 150f, height / 2 + 93f), 25f, 162.5f, color.Blue);
+            Quad quad5 = new Quad(new Vector((width / 2 - 160f) + 150f, height / 2 + 93f), 25f, 162.5f, color);
 
             //N
-            Quad quad6 = new Quad(new Vector((width / 2 - 160f) + 200f, height / 2 + 93f), 25f, 162.5f, color.Blue);
-            Quad quad7 = new Quad(new Vector((width / 2 - 160f) + 235f, height / 2 + 161.5f), 50f, 25f, color.Blue);
-            Quad quad8 = new Quad(new Vector((width / 2 - 160f) + 250f, height / 2 + 93f), 25f, 162.5f, color.Blue);
-            Quad quad9 = new Quad(new Vector((width / 2 - 160f) + 262f, height / 2 + 24.5f), 50f, 25f, color.Blue);
-            Quad quad10 = new Quad(new Vector((width / 2 - 160f) + 292f, height / 2 + 93f), 25f, 162.5f, color.Blue);
+            Quad quad6 = new Quad(new Vector((width / 2 - 160f) + 200f, height / 2 + 93f), 25f, 162.5f, color);
+            Quad quad7 = new Quad(new Vector((width / 2 - 160f) + 235f, height / 2 + 161.5f), 50f, 25f, color);
+            Quad quad8 = new Quad(new Vector((width / 2 - 160f) + 250f, height / 2 + 93f), 25f, 162.5f, color);
+            Quad quad9 = new Quad(new Vector((width / 2 - 160f) + 262f, height / 2 + 24.5f), 50f, 25f, color);
+            Quad quad10 = new Quad(new Vector((width / 2 - 160f) + 292f, height / 2 + 93f), 25f, 162.5f, color);
+
+            //R
+            Quad quadR1 = new Quad(new Vector((width / 2) - 210f, (height / 2) - 115f), 6f, 55f, color.Gray);
+            Quad quadR2 = new Quad(new Vector((width / 2) - 195f, (height / 2) - 90f), 25f, 5f, color.Gray);
+            Quad quadR3 = new Quad(new Vector((width / 2) - 185f, (height / 2) - 100f), 5f, 25f, color.Gray);
+            Quad quadR4 = new Quad(new Vector((width / 2) - 195f, (height / 2) - 115f), 25f, 5f, color.Gray);
+            Quad quadR5 = new Quad(new Vector((width / 2) - 190f, (height / 2) - 130f), 5f, 25f, color.Gray);
+
+            //E
+            Quad quadE1 = new Quad(new Vector((width / 2) + 165f, (height / 2) - 110f), 6f, 55f, color.Gray);
+            Quad quadE2 = new Quad(new Vector((width / 2) + 175f, (height / 2) - 85f), 25f, 5f, color.Gray);
+            Quad quadE3 = new Quad(new Vector((width / 2) + 175f, (height / 2) - 112.5f), 25f, 5f, color.Gray);
+            Quad quadE4 = new Quad(new Vector((width / 2) + 175f, (height / 2) - 140f), 25f, 5f, color.Gray);
 
             Drawables.Add(quad1);
             Drawables.Add(quad2);
@@ -176,16 +181,36 @@ namespace FPX___Zadatak2
             Drawables.Add(quad9);
             Drawables.Add(quad10);
 
+            Drawables.Add(quadR1);
+            Drawables.Add(quadR2);
+            Drawables.Add(quadR3);
+            Drawables.Add(quadR4);
+            Drawables.Add(quadR5);
+
+            Drawables.Add(quadE1);
+            Drawables.Add(quadE2);
+            Drawables.Add(quadE3);
+            Drawables.Add(quadE4);
+
             winArray[0] = quad1;
-            winArray[1] = (quad2);
-            winArray[2] = (quad3);
-            winArray[3] = (quad4);
-            winArray[4] = (quad5);
-            winArray[5] = (quad6);
-            winArray[6] = (quad7);
-            winArray[7] = (quad8);
-            winArray[8] = (quad9);
-            winArray[9] = (quad10);
+            winArray[1] = quad2;
+            winArray[2] = quad3;
+            winArray[3] = quad4;
+            winArray[4] = quad5;
+            winArray[5] = quad6;
+            winArray[6] = quad7;
+            winArray[7] = quad8;
+            winArray[8] = quad9;
+            winArray[9] = quad10;
+            winArray[10] = quadR1;
+            winArray[11] = quadR2;
+            winArray[12] = quadR3;
+            winArray[13] = quadR4;
+            winArray[14] = quadR5;
+            winArray[15] = quadE1;
+            winArray[16] = quadE2;
+            winArray[17] = quadE3;
+            winArray[18] = quadE4;
             winList.Add(winArray);
 
             Drawables.Add(CircleFollow);

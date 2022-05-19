@@ -37,5 +37,9 @@ namespace FPX___Zadatak2
             }
         }
 
+        public void ClearBoard()
+        {
+            BoardLayout = new Coin[6, 7];
+        }
     }
 }

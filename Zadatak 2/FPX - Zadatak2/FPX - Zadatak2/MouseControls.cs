@@ -58,7 +58,7 @@ namespace FPX___Zadatak2
             circleFollow.Layer = 2;
             drawables.Add(circleFollow);
 
-            gameOver = new GameOver(Drawables, this, GameWindow, circleFollow, Game, BoardLogic);
+            gameOver = new GameOver(Drawables, this, GameWindow, circleFollow, BoardLogic);
             Board.winList = gameOver.winList;
             Board.buttonList = gameOver.buttonList;
         }
@@ -67,15 +67,29 @@ namespace FPX___Zadatak2
         {
             if (Game.canDrop && !logic.GameOver())
             {
-                //BoardLogic.PrintBoard();
+                BoardLogic.PrintBoard();
             }
-            if (logic.GameOver())
+            else if (logic.GameOver())
             {
+                BoardLogic.ClearBoard();
+                logic.coin = Coin.Empty;
                 Console.WriteLine("over");
+                Game.canDrop = false;
 
-                await Task.Delay(2500);
+                if (playerCounter % 2 != 0)
+                {
+                    await Task.Delay(2500);
+                    drawables.Clear();
 
-                gameOver.EndScreen();
+                    gameOver.EndScreen(color.Red);
+                }
+                else
+                {
+                    await Task.Delay(2500);
+                    drawables.Clear();
+
+                    gameOver.EndScreen(color.Yellow);
+                }
             }
         }
 
@@ -169,7 +183,7 @@ namespace FPX___Zadatak2
 
         public void DrawOnClick(float x, float y, Color color)
         {
-            if (x > (gameWindow.Bounds.Width / 2 - 50f) && x < (gameWindow.Bounds.Width / 2 + 50f)) //4. column
+            if (x > (gameWindow.Bounds.Width / 2 - 50f) && x < (gameWindow.Bounds.Width / 2 + 50f) && Game.canDrop) //4. column
             {
                 Console.WriteLine(string.Format("x: {0} y: {1}", x, y));
 
@@ -186,7 +200,7 @@ namespace FPX___Zadatak2
                 drawables.Add(circle);
                 circles.Add(circle);
             }
-            else if ((x < (gameWindow.Bounds.Width / 2 - 50f) && x > (gameWindow.Bounds.Width / 2 - 150f))) //3. column
+            else if (x < (gameWindow.Bounds.Width / 2 - 50f) && x > (gameWindow.Bounds.Width / 2 - 150f) && Game.canDrop) //3. column
             {
                 Console.WriteLine(string.Format("x: {0} y: {1}", x, y));
 
@@ -203,7 +217,7 @@ namespace FPX___Zadatak2
                 drawables.Add(circle);
                 circles.Add(circle);
             }
-            else if ((x < (gameWindow.Bounds.Width / 2 - 150f) && x > (gameWindow.Bounds.Width / 2 - 250f))) //2. column
+            else if (x < (gameWindow.Bounds.Width / 2 - 150f) && x > (gameWindow.Bounds.Width / 2 - 250f) && Game.canDrop) //2. column
             {
                 Console.WriteLine(string.Format("x: {0} y: {1}", x, y));
 
@@ -220,7 +234,7 @@ namespace FPX___Zadatak2
                 drawables.Add(circle);
                 circles.Add(circle);
             }
-            else if ((x < (gameWindow.Bounds.Width / 2 - 250f) && x > (gameWindow.Bounds.Width / 2 - 350f))) //1. column
+            else if (x < (gameWindow.Bounds.Width / 2 - 250f) && x > (gameWindow.Bounds.Width / 2 - 350f) && Game.canDrop) //1. column
             {
                 Console.WriteLine(string.Format("x: {0} y: {1}", x, y));
 
@@ -237,7 +251,7 @@ namespace FPX___Zadatak2
                 drawables.Add(circle);
                 circles.Add(circle);
             }
-            else if ((x > (gameWindow.Bounds.Width / 2 + 50f) && x < (gameWindow.Bounds.Width / 2 + 150f))) //5. column
+            else if (x > (gameWindow.Bounds.Width / 2 + 50f) && x < (gameWindow.Bounds.Width / 2 + 150f) && Game.canDrop) //5. column
             {
                 Console.WriteLine(string.Format("x: {0} y: {1}", x, y));
 
@@ -254,7 +268,7 @@ namespace FPX___Zadatak2
                 drawables.Add(circle);
                 circles.Add(circle);
             }
-            else if ((x > (gameWindow.Bounds.Width / 2 + 150f) && x < (gameWindow.Bounds.Width / 2 + 250f))) //6. column
+            else if (x > (gameWindow.Bounds.Width / 2 + 150f) && x < (gameWindow.Bounds.Width / 2 + 250f) && Game.canDrop) //6. column
             {
                 Console.WriteLine(string.Format("x: {0} y: {1}", x, y));
 
@@ -271,7 +285,7 @@ namespace FPX___Zadatak2
                 drawables.Add(circle);
                 circles.Add(circle);
             }
-            else if ((x > (gameWindow.Bounds.Width / 2 + 250f) && x < (gameWindow.Bounds.Width / 2 + 350f))) //7. column
+            else if (x > (gameWindow.Bounds.Width / 2 + 250f) && x < (gameWindow.Bounds.Width / 2 + 350f) && Game.canDrop) //7. column
             {
                 Console.WriteLine(string.Format("x: {0} y: {1}", x, y));
 
