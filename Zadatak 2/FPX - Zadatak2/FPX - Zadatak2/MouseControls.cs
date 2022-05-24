@@ -20,7 +20,6 @@ namespace FPX___Zadatak2
         private Color color = new Color();
 
         private Circle circleFollow;
-        private Quad quad;
 
         private static int[] columnDrop;
 
@@ -55,7 +54,7 @@ namespace FPX___Zadatak2
             ColumnIdx = 0;
 
             circleFollow = new Circle(new Vector(gameWindow.Width / 2, gameWindow.Height / 2), 10f, color.Cyan, 250);
-            circleFollow.Layer = 2;
+            circleFollow.Layer = 3;
             drawables.Add(circleFollow);
 
             gameOver = new GameOver(Drawables, this, GameWindow, circleFollow, BoardLogic);
@@ -65,12 +64,14 @@ namespace FPX___Zadatak2
 
         public async void CallLogic(object o, EventArgs e)
         {
-            if (Game.canDrop && !logic.GameOver())
+            if (logic.GameOver())
             {
-               
-            }
-            else if (logic.GameOver())
-            {
+                await Task.Delay(2500);
+
+                GL.Clear(ClearBufferMask.DepthBufferBit | ClearBufferMask.ColorBufferBit);
+                drawables.Clear();
+                GL.LoadIdentity();
+
                 BoardLogic.ClearBoard();
                 logic.coin = Coin.Empty;
 
@@ -80,20 +81,18 @@ namespace FPX___Zadatak2
 
                 if (playerCounter % 2 != 0)
                 {
-                    await Task.Delay(2500);
-
                     System.Threading.Thread.Sleep(100);
                     drawables.Clear();
 
+                    gameWindow.MouseMove += this.FollowMouse;
                     gameOver.EndScreen(color.Red);
                 }
                 else
                 {
-                    await Task.Delay(2500);
-
                     System.Threading.Thread.Sleep(100);
                     drawables.Clear();
 
+                    gameWindow.MouseMove += this.FollowMouse;
                     gameOver.EndScreen(color.Yellow);
                 }
             }
@@ -120,7 +119,18 @@ namespace FPX___Zadatak2
 
             ColumnIdx = 0;
 
-            if (Game.canDrop)
+            if(Game.canDrop && Game.isSinglePlayer)
+            {
+                if(playerCounter % 2 != 0)
+                {
+                    DrawOnClick(xClick, yClick, color.Yellow);
+                }
+                else
+                {
+                    DrawAI(color.Red);
+                }
+            }
+            else if (Game.canDrop && !Game.isSinglePlayer)
             {
                 if (playerCounter % 2 == 0)
                 {
@@ -189,52 +199,233 @@ namespace FPX___Zadatak2
 
         public void DrawOnClick(float x, float y, Color color)
         {
-            if (x > (gameWindow.Bounds.Width / 2 - 50f) && x < (gameWindow.Bounds.Width / 2 + 50f) && Game.canDrop) //4. column
+            if(Game.isSinglePlayer)
             {
-                Circle circle = new Circle(new Vector(gameWindow.Width / 2 + 0.5f, gameWindow.Height / 2 + 350f), 30f, color, 250);
+                if (x > (gameWindow.Bounds.Width / 2 - 50f) && x < (gameWindow.Bounds.Width / 2 + 50f) && Game.canDrop) //4. column
+                {
+                    Circle circle = new Circle(new Vector(gameWindow.Width / 2 + 0.5f, gameWindow.Height / 2 + 350f), 30f, color, 250);
 
-                columnDrop[3] += 1;
+                    columnDrop[3] += 1;
 
-                ColumnIdx = 3;
+                    ColumnIdx = 3;
 
-                playerCounter++;
+                    playerCounter++;
 
-                logic.DropIntoBoard(ColumnIdx, playerCounter);
+                    logic.FallIntoPlaceSP(ColumnIdx);
 
-                drawables.Add(circle);
-                circles.Add(circle);
+                    drawables.Add(circle);
+                    circles.Add(circle);
+                }
+                else if (x < (gameWindow.Bounds.Width / 2 - 50f) && x > (gameWindow.Bounds.Width / 2 - 150f) && Game.canDrop) //3. column
+                {
+                    Circle circle = new Circle(new Vector(gameWindow.Width / 2 - 99.5f, gameWindow.Height / 2 + 350f), 30f, color, 250);
+
+                    columnDrop[2] += 1;
+
+                    ColumnIdx = 2;
+
+                    playerCounter++;
+
+                    logic.FallIntoPlaceSP(ColumnIdx);
+
+                    drawables.Add(circle);
+                    circles.Add(circle);
+                }
+                else if (x < (gameWindow.Bounds.Width / 2 - 150f) && x > (gameWindow.Bounds.Width / 2 - 250f) && Game.canDrop) //2. column
+                {
+                    Circle circle = new Circle(new Vector(gameWindow.Width / 2 - 199.5f, gameWindow.Height / 2 + 350f), 30f, color, 250);
+
+                    columnDrop[1] += 1;
+
+                    ColumnIdx = 1;
+
+                    playerCounter++;
+
+                    logic.FallIntoPlaceSP(ColumnIdx);
+
+                    drawables.Add(circle);
+                    circles.Add(circle);
+                }
+                else if (x < (gameWindow.Bounds.Width / 2 - 250f) && x > (gameWindow.Bounds.Width / 2 - 350f) && Game.canDrop) //1. column
+                {
+                    Circle circle = new Circle(new Vector(gameWindow.Width / 2 - 299.5f, gameWindow.Height / 2 + 350f), 30f, color, 250);
+
+                    columnDrop[0] += 1;
+
+                    ColumnIdx = 0;
+
+                    playerCounter++;
+
+                    logic.FallIntoPlaceSP(ColumnIdx);
+
+                    drawables.Add(circle);
+                    circles.Add(circle);
+                }
+                else if (x > (gameWindow.Bounds.Width / 2 + 50f) && x < (gameWindow.Bounds.Width / 2 + 150f) && Game.canDrop) //5. column
+                {
+                    Circle circle = new Circle(new Vector(gameWindow.Width / 2 + 100.5f, gameWindow.Height / 2 + 350f), 30f, color, 250);
+
+                    columnDrop[4] += 1;
+
+                    ColumnIdx = 4;
+
+                    playerCounter++;
+
+                    logic.FallIntoPlaceSP(ColumnIdx);
+
+                    drawables.Add(circle);
+                    circles.Add(circle);
+                }
+                else if (x > (gameWindow.Bounds.Width / 2 + 150f) && x < (gameWindow.Bounds.Width / 2 + 250f) && Game.canDrop) //6. column
+                {
+                    Circle circle = new Circle(new Vector(gameWindow.Width / 2 + 200.5f, gameWindow.Height / 2 + 350f), 30f, color, 250);
+
+                    columnDrop[5] += 1;
+
+                    ColumnIdx = 5;
+
+                    playerCounter++;
+
+                    logic.FallIntoPlaceSP(ColumnIdx);
+
+                    drawables.Add(circle);
+                    circles.Add(circle);
+                }
+                else if (x > (gameWindow.Bounds.Width / 2 + 250f) && x < (gameWindow.Bounds.Width / 2 + 350f) && Game.canDrop) //7. column
+                {
+                    Circle circle = new Circle(new Vector(gameWindow.Width / 2 + 300.5f, gameWindow.Height / 2 + 350f), 30f, color, 250);
+
+                    columnDrop[6] += 1;
+
+                    ColumnIdx = 6;
+
+                    playerCounter++;
+
+                    logic.FallIntoPlaceSP(ColumnIdx);
+
+                    drawables.Add(circle);
+                    circles.Add(circle);
+                }
             }
-            else if (x < (gameWindow.Bounds.Width / 2 - 50f) && x > (gameWindow.Bounds.Width / 2 - 150f) && Game.canDrop) //3. column
+            else
             {
-                Circle circle = new Circle(new Vector(gameWindow.Width / 2 - 99.5f, gameWindow.Height / 2 + 350f), 30f, color, 250);
+                if (x > (gameWindow.Bounds.Width / 2 - 50f) && x < (gameWindow.Bounds.Width / 2 + 50f) && Game.canDrop) //4. column
+                {
+                    Circle circle = new Circle(new Vector(gameWindow.Width / 2 + 0.5f, gameWindow.Height / 2 + 350f), 30f, color, 250);
 
-                columnDrop[2] += 1;
+                    columnDrop[3] += 1;
 
-                ColumnIdx = 2;
+                    ColumnIdx = 3;
 
-                playerCounter++;
+                    playerCounter++;
 
-                logic.DropIntoBoard(ColumnIdx, playerCounter);
+                    logic.DropIntoBoard(ColumnIdx, playerCounter);
 
-                drawables.Add(circle);
-                circles.Add(circle);
-            }
-            else if (x < (gameWindow.Bounds.Width / 2 - 150f) && x > (gameWindow.Bounds.Width / 2 - 250f) && Game.canDrop) //2. column
-            {
-                Circle circle = new Circle(new Vector(gameWindow.Width / 2 - 199.5f, gameWindow.Height / 2 + 350f), 30f, color, 250);
+                    drawables.Add(circle);
+                    circles.Add(circle);
+                }
+                else if (x < (gameWindow.Bounds.Width / 2 - 50f) && x > (gameWindow.Bounds.Width / 2 - 150f) && Game.canDrop) //3. column
+                {
+                    Circle circle = new Circle(new Vector(gameWindow.Width / 2 - 99.5f, gameWindow.Height / 2 + 350f), 30f, color, 250);
 
-                columnDrop[1] += 1;
+                    columnDrop[2] += 1;
 
-                ColumnIdx = 1;
+                    ColumnIdx = 2;
 
-                playerCounter++;
+                    playerCounter++;
 
-                logic.DropIntoBoard(ColumnIdx, playerCounter);
+                    logic.DropIntoBoard(ColumnIdx, playerCounter);
 
-                drawables.Add(circle);
-                circles.Add(circle);
-            }
-            else if (x < (gameWindow.Bounds.Width / 2 - 250f) && x > (gameWindow.Bounds.Width / 2 - 350f) && Game.canDrop) //1. column
+                    drawables.Add(circle);
+                    circles.Add(circle);
+                }
+                else if (x < (gameWindow.Bounds.Width / 2 - 150f) && x > (gameWindow.Bounds.Width / 2 - 250f) && Game.canDrop) //2. column
+                {
+                    Circle circle = new Circle(new Vector(gameWindow.Width / 2 - 199.5f, gameWindow.Height / 2 + 350f), 30f, color, 250);
+
+                    columnDrop[1] += 1;
+
+                    ColumnIdx = 1;
+
+                    playerCounter++;
+
+                    logic.DropIntoBoard(ColumnIdx, playerCounter);
+
+                    drawables.Add(circle);
+                    circles.Add(circle);
+                }
+                else if (x < (gameWindow.Bounds.Width / 2 - 250f) && x > (gameWindow.Bounds.Width / 2 - 350f) && Game.canDrop) //1. column
+                {
+                    Circle circle = new Circle(new Vector(gameWindow.Width / 2 - 299.5f, gameWindow.Height / 2 + 350f), 30f, color, 250);
+
+                    columnDrop[0] += 1;
+
+                    ColumnIdx = 0;
+
+                    playerCounter++;
+
+                    logic.DropIntoBoard(ColumnIdx, playerCounter);
+
+                    drawables.Add(circle);
+                    circles.Add(circle);
+                }
+                else if (x > (gameWindow.Bounds.Width / 2 + 50f) && x < (gameWindow.Bounds.Width / 2 + 150f) && Game.canDrop) //5. column
+                {
+                    Circle circle = new Circle(new Vector(gameWindow.Width / 2 + 100.5f, gameWindow.Height / 2 + 350f), 30f, color, 250);
+
+                    columnDrop[4] += 1;
+
+                    ColumnIdx = 4;
+
+                    playerCounter++;
+
+                    logic.DropIntoBoard(ColumnIdx, playerCounter);
+
+                    drawables.Add(circle);
+                    circles.Add(circle);
+                }
+                else if (x > (gameWindow.Bounds.Width / 2 + 150f) && x < (gameWindow.Bounds.Width / 2 + 250f) && Game.canDrop) //6. column
+                {
+                    Circle circle = new Circle(new Vector(gameWindow.Width / 2 + 200.5f, gameWindow.Height / 2 + 350f), 30f, color, 250);
+
+                    columnDrop[5] += 1;
+
+                    ColumnIdx = 5;
+
+                    playerCounter++;
+
+                    logic.DropIntoBoard(ColumnIdx, playerCounter);
+
+                    drawables.Add(circle);
+                    circles.Add(circle);
+                }
+                else if (x > (gameWindow.Bounds.Width / 2 + 250f) && x < (gameWindow.Bounds.Width / 2 + 350f) && Game.canDrop) //7. column
+                {
+                    Circle circle = new Circle(new Vector(gameWindow.Width / 2 + 300.5f, gameWindow.Height / 2 + 350f), 30f, color, 250);
+
+                    columnDrop[6] += 1;
+
+                    ColumnIdx = 6;
+
+                    playerCounter++;
+
+                    logic.DropIntoBoard(ColumnIdx, playerCounter);
+
+                    drawables.Add(circle);
+                    circles.Add(circle);
+                }
+            }        
+
+            drawables.Sort((j, k) => j.Layer.CompareTo(k.Layer));
+
+            GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.ColorBufferBit);
+        }
+
+        public async void DrawAI(Color color)
+        {
+            logic.columnAI = logic.DetermineColumnAI();
+
+            if(logic.columnAI == 1)
             {
                 Circle circle = new Circle(new Vector(gameWindow.Width / 2 - 299.5f, gameWindow.Height / 2 + 350f), 30f, color, 250);
 
@@ -249,7 +440,52 @@ namespace FPX___Zadatak2
                 drawables.Add(circle);
                 circles.Add(circle);
             }
-            else if (x > (gameWindow.Bounds.Width / 2 + 50f) && x < (gameWindow.Bounds.Width / 2 + 150f) && Game.canDrop) //5. column
+            else if(logic.columnAI == 2)
+            {
+                Circle circle = new Circle(new Vector(gameWindow.Width / 2 - 199.5f, gameWindow.Height / 2 + 350f), 30f, color, 250);
+
+                columnDrop[1] += 1;
+
+                ColumnIdx = 1;
+
+                playerCounter++;
+
+                logic.DropIntoBoard(ColumnIdx, playerCounter);
+
+                drawables.Add(circle);
+                circles.Add(circle);
+            }
+            else if(logic.columnAI == 3)
+            {
+                Circle circle = new Circle(new Vector(gameWindow.Width / 2 - 99.5f, gameWindow.Height / 2 + 350f), 30f, color, 250);
+
+                columnDrop[2] += 1;
+
+                ColumnIdx = 2;
+
+                playerCounter++;
+
+                logic.DropIntoBoard(ColumnIdx, playerCounter);
+
+                drawables.Add(circle);
+                circles.Add(circle);
+            }
+            else if (logic.columnAI == 4)
+            {
+                Circle circle = new Circle(new Vector(gameWindow.Width / 2 + 0.5f, gameWindow.Height / 2 + 350f), 30f, color, 250);
+
+                columnDrop[3] += 1;
+
+                ColumnIdx = 3;
+
+                playerCounter++;
+
+                logic.DropIntoBoard(ColumnIdx, playerCounter);
+
+                drawables.Add(circle);
+                circles.Add(circle);
+            }
+            else if (logic.columnAI == 5)
             {
                 Circle circle = new Circle(new Vector(gameWindow.Width / 2 + 100.5f, gameWindow.Height / 2 + 350f), 30f, color, 250);
 
@@ -264,28 +500,13 @@ namespace FPX___Zadatak2
                 drawables.Add(circle);
                 circles.Add(circle);
             }
-            else if (x > (gameWindow.Bounds.Width / 2 + 150f) && x < (gameWindow.Bounds.Width / 2 + 250f) && Game.canDrop) //6. column
+            else if (logic.columnAI == 6)
             {
                 Circle circle = new Circle(new Vector(gameWindow.Width / 2 + 200.5f, gameWindow.Height / 2 + 350f), 30f, color, 250);
 
                 columnDrop[5] += 1;
 
                 ColumnIdx = 5;
-
-                playerCounter++;
-
-                logic.DropIntoBoard(ColumnIdx, playerCounter);
-
-                drawables.Add(circle);
-                circles.Add(circle);
-            }
-            else if (x > (gameWindow.Bounds.Width / 2 + 250f) && x < (gameWindow.Bounds.Width / 2 + 350f) && Game.canDrop) //7. column
-            {
-                Circle circle = new Circle(new Vector(gameWindow.Width / 2 + 300.5f, gameWindow.Height / 2 + 350f), 30f, color, 250);
-
-                columnDrop[6] += 1;
-
-                ColumnIdx = 6;
 
                 playerCounter++;
 

@@ -22,13 +22,13 @@ namespace FPX___Zadatak2
         private static Circle CircleFollow;
 
         public List<Quad[]> winList = new List<Quad[]>();
-        public List<Quad[]> buttonList = new List<Quad[]>();
+        public List<QuadTexture[]> buttonList = new List<QuadTexture[]>();
 
         float xClick;
         float yClick;
 
-        Quad restartButton;
-        Quad exitButton;
+        QuadTexture restartButton;
+        QuadTexture exitButton;
 
         private static BoardLogic BoardLogic;
 
@@ -37,12 +37,16 @@ namespace FPX___Zadatak2
             Drawables = drawables;
             renderables = drawables;
 
+            GL.Clear(ClearBufferMask.DepthBufferBit | ClearBufferMask.ColorBufferBit);
+
             MouseControls = mouseControls;
             CircleFollow = circleFollow;
-            CircleFollow.Layer = 2;
+            CircleFollow.Layer = 3;
 
-            restartButton = new Quad();
-            exitButton = new Quad();
+            GL.LoadIdentity();
+
+            restartButton = new QuadTexture();
+            exitButton = new QuadTexture();
 
             GameWindow = gameWindow;
             BoardLogic = boardLogic;
@@ -52,39 +56,38 @@ namespace FPX___Zadatak2
         {
             BoardLogic.ClearBoard();
 
-            GL.Clear(ClearBufferMask.DepthBufferBit | ClearBufferMask.ColorBufferBit);
-            Drawables.Clear();
-
             GameWindow.MouseDown -= MouseControls.DropOnMouse;
             GameWindow.MouseDown -= MouseControls.CallLogic;
             GameWindow.MouseDown += MouseControls.gameOver.ButtonLogic;
 
             DrawEndScreen(GameWindow.Width, GameWindow.Height, color);
+
+            Drawables.Add(CircleFollow);
+
             DrawButtons(GameWindow.Width, GameWindow.Height);
-
-            GL.LoadIdentity();
-
-            //gameWindow.Exit();
         }
 
         public void DrawButtons(float width, float height)
         {
-            Quad[] buttonsArray = new Quad[2];
+            QuadTexture[] buttonsArray = new QuadTexture[2];
 
-            restartButton = new Quad(new Vector((width / 2) - 200f, (height / 2) - 200f), 100f, 100f, color.Gray);
-            exitButton = new Quad(new Vector((width / 2) + 175f, (height / 2) - 200f), 100f, 100f, color.Gray);
+            Texture restartTexture = new Texture(@"C:\Users\Reroot\Desktop\FPX\restartButton.bmp");
+            Texture exitTexture = new Texture(@"C:\Users\Reroot\Desktop\FPX\exitButton.bmp");
 
-            Drawables.Add(restartButton);
-            Drawables.Add(exitButton);
+            restartButton = new QuadTexture(new Vector((width / 2) - 200f, (height / 2) - 200f), 100f, 100f, restartTexture);
+            restartButton.Layer = 2;
+            exitButton = new QuadTexture(new Vector((width / 2) + 175f, (height / 2) - 200f), 100f, 100f, exitTexture);
+            exitButton.Layer = 2;
 
             buttonsArray[0] = restartButton;
             buttonsArray[1] = exitButton;
             buttonList.Add(buttonsArray);
 
-            Drawables.Add(CircleFollow);
+            Drawables.Add(restartButton);
+            Drawables.Add(exitButton);
         }
 
-        public async void ButtonLogic(object o, EventArgs e)
+        public void ButtonLogic(object o, EventArgs e)
         {
             var mouse = OpenTK.Input.Mouse.GetCursorState();
 
@@ -133,7 +136,7 @@ namespace FPX___Zadatak2
             return false;
         }
 
-        public async void DrawEndScreen(float width, float height, Color color)
+        public void DrawEndScreen(float width, float height, Color color)
         {
             Quad[] winArray = new Quad[19];
 
@@ -210,6 +213,7 @@ namespace FPX___Zadatak2
             winList.Add(winArray);
 
             Drawables.Add(CircleFollow);
+
         }
     }
 }

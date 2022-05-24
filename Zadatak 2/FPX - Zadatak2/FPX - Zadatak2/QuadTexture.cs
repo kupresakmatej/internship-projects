@@ -29,19 +29,24 @@ namespace FPX___Zadatak2
             TextureInstance = texture;
         }
 
+        public QuadTexture()
+        {
+            
+        }
+
         public void Draw()
         {
             GL.BindTexture(TextureTarget.Texture2D, TextureInstance.TextureInt);
 
             GL.Begin(BeginMode.Quads);
 
-            GL.TexCoord2(0, 0);
-            GL.Vertex2(Position.X - A / 2, Position.Y - B / 2);
-            GL.TexCoord2(1, 0);
-            GL.Vertex2(Position.X + A / 2, Position.Y - B / 2);
-            GL.TexCoord2(1, 1);
-            GL.Vertex2(Position.X + A / 2, Position.Y + B / 2);
             GL.TexCoord2(0, 1);
+            GL.Vertex2(Position.X - A / 2, Position.Y - B / 2);
+            GL.TexCoord2(1, 1);
+            GL.Vertex2(Position.X + A / 2, Position.Y - B / 2);
+            GL.TexCoord2(1, 0);
+            GL.Vertex2(Position.X + A / 2, Position.Y + B / 2);
+            GL.TexCoord2(0, 0);
             GL.Vertex2(Position.X - A / 2, Position.Y + B / 2);
 
             GL.End();

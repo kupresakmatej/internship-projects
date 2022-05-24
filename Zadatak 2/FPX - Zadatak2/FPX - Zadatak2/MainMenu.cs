@@ -17,8 +17,8 @@ namespace FPX___Zadatak2
         private static GameWindow GameWindow;
         private static BoardGFX Board;
         Color color = new Color();
-        public List<Quad[]> reshapeTitle = new List<Quad[]>();
-        public List<Quad[]> reshapeButtons = new List<Quad[]>();
+        public List<QuadTexture[]> reshapeTitle = new List<QuadTexture[]>();
+        public List<QuadTexture[]> reshapeButtons = new List<QuadTexture[]>();
 
         float xClick;
         float yClick;
@@ -26,8 +26,8 @@ namespace FPX___Zadatak2
         float w;
         float h;
 
-        Quad onePlayerButton;
-        Quad twoPlayerButton;
+        QuadTexture onePlayerButton;
+        QuadTexture twoPlayerButton;
 
         private static Game Game;
 
@@ -38,8 +38,8 @@ namespace FPX___Zadatak2
             Drawables = drawables;
             Game = game;
 
-            onePlayerButton = new Quad();
-            twoPlayerButton = new Quad();
+            onePlayerButton = new QuadTexture();
+            twoPlayerButton = new QuadTexture();
 
             DrawButtons(GameWindow.Width, GameWindow.Height);
             DrawTitle(GameWindow.Width, GameWindow.Height);
@@ -47,13 +47,18 @@ namespace FPX___Zadatak2
 
         public void DrawButtons(float width, float height)
         {
-            Quad[] quads = new Quad[2];
+            QuadTexture[] quads = new QuadTexture[2];
 
             w = width / 2;
             h = height / 2;
 
-            onePlayerButton = new Quad(new Vector(width / 2 - 250f, height / 2 - 285f), 200f, 50f, color.Gray);
-            twoPlayerButton = new Quad(new Vector(width / 2 + 250f, height / 2 - 285f), 200f, 50f, color.Gray);
+            Texture textureOne = new Texture(@"C:\Users\Reroot\Desktop\FPX\onePlayer.bmp");
+            Texture textureTwo = new Texture(@"C:\Users\Reroot\Desktop\FPX\twoPlayer.bmp");
+
+            onePlayerButton = new QuadTexture(new Vector(width / 2 - 250f, height / 2 - 100f), 200f, 50f, textureOne);
+            twoPlayerButton = new QuadTexture(new Vector(width / 2 + 250f, height / 2 - 100f), 200f, 50f, textureTwo);
+            onePlayerButton.Layer = 3;
+            twoPlayerButton.Layer = 3;
 
             Drawables.Add(onePlayerButton);
             Drawables.Add(twoPlayerButton);
@@ -62,39 +67,29 @@ namespace FPX___Zadatak2
             quads[1] = twoPlayerButton;
 
             reshapeButtons.Add(quads);
+
+            Drawables.Sort((x, y) => x.Layer.CompareTo(y.Layer));
         }
         
         public void DrawTitle(float width, float height)
         {
-            Quad[] quads = new Quad[6];
+            QuadTexture[] quadTextures = new QuadTexture[1];
 
-            Quad letterC1 = new Quad(new Vector(width/2 - 220f, height/2 + 200f), 25f, 200f, color.Red);
-            Quad letterC2 = new Quad(new Vector(width / 2 - 133f, height / 2 + 287f), 150f, 25f, color.Red);
-            Quad letterC3 = new Quad(new Vector(width / 2 - 133f, height / 2 + 112f), 150f, 25f, color.Red);
+            Texture texture = new Texture(@"C:\Users\Reroot\Desktop\FPX\mainMenu_Title750.bmp");
 
-            Quad number4_1 = new Quad(new Vector(width/2 + 200f, height/2 + 200f), 25f, 200f, color.Yellow);
-            Quad number4_2 = new Quad(new Vector(width / 2 + 130f, height / 2 + 200f), 150f, 25f, color.Yellow);
-            Quad number4_3 = new Quad(new Vector(width / 2 + 67f, height / 2 + 245f), 25f, 110f, color.Yellow);
+            QuadTexture mainMenuTitle = new QuadTexture(new Vector(width/2, height/2 + 200f), 750f, 750f, texture);
+            mainMenuTitle.Layer = 2;
 
-            Drawables.Add(letterC1);
-            Drawables.Add(letterC2);
-            Drawables.Add(letterC3);
+            quadTextures[0] = mainMenuTitle;
 
-            Drawables.Add(number4_1);
-            Drawables.Add(number4_2);
-            Drawables.Add(number4_3);
+            Drawables.Add(mainMenuTitle);
 
-            quads[0] = letterC1;
-            quads[1] = letterC2;
-            quads[2] = letterC3;
-            quads[3] = number4_1;
-            quads[4] = number4_2;
-            quads[5] = number4_3;
+            reshapeTitle.Add(quadTextures);
 
-            reshapeTitle.Add(quads);
+            Drawables.Sort((x, y) => x.Layer.CompareTo(y.Layer));
         }
 
-        public async void ButtonLogic(object o, EventArgs e)
+        public void ButtonLogic(object o, EventArgs e)
         {
             var mouse = OpenTK.Input.Mouse.GetCursorState();
 
@@ -103,7 +98,20 @@ namespace FPX___Zadatak2
 
             if (StartOnePlayerGame(GameWindow.Width, GameWindow.Height, xClick, yClick))
             {
-                GameWindow.Exit();
+                System.Threading.Thread.Sleep(100);
+
+                GL.Clear(ClearBufferMask.DepthBufferBit | ClearBufferMask.ColorBufferBit);
+
+                Drawables.Clear();
+
+                GameWindow.SwapBuffers();
+
+                Game.isSinglePlayer = true;
+
+                Game.Input();
+                Game.Start(Game.isSinglePlayer);
+
+                GL.LoadIdentity();
             }
             else if (StartTwoPlayerGame(GameWindow.Width, GameWindow.Height, xClick, yClick))
             {
@@ -113,12 +121,14 @@ namespace FPX___Zadatak2
 
                 Drawables.Clear();
 
-                GL.LoadIdentity();
-
                 GameWindow.SwapBuffers();
 
+                Game.isSinglePlayer = false;
+
                 Game.Input();
-                Game.Start();
+                Game.Start(Game.isSinglePlayer);
+
+                GL.LoadIdentity();
             }
             else
             {
@@ -146,7 +156,7 @@ namespace FPX___Zadatak2
 
         public void WindowReshape(float width, float height)
         {
-            foreach(Quad[] quads in reshapeTitle)
+            foreach(QuadTexture[] quads in reshapeTitle)
             {
                 if (width < w)
                 {
@@ -178,7 +188,7 @@ namespace FPX___Zadatak2
                 }
             }
 
-            foreach (Quad[] quads in reshapeButtons)
+            foreach (QuadTexture[] quads in reshapeButtons)
             {
                 if (width < w)
                 {

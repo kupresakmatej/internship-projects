@@ -17,6 +17,7 @@ namespace FPX___Zadatak2
         List<IRenderable> drawables;
         BoardGFX board;
         MainMenu mainMenu;
+        Renderer renderer;
 
         private List<Circle> circles = new List<Circle>();
 
@@ -32,6 +33,8 @@ namespace FPX___Zadatak2
 
         BoardLogic BoardLogic;
 
+        public bool isSinglePlayer;
+
         public Game(GameWindow window, BoardLogic boardLogic)
         {
             this.gameWindow = window;
@@ -40,6 +43,8 @@ namespace FPX___Zadatak2
             canDrop = true;
 
             BoardLogic = boardLogic;
+
+            drawables.Clear();
 
             MainMenu();
             StartMenu();
@@ -81,40 +86,72 @@ namespace FPX___Zadatak2
         {
             gameWindow.Title = "Connect 4";
 
-            Renderer renderer = new Renderer(drawables, gameWindow);
+            renderer = new Renderer(drawables, gameWindow);
             MouseControls mouseControls = new MouseControls(drawables, circles, gameWindow, columnDrop, this, playerCounter, board, BoardLogic);
 
             gameWindow.Load += Loaded;
             gameWindow.MouseDown += mainMenu.ButtonLogic;
             gameWindow.MouseMove += mouseControls.FollowMouse;
-            gameWindow.RenderFrame += renderer.RenderF;
+            gameWindow.UpdateFrame += renderer.RenderF;
             gameWindow.Resize += Resize;
             gameWindow.Run(1.0 / 60.0);
         }
 
-        public void Start()
+        public void Start(bool isSinglePlayer)
         {
-            gameWindow.MouseDown -= mainMenu.ButtonLogic;
+            if(isSinglePlayer)
+            {
+                GL.Clear(ClearBufferMask.DepthBufferBit | ClearBufferMask.ColorBufferBit);
+                GL.LoadIdentity();
 
-            playerCounter = 1;
+                gameWindow.MouseDown -= mainMenu.ButtonLogic;
 
-            gameWindow.Title = "Connect 4";
+                playerCounter = 1;
 
-            Renderer renderer = new Renderer(drawables, gameWindow);
-            MouseControls mouseControls = new MouseControls(drawables, circles, gameWindow, columnDrop, this, playerCounter, board, BoardLogic);
-            CoinDrop coinDrop = new CoinDrop(circles, columnDrop, gameWindow, this);
+                gameWindow.Title = "Connect 4";
 
-            gameWindow.Load += Loaded;
-            gameWindow.MouseMove += mouseControls.FollowMouse;
-            gameWindow.MouseDown += mouseControls.DropOnMouse;
-            gameWindow.MouseDown += mouseControls.CallLogic;
-            gameWindow.RenderFrame += coinDrop.DropCoin;
-            gameWindow.RenderFrame += coinDrop.WaitForDrop;
-            gameWindow.RenderFrame += mouseControls.ChangePlayerColor;
-            gameWindow.Resize += Resize;
-            gameWindow.Run(1.0 / 60.0);
+                MouseControls mouseControls = new MouseControls(drawables, circles, gameWindow, columnDrop, this, playerCounter, board, BoardLogic);
+                CoinDrop coinDrop = new CoinDrop(circles, columnDrop, gameWindow, this);
 
-            GL.Clear(ClearBufferMask.DepthBufferBit | ClearBufferMask.ColorBufferBit);
+                gameWindow.Load += Loaded;
+                gameWindow.MouseMove += mouseControls.FollowMouse;
+                gameWindow.MouseDown += mouseControls.DropOnMouse;
+                gameWindow.MouseDown += mouseControls.CallLogic;
+                gameWindow.RenderFrame += coinDrop.DropCoin;
+                gameWindow.RenderFrame += coinDrop.WaitForDrop;
+                gameWindow.RenderFrame += mouseControls.ChangePlayerColor;
+                gameWindow.Resize += Resize;
+                gameWindow.Run(1.0 / 60.0);
+
+                GL.Clear(ClearBufferMask.DepthBufferBit | ClearBufferMask.ColorBufferBit);
+            }
+            else 
+            {
+                GL.Clear(ClearBufferMask.DepthBufferBit | ClearBufferMask.ColorBufferBit);
+                GL.LoadIdentity();
+
+                gameWindow.MouseDown -= mainMenu.ButtonLogic;
+
+                playerCounter = 1;
+
+                gameWindow.Title = "Connect 4";
+
+                Renderer renderer = new Renderer(drawables, gameWindow);
+                MouseControls mouseControls = new MouseControls(drawables, circles, gameWindow, columnDrop, this, playerCounter, board, BoardLogic);
+                CoinDrop coinDrop = new CoinDrop(circles, columnDrop, gameWindow, this);
+
+                gameWindow.Load += Loaded;
+                gameWindow.MouseMove += mouseControls.FollowMouse;
+                gameWindow.MouseDown += mouseControls.DropOnMouse;
+                gameWindow.MouseDown += mouseControls.CallLogic;
+                gameWindow.RenderFrame += coinDrop.DropCoin;
+                gameWindow.RenderFrame += coinDrop.WaitForDrop;
+                gameWindow.RenderFrame += mouseControls.ChangePlayerColor;
+                gameWindow.Resize += Resize;
+                gameWindow.Run(1.0 / 60.0);
+
+                GL.Clear(ClearBufferMask.DepthBufferBit | ClearBufferMask.ColorBufferBit);
+            }
         }
 
         public void Resize(object o, EventArgs e)
