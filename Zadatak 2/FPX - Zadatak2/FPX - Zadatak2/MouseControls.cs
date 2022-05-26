@@ -58,7 +58,7 @@ namespace FPX___Zadatak2
             drawables.Add(circleFollow);
 
 
-            gameOver = new GameOver(Drawables, this, GameWindow, circleFollow, BoardLogic);
+            gameOver = new GameOver(Drawables, this, GameWindow, circleFollow, BoardLogic, Game);
             Board.winList = gameOver.winList;
             Board.buttonList = gameOver.buttonList;
         }
@@ -66,39 +66,32 @@ namespace FPX___Zadatak2
         public async void CallLogic(object o, EventArgs e)
         {
             if (logic.GameOver())
-            {
+            { 
                 await Task.Delay(2500);
+                System.Threading.Thread.Sleep(100);
+
+                drawables.Clear();
 
                 BoardLogic.ClearBoard();
                 logic.coin = Coin.Empty;
-
-                Console.WriteLine("over");
 
                 Game.canDrop = false;
 
                 if (playerCounter % 2 != 0)
                 {
-                    System.Threading.Thread.Sleep(250);
-
                     GL.Clear(ClearBufferMask.DepthBufferBit | ClearBufferMask.ColorBufferBit);
 
-                    gameWindow.SwapBuffers();
+                    GL.LoadIdentity();
 
                     gameOver.EndScreen(color.Red);
-
-                    GL.LoadIdentity();
                 }
                 else
                 {
-                    System.Threading.Thread.Sleep(250);
-
                     GL.Clear(ClearBufferMask.DepthBufferBit | ClearBufferMask.ColorBufferBit);
 
-                    gameWindow.SwapBuffers();
+                    GL.LoadIdentity();
 
                     gameOver.EndScreen(color.Yellow);
-
-                    GL.LoadIdentity();
                 }
             }
         }
@@ -115,7 +108,7 @@ namespace FPX___Zadatak2
             GL.Clear(ClearBufferMask.ColorBufferBit);
         }
 
-        public void DropOnMouse(object o, EventArgs e)
+        public async void DropOnMouse(object o, EventArgs e)
         {
             var mouse = OpenTK.Input.Mouse.GetCursorState();
 
@@ -145,10 +138,6 @@ namespace FPX___Zadatak2
                 {
                     DrawOnClick(xClick, yClick, color.Yellow);
                 }
-            }
-            else
-            {
-                Console.WriteLine("wait");
             }
         }
 

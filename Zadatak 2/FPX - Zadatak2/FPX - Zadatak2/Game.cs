@@ -66,7 +66,7 @@ namespace FPX___Zadatak2
             return drawables;
         }
 
-        private List<IRenderable> MainMenu()
+        public List<IRenderable> MainMenu()
         {
             mainMenu = new MainMenu(gameWindow, board, drawables, this);
 
@@ -101,9 +101,6 @@ namespace FPX___Zadatak2
         {
             if(isSinglePlayer)
             {
-                GL.Clear(ClearBufferMask.DepthBufferBit | ClearBufferMask.ColorBufferBit);
-                GL.LoadIdentity();
-
                 gameWindow.MouseDown -= mainMenu.ButtonLogic;
 
                 playerCounter = 1;
@@ -117,17 +114,14 @@ namespace FPX___Zadatak2
                 gameWindow.MouseMove += mouseControls.FollowMouse;
                 gameWindow.MouseDown += mouseControls.DropOnMouse;
                 gameWindow.MouseDown += mouseControls.CallLogic;
-                gameWindow.RenderFrame += coinDrop.DropCoin;
-                gameWindow.RenderFrame += coinDrop.WaitForDrop;
-                gameWindow.RenderFrame += mouseControls.ChangePlayerColor;
+                gameWindow.UpdateFrame += coinDrop.DropCoin;
+                gameWindow.UpdateFrame += coinDrop.WaitForDrop;
+                gameWindow.UpdateFrame += mouseControls.ChangePlayerColor;
                 gameWindow.Resize += Resize;
                 gameWindow.Run(1.0 / 60.0);
             }
             else 
             {
-                GL.Clear(ClearBufferMask.DepthBufferBit | ClearBufferMask.ColorBufferBit);
-                GL.LoadIdentity();
-
                 gameWindow.MouseDown -= mainMenu.ButtonLogic;
 
                 playerCounter = 1;
@@ -142,13 +136,11 @@ namespace FPX___Zadatak2
                 gameWindow.MouseDown += mouseControls.DropOnMouse;
                 gameWindow.MouseMove += mouseControls.FollowMouse;
                 gameWindow.MouseDown += mouseControls.CallLogic;
-                gameWindow.RenderFrame += coinDrop.DropCoin;
-                gameWindow.RenderFrame += coinDrop.WaitForDrop;
-                gameWindow.RenderFrame += mouseControls.ChangePlayerColor;
+                gameWindow.UpdateFrame += coinDrop.DropCoin;
+                gameWindow.UpdateFrame += coinDrop.WaitForDrop;
+                gameWindow.UpdateFrame += mouseControls.ChangePlayerColor;
                 gameWindow.Resize += Resize;
                 gameWindow.Run(1.0 / 60.0);
-
-                GL.Clear(ClearBufferMask.DepthBufferBit | ClearBufferMask.ColorBufferBit);
             }
         }
 

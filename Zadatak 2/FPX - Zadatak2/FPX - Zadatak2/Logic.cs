@@ -167,13 +167,13 @@ namespace FPX___Zadatak2
             int column;
             Random random = new Random();
 
-            if (CheckHorizontallyAI() == Coin.PlayerB || CheckHorizontallyAI() == Coin.PlayerB)
+            if (CheckHorizontallyAI() == Coin.PlayerB || CheckHorizontallyAI() == Coin.PlayerA)
             {
                 column = LASTPOS_Y + 1;
             }
             else if (CheckVerticallyAI() == Coin.PlayerB || CheckVerticallyAI() == Coin.PlayerA)
             {
-                column = LASTPOS_Y;
+                column = LASTPOS_Y + 1;
             }
             else
             {
@@ -211,8 +211,6 @@ namespace FPX___Zadatak2
                 }
             }
             return Coin.Empty;
-
-            //return true;
         }
 
         public Coin CheckVerticallyAI()

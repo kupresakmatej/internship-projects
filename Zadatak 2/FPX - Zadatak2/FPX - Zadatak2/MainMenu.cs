@@ -131,10 +131,6 @@ namespace FPX___Zadatak2
 
                 GL.LoadIdentity();
             }
-            else
-            {
-                Console.WriteLine("No buttons were clicked.");
-            }
         } 
 
         public bool StartOnePlayerGame(float width, float height, float x, float y)

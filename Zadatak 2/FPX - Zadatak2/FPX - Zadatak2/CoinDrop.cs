@@ -36,7 +36,7 @@ namespace FPX___Zadatak2
             {
                 if (circle.Position.X == gameWindow.Width / 2 - 299.5f) //1. column
                 {
-                    miliseconds = 2400 - (columnDrop[0] * 350);
+                    miliseconds = 2400 - (columnDrop[0] * 400);
                     if (circle.Position.Y > (columnDrop[0] * 100) + (gameWindow.Height / 2 - 250f))
                     {
                         circle.Position = new Vector(circle.Position.X, circle.Position.Y - 5f);
@@ -46,7 +46,7 @@ namespace FPX___Zadatak2
 
                 else if (circle.Position.X == gameWindow.Width / 2 - 199.5f) //2. column
                 {
-                    miliseconds = 2400 - (columnDrop[1] * 350);
+                    miliseconds = 2400 - (columnDrop[1] * 400);
                     if (circle.Position.Y > (columnDrop[1] * 100) + (gameWindow.Height / 2 - 250f))
                     {
                         circle.Position = new Vector(circle.Position.X, circle.Position.Y - 5f);
@@ -56,7 +56,7 @@ namespace FPX___Zadatak2
 
                 else if (circle.Position.X == gameWindow.Width / 2 - 99.5f) //3. column
                 {
-                    miliseconds = 2400 - (columnDrop[2] * 350);
+                    miliseconds = 2400 - (columnDrop[2] * 400);
                     if (circle.Position.Y > (columnDrop[2] * 100) + (gameWindow.Height / 2 - 250f))
                     {
                         circle.Position = new Vector(circle.Position.X, circle.Position.Y - 5f);
@@ -66,7 +66,7 @@ namespace FPX___Zadatak2
 
                 else if (circle.Position.X == gameWindow.Width / 2 + 0.5f) //4. column
                 {
-                    miliseconds = 2400 - (columnDrop[3] * 350);
+                    miliseconds = 2400 - (columnDrop[3] * 400);
                     if (circle.Position.Y > (columnDrop[3] * 100) + (gameWindow.Height / 2 - 250f))
                     {
                         circle.Position = new Vector(circle.Position.X, circle.Position.Y - 5f);
@@ -76,7 +76,7 @@ namespace FPX___Zadatak2
 
                 else if (circle.Position.X == gameWindow.Width / 2 + 100.5f) //5. column
                 {
-                    miliseconds = 2400 - (columnDrop[4] * 350);
+                    miliseconds = 2400 - (columnDrop[4] * 400);
                     if (circle.Position.Y > (columnDrop[4] * 100) + (gameWindow.Height / 2 - 250f))
                     {
                         circle.Position = new Vector(circle.Position.X, circle.Position.Y - 5f);
@@ -86,7 +86,7 @@ namespace FPX___Zadatak2
 
                 else if (circle.Position.X == gameWindow.Width / 2 + 200.5f) //6. column
                 {
-                    miliseconds = 2400 - (columnDrop[5] * 350);
+                    miliseconds = 2400 - (columnDrop[5] * 400);
                     if (circle.Position.Y > (columnDrop[5] * 100) + (gameWindow.Height / 2 - 250f))
                     {
                         circle.Position = new Vector(circle.Position.X, circle.Position.Y - 5f);
@@ -96,7 +96,7 @@ namespace FPX___Zadatak2
 
                 else if (circle.Position.X == gameWindow.Width / 2 + 300.5f) //7. column
                 {
-                    miliseconds = 2400 - (columnDrop[6] * 350);
+                    miliseconds = 2400 - (columnDrop[6] * 400);
                     if (circle.Position.Y > (columnDrop[6] * 100) + (gameWindow.Height / 2 - 250f))
                     {
                         circle.Position = new Vector(circle.Position.X, circle.Position.Y - 5f);
