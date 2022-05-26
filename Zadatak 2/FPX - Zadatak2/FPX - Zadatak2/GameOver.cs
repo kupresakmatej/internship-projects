@@ -49,19 +49,15 @@ namespace FPX___Zadatak2
             Game = game;
         }
 
-        public void EndScreen(Color color)
+        public void EndScreen()
         {
             BoardLogic.ClearBoard();
-
-            Drawables.Clear();
-            GL.Clear(ClearBufferMask.DepthBufferBit | ClearBufferMask.ColorBufferBit);
-            GL.LoadIdentity();
 
             GameWindow.MouseDown -= MouseControls.DropOnMouse;
             GameWindow.MouseDown -= MouseControls.CallLogic;
             GameWindow.MouseDown += MouseControls.gameOver.ButtonLogic;
 
-            DrawEndScreen(GameWindow.Width, GameWindow.Height, color);
+            DrawEndScreen(GameWindow.Width, GameWindow.Height, color.White);
 
             DrawButtons(GameWindow.Width, GameWindow.Height);
 
@@ -70,6 +66,8 @@ namespace FPX___Zadatak2
 
         public void DrawButtons(float width, float height)
         {
+            System.Threading.Thread.Sleep(200);
+
             QuadTexture[] buttonsArray = new QuadTexture[2];
 
             Texture restartTexture = new Texture(@"C:\Users\Reroot\Desktop\FPX\restartButton.bmp");
@@ -102,9 +100,6 @@ namespace FPX___Zadatak2
             else if (CheckIfInsideRestartButton(GameWindow.Width, GameWindow.Height, xClick, yClick))
             {
                 System.Threading.Thread.Sleep(100);
-
-                GL.Clear(ClearBufferMask.DepthBufferBit | ClearBufferMask.ColorBufferBit);
-                GL.LoadIdentity();
 
                 GameWindow.Exit();
 
@@ -141,6 +136,8 @@ namespace FPX___Zadatak2
 
         public void DrawEndScreen(float width, float height, Color color)
         {
+            System.Threading.Thread.Sleep(200);
+
             Quad[] winArray = new Quad[19];
 
             //W

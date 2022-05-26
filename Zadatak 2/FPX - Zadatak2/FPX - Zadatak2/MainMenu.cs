@@ -99,13 +99,11 @@ namespace FPX___Zadatak2
 
             if (StartOnePlayerGame(GameWindow.Width, GameWindow.Height, xClick, yClick))
             {
-                System.Threading.Thread.Sleep(100);
-
                 GL.Clear(ClearBufferMask.DepthBufferBit | ClearBufferMask.ColorBufferBit);
 
                 Drawables.Clear();
 
-                GameWindow.SwapBuffers();
+                GL.LoadIdentity();
 
                 Game.isSinglePlayer = true;
 
@@ -116,13 +114,11 @@ namespace FPX___Zadatak2
             }
             else if (StartTwoPlayerGame(GameWindow.Width, GameWindow.Height, xClick, yClick))
             {
-                System.Threading.Thread.Sleep(100);
-
                 GL.Clear(ClearBufferMask.DepthBufferBit | ClearBufferMask.ColorBufferBit);
 
                 Drawables.Clear();
 
-                GameWindow.SwapBuffers();
+                GL.LoadIdentity();
 
                 Game.isSinglePlayer = false;
 

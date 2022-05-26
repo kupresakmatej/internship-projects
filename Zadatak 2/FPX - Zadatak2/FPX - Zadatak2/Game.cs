@@ -87,12 +87,11 @@ namespace FPX___Zadatak2
             gameWindow.Title = "Connect 4";
 
             renderer = new Renderer(drawables, gameWindow);
-            MouseControls mouseControls = new MouseControls(drawables, circles, gameWindow, columnDrop, this, playerCounter, board, BoardLogic);
+            MouseControls mouseControls = new MouseControls(drawables, circles, gameWindow, columnDrop, this, playerCounter, board, BoardLogic, renderer);
 
-            gameWindow.Load += Loaded;
             gameWindow.MouseDown += mainMenu.ButtonLogic;
             gameWindow.MouseMove += mouseControls.FollowMouse;
-            gameWindow.UpdateFrame += renderer.RenderF;
+            gameWindow.RenderFrame += renderer.RenderF;
             gameWindow.Resize += Resize;
             gameWindow.Run(1.0 / 60.0);
         }
@@ -107,18 +106,15 @@ namespace FPX___Zadatak2
 
                 gameWindow.Title = "Connect 4";
 
-                MouseControls mouseControls = new MouseControls(drawables, circles, gameWindow, columnDrop, this, playerCounter, board, BoardLogic);
+                MouseControls mouseControls = new MouseControls(drawables, circles, gameWindow, columnDrop, this, playerCounter, board, BoardLogic, renderer);
                 CoinDrop coinDrop = new CoinDrop(circles, columnDrop, gameWindow, this);
 
-                gameWindow.Load += Loaded;
                 gameWindow.MouseMove += mouseControls.FollowMouse;
                 gameWindow.MouseDown += mouseControls.DropOnMouse;
                 gameWindow.MouseDown += mouseControls.CallLogic;
-                gameWindow.UpdateFrame += coinDrop.DropCoin;
-                gameWindow.UpdateFrame += coinDrop.WaitForDrop;
+                gameWindow.RenderFrame += coinDrop.DropCoin;
+                gameWindow.RenderFrame += coinDrop.WaitForDrop;
                 gameWindow.UpdateFrame += mouseControls.ChangePlayerColor;
-                gameWindow.Resize += Resize;
-                gameWindow.Run(1.0 / 60.0);
             }
             else 
             {
@@ -129,18 +125,15 @@ namespace FPX___Zadatak2
                 gameWindow.Title = "Connect 4";
 
                 Renderer renderer = new Renderer(drawables, gameWindow);
-                MouseControls mouseControls = new MouseControls(drawables, circles, gameWindow, columnDrop, this, playerCounter, board, BoardLogic);
+                MouseControls mouseControls = new MouseControls(drawables, circles, gameWindow, columnDrop, this, playerCounter, board, BoardLogic, renderer);
                 CoinDrop coinDrop = new CoinDrop(circles, columnDrop, gameWindow, this);
 
-                gameWindow.Load += Loaded;
-                gameWindow.MouseDown += mouseControls.DropOnMouse;
                 gameWindow.MouseMove += mouseControls.FollowMouse;
+                gameWindow.MouseDown += mouseControls.DropOnMouse;
                 gameWindow.MouseDown += mouseControls.CallLogic;
-                gameWindow.UpdateFrame += coinDrop.DropCoin;
-                gameWindow.UpdateFrame += coinDrop.WaitForDrop;
+                gameWindow.RenderFrame += coinDrop.DropCoin;
+                gameWindow.RenderFrame += coinDrop.WaitForDrop;
                 gameWindow.UpdateFrame += mouseControls.ChangePlayerColor;
-                gameWindow.Resize += Resize;
-                gameWindow.Run(1.0 / 60.0);
             }
         }
 

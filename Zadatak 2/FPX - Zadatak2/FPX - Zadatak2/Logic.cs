@@ -29,6 +29,7 @@ namespace FPX___Zadatak2
         {
             if (coin != Coin.Empty)
             {
+                Console.WriteLine("as");
                 return true;
             }
 

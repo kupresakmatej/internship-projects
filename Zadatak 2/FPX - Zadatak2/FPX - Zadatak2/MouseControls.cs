@@ -36,9 +36,11 @@ namespace FPX___Zadatak2
 
         Logic logic;
 
+        private static Renderer Renderer;
+
         public int ColumnIdx { get; set; }
 
-        public MouseControls(List<IRenderable> Drawables, List<Circle> Circles, GameWindow GameWindow, int[] ColumnDrop, Game CanDrop, int PlayerCounter, BoardGFX board, BoardLogic boardLogic)
+        public MouseControls(List<IRenderable> Drawables, List<Circle> Circles, GameWindow GameWindow, int[] ColumnDrop, Game CanDrop, int PlayerCounter, BoardGFX board, BoardLogic boardLogic, Renderer renderer)
         {
             drawables = Drawables;
             circles = Circles;
@@ -61,6 +63,8 @@ namespace FPX___Zadatak2
             gameOver = new GameOver(Drawables, this, GameWindow, circleFollow, BoardLogic, Game);
             Board.winList = gameOver.winList;
             Board.buttonList = gameOver.buttonList;
+
+            Renderer = renderer;
         }
 
         public async void CallLogic(object o, EventArgs e)
@@ -68,31 +72,21 @@ namespace FPX___Zadatak2
             if (logic.GameOver())
             { 
                 await Task.Delay(2500);
-                System.Threading.Thread.Sleep(100);
-
-                drawables.Clear();
 
                 BoardLogic.ClearBoard();
                 logic.coin = Coin.Empty;
 
                 Game.canDrop = false;
 
-                if (playerCounter % 2 != 0)
-                {
-                    GL.Clear(ClearBufferMask.DepthBufferBit | ClearBufferMask.ColorBufferBit);
+                GL.Clear(ClearBufferMask.DepthBufferBit | ClearBufferMask.ColorBufferBit);
 
-                    GL.LoadIdentity();
+                drawables.Clear();
 
-                    gameOver.EndScreen(color.Red);
-                }
-                else
-                {
-                    GL.Clear(ClearBufferMask.DepthBufferBit | ClearBufferMask.ColorBufferBit);
+                GL.LoadIdentity();
 
-                    GL.LoadIdentity();
+                gameOver.EndScreen();
 
-                    gameOver.EndScreen(color.Yellow);
-                }
+                GL.LoadIdentity();
             }
         }
 
@@ -108,7 +102,7 @@ namespace FPX___Zadatak2
             GL.Clear(ClearBufferMask.ColorBufferBit);
         }
 
-        public async void DropOnMouse(object o, EventArgs e)
+        public void DropOnMouse(object o, EventArgs e)
         {
             var mouse = OpenTK.Input.Mouse.GetCursorState();
 
