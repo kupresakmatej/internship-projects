@@ -16,7 +16,6 @@ namespace FPX___Zadatak2
 
         private static GameWindow GameWindow;
         private static BoardGFX Board;
-        Color color = new Color();
         public List<QuadTexture[]> reshapeTitle = new List<QuadTexture[]>();
         public List<QuadTexture[]> reshapeButtons = new List<QuadTexture[]>();
 
@@ -37,6 +36,8 @@ namespace FPX___Zadatak2
             Board = board;
             Drawables = drawables;
             Game = game;
+
+            Drawables.Clear();
 
             onePlayerButton = new QuadTexture();
             twoPlayerButton = new QuadTexture();

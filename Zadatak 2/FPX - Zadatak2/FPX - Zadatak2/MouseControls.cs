@@ -19,7 +19,7 @@ namespace FPX___Zadatak2
 
         private Color color = new Color();
 
-        private Circle circleFollow;
+        public Circle circleFollow = new Circle();
 
         private static int[] columnDrop;
 
@@ -28,7 +28,7 @@ namespace FPX___Zadatak2
         float xClick;
         float yClick;
 
-        private int playerCounter;
+        public int playerCounter;
 
         private static BoardGFX Board;
         private static BoardLogic BoardLogic;
@@ -53,9 +53,10 @@ namespace FPX___Zadatak2
 
             ColumnIdx = 0;
 
-            circleFollow = new Circle(new Vector(gameWindow.Width / 2, gameWindow.Height / 2), 10f, color.Cyan, 250);
+            circleFollow = new Circle(new Vector(gameWindow.Width / 2, gameWindow.Height / 2), 10f, color.Green, 250);
             circleFollow.Layer = 3;
             drawables.Add(circleFollow);
+
 
             gameOver = new GameOver(Drawables, this, GameWindow, circleFollow, BoardLogic);
             Board.winList = gameOver.winList;
@@ -68,10 +69,6 @@ namespace FPX___Zadatak2
             {
                 await Task.Delay(2500);
 
-                GL.Clear(ClearBufferMask.DepthBufferBit | ClearBufferMask.ColorBufferBit);
-                drawables.Clear();
-                GL.LoadIdentity();
-
                 BoardLogic.ClearBoard();
                 logic.coin = Coin.Empty;
 
@@ -81,19 +78,27 @@ namespace FPX___Zadatak2
 
                 if (playerCounter % 2 != 0)
                 {
-                    System.Threading.Thread.Sleep(100);
-                    drawables.Clear();
+                    System.Threading.Thread.Sleep(250);
 
-                    gameWindow.MouseMove += this.FollowMouse;
+                    GL.Clear(ClearBufferMask.DepthBufferBit | ClearBufferMask.ColorBufferBit);
+
+                    gameWindow.SwapBuffers();
+
                     gameOver.EndScreen(color.Red);
+
+                    GL.LoadIdentity();
                 }
                 else
                 {
-                    System.Threading.Thread.Sleep(100);
-                    drawables.Clear();
+                    System.Threading.Thread.Sleep(250);
 
-                    gameWindow.MouseMove += this.FollowMouse;
+                    GL.Clear(ClearBufferMask.DepthBufferBit | ClearBufferMask.ColorBufferBit);
+
+                    gameWindow.SwapBuffers();
+
                     gameOver.EndScreen(color.Yellow);
+
+                    GL.LoadIdentity();
                 }
             }
         }
@@ -421,7 +426,7 @@ namespace FPX___Zadatak2
             GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.ColorBufferBit);
         }
 
-        public async void DrawAI(Color color)
+        public void DrawAI(Color color)
         {
             logic.columnAI = logic.DetermineColumnAI();
 

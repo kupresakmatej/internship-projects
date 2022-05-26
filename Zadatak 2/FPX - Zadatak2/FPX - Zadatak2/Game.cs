@@ -122,8 +122,6 @@ namespace FPX___Zadatak2
                 gameWindow.RenderFrame += mouseControls.ChangePlayerColor;
                 gameWindow.Resize += Resize;
                 gameWindow.Run(1.0 / 60.0);
-
-                GL.Clear(ClearBufferMask.DepthBufferBit | ClearBufferMask.ColorBufferBit);
             }
             else 
             {
@@ -141,8 +139,8 @@ namespace FPX___Zadatak2
                 CoinDrop coinDrop = new CoinDrop(circles, columnDrop, gameWindow, this);
 
                 gameWindow.Load += Loaded;
-                gameWindow.MouseMove += mouseControls.FollowMouse;
                 gameWindow.MouseDown += mouseControls.DropOnMouse;
+                gameWindow.MouseMove += mouseControls.FollowMouse;
                 gameWindow.MouseDown += mouseControls.CallLogic;
                 gameWindow.RenderFrame += coinDrop.DropCoin;
                 gameWindow.RenderFrame += coinDrop.WaitForDrop;
