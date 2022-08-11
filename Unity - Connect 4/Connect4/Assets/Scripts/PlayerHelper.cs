@@ -9,46 +9,36 @@ public class PlayerHelper : MonoBehaviour
     [SerializeField] CinemachineVirtualCamera secondPlayerCam;
 
     public Transform lightObject;
+    public Transform arrowObject;
     private bool rotating;
     private float lerpDuration = 2f;
 
-    private bool isFirstPlayer;
+    public static bool isFirstPlayer;
 
-    private void OnEnable()
-    {
-        CameraChange.Register(firstPlayerCam);
-        CameraChange.Register(secondPlayerCam);
-        CameraChange.SwitchCamera(firstPlayerCam);
+    //void Update()
+    //{
+    //    if(Input.GetKeyDown(KeyCode.C))
+    //    {
+    //        if(CameraChange.IsActive(secondPlayerCam))
+    //        {
+    //            CameraChange.SwitchCamera(firstPlayerCam);
+    //            isFirstPlayer = true;
 
-        isFirstPlayer = true;
-    }
+    //            StartCoroutine(RotateLight());
 
-    private void OnDisable()
-    {
-        CameraChange.Delete(firstPlayerCam);
-        CameraChange.Delete(secondPlayerCam);
-    }
+    //            arrowObject.rotation = Quaternion.Euler(0, -90, 90);
+    //        }
+    //        else if(CameraChange.IsActive(firstPlayerCam) && !rotating)
+    //        {
+    //            CameraChange.SwitchCamera(secondPlayerCam);
+    //            isFirstPlayer = false;
 
-    void Update()
-    {
-        if(Input.GetKeyDown(KeyCode.C))
-        {
-            if(CameraChange.IsActive(secondPlayerCam))
-            {
-                CameraChange.SwitchCamera(firstPlayerCam);
-                isFirstPlayer = true;
+    //            StartCoroutine(RotateLight());
 
-                StartCoroutine(RotateLight());
-            }
-            else if(CameraChange.IsActive(firstPlayerCam) && !rotating)
-            {
-                CameraChange.SwitchCamera(secondPlayerCam);
-                isFirstPlayer = false;
-
-                StartCoroutine(RotateLight());
-            }
-        }
-    }
+    //            arrowObject.rotation = Quaternion.Euler(0, 90, 90);
+    //        }
+    //    }
+    //}
 
     IEnumerator RotateLight()
     {
