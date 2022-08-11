@@ -1,25 +1,40 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Cinemachine;
 
-public class CameraChange : MonoBehaviour
+public static class CameraChange
 {
-    private float rotationSpeed = 0.1f;
-    public GameObject pivotObject;
+    static List<CinemachineVirtualCamera> cameras = new List<CinemachineVirtualCamera>();
 
-    void Update()
+    public static CinemachineVirtualCamera active = null;
+
+    public static bool IsActive(CinemachineVirtualCamera camera)
     {
-        if(Input.GetKeyDown(KeyCode.C))
+        return camera == active;
+    }
+
+    public static void SwitchCamera(CinemachineVirtualCamera camera)
+    {
+        camera.Priority = 10;
+        active = camera;
+
+        foreach(CinemachineVirtualCamera c in cameras)
         {
-            RotateCamera();
+            if(c != camera && c.Priority != 0)
+            {
+                c.Priority = 0;
+            }
         }
     }
 
-    void RotateCamera()
+    public static void Register(CinemachineVirtualCamera camera)
     {
-        while(transform.position.z < 26 && transform.rotation.y < 180)
-        {
-            transform.RotateAround(pivotObject.transform.position, new Vector3(0, 1, 0), rotationSpeed * Time.deltaTime);
-        }
+        cameras.Add(camera);
+    }
+
+    public static void Delete(CinemachineVirtualCamera camera)
+    {
+        cameras.Remove(camera);
     }
 }
