@@ -7,13 +7,20 @@ public class PlayerHelper : MonoBehaviour
 {
     [SerializeField] CinemachineVirtualCamera firstPlayerCam;
     [SerializeField] CinemachineVirtualCamera secondPlayerCam;
+
     public Transform lightObject;
+    private bool rotating;
+    private float lerpDuration = 2f;
+
+    private bool isFirstPlayer;
 
     private void OnEnable()
     {
         CameraChange.Register(firstPlayerCam);
         CameraChange.Register(secondPlayerCam);
         CameraChange.SwitchCamera(firstPlayerCam);
+
+        isFirstPlayer = true;
     }
 
     private void OnDisable()
@@ -29,19 +36,47 @@ public class PlayerHelper : MonoBehaviour
             if(CameraChange.IsActive(secondPlayerCam))
             {
                 CameraChange.SwitchCamera(firstPlayerCam);
-                while(lightObject.rotation.x != 50)
-                {
-                    lightObject.Rotate(Time.deltaTime * -10, 0, 0);
-                }
+                isFirstPlayer = true;
+
+                StartCoroutine(RotateLight());
             }
-            else if(CameraChange.IsActive(firstPlayerCam))
+            else if(CameraChange.IsActive(firstPlayerCam) && !rotating)
             {
                 CameraChange.SwitchCamera(secondPlayerCam);
-                while (lightObject.rotation.x != 140)
-                {
-                    lightObject.Rotate(Time.deltaTime * 10, 0, 0);
-                }
+                isFirstPlayer = false;
+
+                StartCoroutine(RotateLight());
             }
         }
+    }
+
+    IEnumerator RotateLight()
+    {
+        rotating = true;
+
+        float time = 0;
+        float angle = 0;
+
+        if(isFirstPlayer)
+        {
+            angle = -90;
+        }
+        else
+        {
+            angle = 90;
+        }
+
+        Quaternion startRotation = lightObject.rotation;
+        Quaternion targetRotation = lightObject.rotation * Quaternion.Euler(angle, 0, 0);
+
+        while(time < lerpDuration)
+        {
+            lightObject.rotation = Quaternion.Slerp(startRotation, targetRotation, time / lerpDuration);
+            time += Time.deltaTime;
+            yield return null;
+        }
+
+        lightObject.rotation = targetRotation;
+        rotating = false;
     }
 }
