@@ -6,17 +6,30 @@ public class PickupCoin : MonoBehaviour
 {
     private Vector3 mouseOffset;
 
+    private Collider coinCollider;
+
     private float mouseZCoord;
 
-    private float lerpDuration = 1f;
+    public GameObject arrow;
 
-    public float speed;
+    private static BoardLogic boardLogic;
+    Logic logic;
 
-   void OnMouseDown()
+    private void Awake()
+    {
+        boardLogic = new BoardLogic();
+        logic = new Logic(boardLogic);
+
+        coinCollider = GetComponent<Collider>();
+    }
+
+    void OnMouseDown()
     {
         mouseZCoord = Camera.main.WorldToScreenPoint(gameObject.transform.position).z;
 
         mouseOffset = gameObject.transform.position - GetMouseWorldPos();
+
+        GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePosition;
     }
 
     private Vector3 GetMouseWorldPos()
@@ -33,14 +46,31 @@ public class PickupCoin : MonoBehaviour
         transform.position = GetMouseWorldPos() + mouseOffset;
     }
 
-    private void OnMouseUp()
+     void OnMouseUp()
     {
-        if(ColumnIndicator.collided)
+        if (ColumnIndicator.collided)
         {
             StartCoroutine(MoveToPosition());
 
             GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation;
+            arrow.SetActive(false);
+
+            coinCollider.enabled = false;
+
+            StartCoroutine(CoinHelper());
+            StartCoroutine(RestartIndicatior());
+
+            logic.DropIntoBoard(ColumnIndicator.column - 1, CameraRotate.helper);
+            boardLogic.PrintBoard();
+
+            StartCoroutine(ChangePlayer());
         }
+    }
+
+    IEnumerator ChangePlayer()
+    {
+        yield return new WaitForSeconds(3f);
+        CameraRotate.helper += 1;
     }
 
     IEnumerator RotateCoin()
@@ -48,7 +78,7 @@ public class PickupCoin : MonoBehaviour
         float rotateSpeed = 0.02f;
         float angle = 90;
 
-        if(CameraRotate.isFirstPlayer)
+        if(!CameraRotate.isFirstPlayer)
         {
             angle = -90;
         }
@@ -85,5 +115,19 @@ public class PickupCoin : MonoBehaviour
             StartCoroutine(RotateCoin());
             yield return null;
         }
+    }
+
+    IEnumerator CoinHelper()
+    {
+        yield return new WaitForSeconds(1f);
+
+        coinCollider.enabled = true;
+    }
+
+    IEnumerator RestartIndicatior()
+    {
+        yield return new WaitForSeconds(2f);
+
+        arrow.SetActive(true);
     }
 }

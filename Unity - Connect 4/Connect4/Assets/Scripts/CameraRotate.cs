@@ -6,41 +6,55 @@ public class CameraRotate : MonoBehaviour
 {
     public Transform lightObject;
 
-    public static bool isFirstPlayer;
+    public static bool isFirstPlayer = true;
 
     public Transform arrowObject;
 
     float angles;
 
+    MainMenu menu;
+    public GameObject Menu;
+
+    public static int helper = 0;
+
     private void Awake()
     {
         isFirstPlayer = true;
         angles = transform.rotation.y;
+
+        menu = Menu.GetComponent<MainMenu>();
     }
 
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.D))
+        if (helper % 2 == 0 && isFirstPlayer)
         {
+            isFirstPlayer = !isFirstPlayer;
+
             StartCoroutine(RotateCamera());
             StartCoroutine(RotateLight());
 
+            arrowObject.rotation = Quaternion.Euler(0, -90, 90);
+        }
+        else if (helper % 2 != 0 && !isFirstPlayer)
+        {
             isFirstPlayer = !isFirstPlayer;
 
-            if(isFirstPlayer)
-            {
-                arrowObject.rotation = Quaternion.Euler(0, -90, 90);
-            }
-            else
-            {
-                arrowObject.rotation = Quaternion.Euler(0, 90, 90);
-            }
+            StartCoroutine(RotateCamera());
+            StartCoroutine(RotateLight());
+
+            arrowObject.rotation = Quaternion.Euler(0, 90, 90);
+        }
+
+        if(Logic.GameOver())
+        {
+            menu.GameOver();
         }
     }
 
     IEnumerator RotateCamera()
     {
-        float speed = 0.05f;
+        float speed = 2f;
 
         if (isFirstPlayer)
         {
@@ -55,7 +69,7 @@ public class CameraRotate : MonoBehaviour
 
         while (this.transform.rotation != correctRotation)
         {
-            transform.rotation = Quaternion.Slerp(this.transform.rotation, Quaternion.Euler(0, angles, 0), speed);
+            transform.rotation = Quaternion.RotateTowards(this.transform.rotation, Quaternion.Euler(0, angles, 0), speed);
             yield return null;
         }
 
@@ -64,7 +78,7 @@ public class CameraRotate : MonoBehaviour
 
     IEnumerator RotateLight()
     {
-        float rotateSpeed = 0.01f;
+        float rotateSpeed = 1f;
         float angle = lightObject.rotation.y;
 
         if(isFirstPlayer)
@@ -80,7 +94,7 @@ public class CameraRotate : MonoBehaviour
 
         while (lightObject.rotation != correctRotation)
         {
-            lightObject.rotation = Quaternion.Slerp(lightObject.rotation, Quaternion.Euler(angle, -30, 0), rotateSpeed * Time.time);
+            lightObject.rotation = Quaternion.RotateTowards(lightObject.rotation, Quaternion.Euler(angle, -30, 0), rotateSpeed);
             yield return null;
         }
 

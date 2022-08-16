@@ -15,31 +15,6 @@ public class PlayerHelper : MonoBehaviour
 
     public static bool isFirstPlayer;
 
-    //void Update()
-    //{
-    //    if(Input.GetKeyDown(KeyCode.C))
-    //    {
-    //        if(CameraChange.IsActive(secondPlayerCam))
-    //        {
-    //            CameraChange.SwitchCamera(firstPlayerCam);
-    //            isFirstPlayer = true;
-
-    //            StartCoroutine(RotateLight());
-
-    //            arrowObject.rotation = Quaternion.Euler(0, -90, 90);
-    //        }
-    //        else if(CameraChange.IsActive(firstPlayerCam) && !rotating)
-    //        {
-    //            CameraChange.SwitchCamera(secondPlayerCam);
-    //            isFirstPlayer = false;
-
-    //            StartCoroutine(RotateLight());
-
-    //            arrowObject.rotation = Quaternion.Euler(0, 90, 90);
-    //        }
-    //    }
-    //}
-
     IEnumerator RotateLight()
     {
         rotating = true;

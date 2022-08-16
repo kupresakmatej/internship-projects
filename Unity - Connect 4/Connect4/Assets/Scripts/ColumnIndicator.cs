@@ -6,6 +6,7 @@ public class ColumnIndicator : MonoBehaviour
 {
     public Transform arrow;
     public static bool collided;
+    public static int column;
 
     public static Vector3 colliderPosition;
 
@@ -13,6 +14,7 @@ public class ColumnIndicator : MonoBehaviour
     {
         if(other.tag == "Coin")
         {
+            column = System.Convert.ToInt32(this.tag);
             collided = true;
             colliderPosition = this.transform.position + new Vector3(0, 3f, -4.55f);
 
