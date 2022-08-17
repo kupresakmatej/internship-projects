@@ -12,10 +12,12 @@ public class PickupCoin : MonoBehaviour
 
     public GameObject arrow;
 
+    public float angle;
+
     private static BoardLogic boardLogic;
     Logic logic;
 
-    private void Awake()
+    void Awake()
     {
         boardLogic = new BoardLogic();
         logic = new Logic(boardLogic);
@@ -61,7 +63,6 @@ public class PickupCoin : MonoBehaviour
             StartCoroutine(RestartIndicatior());
 
             logic.DropIntoBoard(ColumnIndicator.column - 1, CameraRotate.helper);
-            boardLogic.PrintBoard();
 
             StartCoroutine(ChangePlayer());
         }
@@ -76,9 +77,8 @@ public class PickupCoin : MonoBehaviour
     IEnumerator RotateCoin()
     {
         float rotateSpeed = 0.02f;
-        float angle = 90;
 
-        if(!CameraRotate.isFirstPlayer)
+        if(!PlayerHelper.isFirstPlayer)
         {
             angle = -90;
         }
@@ -104,6 +104,8 @@ public class PickupCoin : MonoBehaviour
 
         while(true)
         {
+            StartCoroutine(RotateCoin());
+
             timeSinceStart += Time.deltaTime;
             transform.position = Vector3.Lerp(transform.position, ColumnIndicator.colliderPosition, timeSinceStart);
 
@@ -111,8 +113,6 @@ public class PickupCoin : MonoBehaviour
             {
                 yield break;
             }
-
-            StartCoroutine(RotateCoin());
             yield return null;
         }
     }

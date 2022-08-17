@@ -6,8 +6,6 @@ public class CameraRotate : MonoBehaviour
 {
     public Transform lightObject;
 
-    public static bool isFirstPlayer = true;
-
     public Transform arrowObject;
 
     float angles;
@@ -17,38 +15,60 @@ public class CameraRotate : MonoBehaviour
 
     public static int helper = 0;
 
-    private void Awake()
+    private BoardLogic board;
+
+    private bool isDone;
+
+    void Awake()
     {
-        isFirstPlayer = true;
+        PlayerHelper.isFirstPlayer = true;
+        helper = 0;
         angles = transform.rotation.y;
 
         menu = Menu.GetComponent<MainMenu>();
+
+        board = new BoardLogic();
+        board.ClearBoard();
+
+        isDone = false;
+
+        StopAllCoroutines();
     }
 
     void Update()
     {
-        if (helper % 2 == 0 && isFirstPlayer)
+        if(!Logic.GameOver())
         {
-            isFirstPlayer = !isFirstPlayer;
+            Time.timeScale = 1;
 
-            StartCoroutine(RotateCamera());
-            StartCoroutine(RotateLight());
+            if (helper % 2 == 0 && PlayerHelper.isFirstPlayer)
+            {
+                PlayerHelper.isFirstPlayer = !PlayerHelper.isFirstPlayer;
 
-            arrowObject.rotation = Quaternion.Euler(0, -90, 90);
+                StartCoroutine(RotateCamera());
+                StartCoroutine(RotateLight());
+
+                arrowObject.rotation = Quaternion.Euler(0, -90, 90);
+            }
+            else if (helper % 2 != 0 && !PlayerHelper.isFirstPlayer)
+            {
+                PlayerHelper.isFirstPlayer = !PlayerHelper.isFirstPlayer;
+
+                StartCoroutine(RotateCamera());
+                StartCoroutine(RotateLight());
+
+                arrowObject.rotation = Quaternion.Euler(0, 90, 90);
+            }
         }
-        else if (helper % 2 != 0 && !isFirstPlayer)
+        else
         {
-            isFirstPlayer = !isFirstPlayer;
-
-            StartCoroutine(RotateCamera());
-            StartCoroutine(RotateLight());
-
-            arrowObject.rotation = Quaternion.Euler(0, 90, 90);
-        }
-
-        if(Logic.GameOver())
-        {
-            menu.GameOver();
+            if(!isDone)
+            {
+                board.ClearBoard();
+                menu.GameOver();
+                //Time.timeScale = 0;
+                isDone = true;
+            }
         }
     }
 
@@ -56,7 +76,7 @@ public class CameraRotate : MonoBehaviour
     {
         float speed = 2f;
 
-        if (isFirstPlayer)
+        if (PlayerHelper.isFirstPlayer)
         {
             angles = -180;
         }
@@ -81,7 +101,7 @@ public class CameraRotate : MonoBehaviour
         float rotateSpeed = 1f;
         float angle = lightObject.rotation.y;
 
-        if(isFirstPlayer)
+        if(PlayerHelper.isFirstPlayer)
         {
             angle = 140;
         }

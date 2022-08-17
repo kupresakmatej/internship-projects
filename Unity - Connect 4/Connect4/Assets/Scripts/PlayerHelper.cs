@@ -5,15 +5,18 @@ using Cinemachine;
 
 public class PlayerHelper : MonoBehaviour
 {
-    [SerializeField] CinemachineVirtualCamera firstPlayerCam;
-    [SerializeField] CinemachineVirtualCamera secondPlayerCam;
-
     public Transform lightObject;
     public Transform arrowObject;
     private bool rotating;
     private float lerpDuration = 2f;
 
     public static bool isFirstPlayer;
+
+    void Awake()
+    {
+        isFirstPlayer = true;
+        rotating = false;
+    }
 
     IEnumerator RotateLight()
     {

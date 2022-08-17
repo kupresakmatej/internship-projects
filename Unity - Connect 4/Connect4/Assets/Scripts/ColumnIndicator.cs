@@ -10,13 +10,22 @@ public class ColumnIndicator : MonoBehaviour
 
     public static Vector3 colliderPosition;
 
+    private void Awake()
+    {
+        column = 0;
+        collided = false;
+
+        colliderPosition = this.transform.position;
+    }
+
     private void OnTriggerStay(Collider other)
     {
-        if(other.tag == "Coin")
+        collided = true;
+
+        if (other.tag == "Coin")
         {
             column = System.Convert.ToInt32(this.tag);
-            collided = true;
-            colliderPosition = this.transform.position + new Vector3(0, 3f, -4.55f);
+            colliderPosition = this.transform.position + new Vector3(0, 3.05f, -4.55f);
 
             arrow.position = this.transform.position + new Vector3(0, 1.5f, -3);
         }

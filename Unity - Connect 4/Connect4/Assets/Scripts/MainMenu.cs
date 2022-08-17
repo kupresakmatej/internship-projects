@@ -6,44 +6,75 @@ using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
-    public GameObject pauseObject;
-    public GameObject restartObject;
-    public GameObject startObject;
-    public GameObject continueObject;
-    public GameObject blurFirst;
-    public GameObject blurSecond;
-    public GameObject victoryText;
+    public GameObject mainMenu;
+    public GameObject gameMode;
+    public GameObject pauseMenu;
+    public GameObject pauseButton;
+    public GameObject blurPlaneF;
+    public GameObject blurPlaneS;
+    public GameObject gameOverMenu;
+
+    public bool isSinglePlayer;
+    private bool plane;
+
+    void Awake()
+    {
+        mainMenu.SetActive(true);
+
+        gameOverMenu.SetActive(false);
+    }
 
     void Start()
     {
-        gameObject.SetActive(true);
-        pauseObject.SetActive(false);
-        restartObject.SetActive(false);
-        continueObject.SetActive(false);
-
-        blurFirst.SetActive(true);
-        blurSecond.SetActive(false);
-
-        victoryText.SetActive(false);
-
-        restartObject.SetActive(false);
-        victoryText.SetActive(false);
-
-        Time.timeScale = 1;
+        gameOverMenu.SetActive(false);
     }
 
-    public void StartGame()
+    void Update()
     {
-        gameObject.SetActive(false);
-        pauseObject.SetActive(true);
+        if(mainMenu.activeSelf)
+        {
+            gameOverMenu.SetActive(false);
+        }
+    }
 
-        blurFirst.SetActive(false);
-        blurSecond.SetActive(false);
+    public void StartSPGame()
+    {
+        Time.timeScale = 1;
 
-        restartObject.SetActive(false);
-        victoryText.SetActive(false);
+        mainMenu.SetActive(false);
+        pauseButton.SetActive(true);
+
+        gameMode.SetActive(false);
+
+        blurPlaneF.SetActive(false);
+        blurPlaneF.SetActive(false);
+
+        isSinglePlayer = true;
+    }
+
+    public void StartMPGame()
+    {
+        PlayerHelper.isFirstPlayer = true;
+        CameraRotate.helper = 0;
 
         Time.timeScale = 1;
+
+        mainMenu.SetActive(false);
+        pauseButton.SetActive(true);
+
+        gameMode.SetActive(false);
+
+        blurPlaneF.SetActive(false);
+        blurPlaneF.SetActive(false);
+
+        isSinglePlayer = false;
+    }
+
+    public void GameMode()
+    {
+        mainMenu.SetActive(false);
+
+        gameMode.SetActive(true);
     }
 
     public void QuitGame()
@@ -53,51 +84,67 @@ public class MainMenu : MonoBehaviour
 
     public void PauseGame()
     {
-        if(!CameraRotate.isFirstPlayer)
+        if(PlayerHelper.isFirstPlayer)
         {
-            blurFirst.SetActive(true);
-            blurSecond.SetActive(false);
+            plane = true;
         }
-        else if(CameraRotate.isFirstPlayer)
+        else if(!PlayerHelper.isFirstPlayer)
         {
-            blurSecond.SetActive(true);
-            blurFirst.SetActive(false);
+            plane = false;
         }
 
-        gameObject.SetActive(true);
-        restartObject.SetActive(true);
-        continueObject.SetActive(true);
+        if(!plane)
+        {
+            blurPlaneF.SetActive(true);
+            blurPlaneS.SetActive(false);
 
-        startObject.SetActive(false);
-        pauseObject.SetActive(false);
+            pauseMenu.SetActive(true);
+            pauseButton.SetActive(false);
+        }
+        else
+        {
+            blurPlaneF.SetActive(false);
+            blurPlaneS.SetActive(true);
+
+            pauseMenu.SetActive(true);
+            pauseButton.SetActive(false);
+        }
+        
+    }
+
+    public void RestartPause()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     public void RestartGame()
     {
-        restartObject.SetActive(false);
-        victoryText.SetActive(false);
-
-        Application.LoadLevel(Application.loadedLevel);
+        gameOverMenu.SetActive(false);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     public void ContinueGame()
     {
-        gameObject.SetActive(false);
+        pauseButton.SetActive(true);
+        pauseMenu.SetActive(false);
 
-        pauseObject.SetActive(true);
-
-        blurFirst.SetActive(false);
-        blurSecond.SetActive(false);
-
-        restartObject.SetActive(false);
+        blurPlaneF.SetActive(false);
+        blurPlaneS.SetActive(false);
     }
 
     public void GameOver()
     {
-        victoryText.SetActive(true);
-        restartObject.SetActive(true);
-        pauseObject.SetActive(false);
+        gameOverMenu.SetActive(true);
 
-        blurSecond.SetActive(true);
+        if (!plane)
+        {
+            blurPlaneF.SetActive(true);
+            blurPlaneS.SetActive(false);
+        }
+        else
+        {
+            blurPlaneF.SetActive(false);
+            blurPlaneS.SetActive(true);
+        }
     }    
 }
