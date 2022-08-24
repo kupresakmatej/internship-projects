@@ -14,7 +14,7 @@ public class MainMenu : MonoBehaviour
     public GameObject blurPlaneS;
     public GameObject gameOverMenu;
 
-    public bool isSinglePlayer;
+    public static bool isSinglePlayer;
     private bool plane;
 
     void Awake()
@@ -39,8 +39,6 @@ public class MainMenu : MonoBehaviour
 
     public void StartSPGame()
     {
-        Time.timeScale = 1;
-
         mainMenu.SetActive(false);
         pauseButton.SetActive(true);
 
@@ -56,8 +54,6 @@ public class MainMenu : MonoBehaviour
     {
         PlayerHelper.isFirstPlayer = true;
         CameraRotate.helper = 0;
-
-        Time.timeScale = 1;
 
         mainMenu.SetActive(false);
         pauseButton.SetActive(true);
@@ -84,6 +80,8 @@ public class MainMenu : MonoBehaviour
 
     public void PauseGame()
     {
+        Time.timeScale = 0;
+
         if(PlayerHelper.isFirstPlayer)
         {
             plane = true;
@@ -125,6 +123,8 @@ public class MainMenu : MonoBehaviour
 
     public void ContinueGame()
     {
+        Time.timeScale = 1;
+
         pauseButton.SetActive(true);
         pauseMenu.SetActive(false);
 

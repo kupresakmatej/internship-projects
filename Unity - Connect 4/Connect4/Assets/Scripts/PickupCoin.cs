@@ -21,6 +21,7 @@ public class PickupCoin : MonoBehaviour
     {
         boardLogic = new BoardLogic();
         logic = new Logic(boardLogic);
+        Logic.coin = new Coin();
 
         coinCollider = GetComponent<Collider>();
     }
@@ -50,21 +51,43 @@ public class PickupCoin : MonoBehaviour
 
      void OnMouseUp()
     {
-        if (ColumnIndicator.collided)
+        if(MainMenu.isSinglePlayer)
         {
-            StartCoroutine(MoveToPosition());
+            if (ColumnIndicator.collided)
+            {
+                StartCoroutine(MoveToPosition());
 
-            GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation;
-            arrow.SetActive(false);
+                GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation;
+                arrow.SetActive(false);
 
-            coinCollider.enabled = false;
+                coinCollider.enabled = false;
 
-            StartCoroutine(CoinHelper());
-            StartCoroutine(RestartIndicatior());
+                StartCoroutine(CoinHelper());
+                StartCoroutine(RestartIndicatior());
 
-            logic.DropIntoBoard(ColumnIndicator.column - 1, CameraRotate.helper);
+                logic.DropIntoBoard(ColumnIndicator.column - 1, CameraRotate.helper);
 
-            StartCoroutine(ChangePlayer());
+                StartCoroutine(ChangePlayer());
+            }
+        }
+        else if(!MainMenu.isSinglePlayer)
+        {
+            if (ColumnIndicator.collided)
+            {
+                StartCoroutine(MoveToPosition());
+
+                GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation;
+                arrow.SetActive(false);
+
+                coinCollider.enabled = false;
+
+                StartCoroutine(CoinHelper());
+                StartCoroutine(RestartIndicatior());
+
+                logic.DropIntoBoard(ColumnIndicator.column - 1, CameraRotate.helper);
+
+                StartCoroutine(ChangePlayer());
+            }
         }
     }
 
@@ -129,5 +152,17 @@ public class PickupCoin : MonoBehaviour
         yield return new WaitForSeconds(2f);
 
         arrow.SetActive(true);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.tag == "Floor")
+        {
+            Rigidbody rb;
+
+            rb = transform.GetComponent<Rigidbody>();
+
+            rb.isKinematic = false;
+        }
     }
 }

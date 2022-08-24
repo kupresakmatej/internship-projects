@@ -19,11 +19,22 @@ public class CameraRotate : MonoBehaviour
 
     private bool isDone;
 
+    private AIPickup aiControl;
+
+    private static int columnIdx;
+    private static int counter;
+
+    [SerializeField]
+    private GameObject manager;
+
     void Awake()
     {
+        aiControl = manager.GetComponent<AIPickup>();
+
         PlayerHelper.isFirstPlayer = true;
         helper = 0;
         angles = transform.rotation.y;
+        counter = 0;
 
         menu = Menu.GetComponent<MainMenu>();
 
@@ -37,10 +48,20 @@ public class CameraRotate : MonoBehaviour
 
     void Update()
     {
-        if(!Logic.GameOver())
+        if(MainMenu.isSinglePlayer)
         {
-            Time.timeScale = 1;
+            Singleplayer();
+        }
+        else if(!MainMenu.isSinglePlayer)
+        {
+            Multiplayer();
+        }
+    }
 
+    void Singleplayer()
+    {
+        if (!Logic.GameOver())
+        { 
             if (helper % 2 == 0 && PlayerHelper.isFirstPlayer)
             {
                 PlayerHelper.isFirstPlayer = !PlayerHelper.isFirstPlayer;
@@ -62,11 +83,49 @@ public class CameraRotate : MonoBehaviour
         }
         else
         {
-            if(!isDone)
+            if (!isDone)
             {
                 board.ClearBoard();
                 menu.GameOver();
-                //Time.timeScale = 0;
+                isDone = true;
+            }
+        }
+    }
+
+    void Multiplayer()
+    {
+        if(!Logic.GameOver())
+        {
+            if (helper % 2 == 0 && PlayerHelper.isFirstPlayer)
+            {
+                PlayerHelper.isFirstPlayer = !PlayerHelper.isFirstPlayer;
+
+                StartCoroutine(RotateCamera());
+                StartCoroutine(RotateLight());
+
+                arrowObject.rotation = Quaternion.Euler(0, -90, 90);
+            }
+            else if (helper % 2 != 0 && !PlayerHelper.isFirstPlayer)
+            {
+                PlayerHelper.isFirstPlayer = !PlayerHelper.isFirstPlayer;
+
+                columnIdx = Logic.DetermineColumnAI();
+
+                StartCoroutine(aiControl.MoveToPosition(columnIdx, counter));
+
+                arrowObject.rotation = Quaternion.Euler(0, 90, 90);
+
+                helper++;
+
+                counter++;
+            }
+        }
+        else
+        {
+            if (!isDone)
+            {
+                board.ClearBoard();
+                menu.GameOver();
                 isDone = true;
             }
         }

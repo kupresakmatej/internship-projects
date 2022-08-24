@@ -10,7 +10,7 @@ public class ColumnIndicator : MonoBehaviour
 
     public static Vector3 colliderPosition;
 
-    private void Awake()
+    void Awake()
     {
         column = 0;
         collided = false;

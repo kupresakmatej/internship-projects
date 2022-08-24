@@ -5,8 +5,11 @@ using UnityEngine;
 
 public class Logic
 {
-    int ROWS_COUNT = 6;
-    int COLUMNS_COUNT = 7;
+    static int ROWS_COUNT = 6;
+    static int COLUMNS_COUNT = 7;
+
+    public static int LASTPOS_X = 0;
+    public static int LASTPOS_Y = 0;
 
     private static BoardLogic board;
     public static Coin coin = new Coin();
@@ -14,6 +17,11 @@ public class Logic
     public Logic(BoardLogic Board)
     {
         board = Board;
+    }
+
+    public Logic()
+    {
+
     }
 
     public static bool GameOver()
@@ -28,59 +36,234 @@ public class Logic
 
     public Coin DropIntoBoard(int columnIdx, int helper)
     {
-        for (int i = 0; i < ROWS_COUNT; i++)
+        if(MainMenu.isSinglePlayer)
         {
-            if ((helper % 2 == 0) && ((i == 6 - 1) || board.BoardLayout[i + 1, columnIdx] != Coin.Empty))
+            for (int i = 0; i < ROWS_COUNT; i++)
             {
-                board.BoardLayout[i, columnIdx] = Coin.PlayerA;
+                if ((helper % 2 == 0) && ((i == 6 - 1) || board.BoardLayout[i + 1, columnIdx] != Coin.Empty))
+                {
+                    board.BoardLayout[i, columnIdx] = Coin.PlayerA;
 
-                if (CheckRows() != Coin.Empty)
-                {
-                    coin = CheckRows();
-                }
-                else if (CheckColumns(columnIdx) != Coin.Empty)
-                {
-                    coin = CheckColumns(columnIdx);
-                }
-                else if (CheckDiagonallyUp() != Coin.Empty)
-                {
-                    coin = CheckDiagonallyUp();
-                }
-                else if (CheckDiagonallyDown() != Coin.Empty)
-                {
-                    coin = CheckDiagonallyDown();
-                }
+                    if (CheckRows() != Coin.Empty)
+                    {
+                        coin = CheckRows();
+                    }
+                    else if (CheckColumns(columnIdx) != Coin.Empty)
+                    {
+                        coin = CheckColumns(columnIdx);
+                    }
+                    else if (CheckDiagonallyUp() != Coin.Empty)
+                    {
+                        coin = CheckDiagonallyUp();
+                    }
+                    else if (CheckDiagonallyDown() != Coin.Empty)
+                    {
+                        coin = CheckDiagonallyDown();
+                    }
 
-                break;
+                    break;
 
+                }
+                else if ((helper % 2 != 0) && ((i == 6 - 1) || board.BoardLayout[i + 1, columnIdx] != Coin.Empty))
+                {
+                    board.BoardLayout[i, columnIdx] = Coin.PlayerB;
+
+                    if (CheckRows() != Coin.Empty)
+                    {
+                        coin = CheckRows();
+                    }
+                    else if (CheckColumns(columnIdx) != Coin.Empty)
+                    {
+                        coin = CheckColumns(columnIdx);
+                    }
+                    else if (CheckDiagonallyUp() != Coin.Empty)
+                    {
+                        coin = CheckDiagonallyUp();
+                    }
+                    else if (CheckDiagonallyDown() != Coin.Empty)
+                    {
+                        coin = CheckDiagonallyDown();
+                    }
+
+                    break;
+
+                }
             }
-            else if ((helper % 2 != 0) && ((i == 6 - 1) || board.BoardLayout[i + 1, columnIdx] != Coin.Empty))
+        }
+        else if(!MainMenu.isSinglePlayer)
+        {
+            for (int i = 0; i < ROWS_COUNT; i++)
             {
-                board.BoardLayout[i, columnIdx] = Coin.PlayerB;
+                if ((helper % 2 == 0) && ((i == 6 - 1) || board.BoardLayout[i + 1, columnIdx] != Coin.Empty))
+                {
+                    board.BoardLayout[i, columnIdx] = Coin.PlayerA;
 
-                if (CheckRows() != Coin.Empty)
-                {
-                    coin = CheckRows();
-                }
-                else if (CheckColumns(columnIdx) != Coin.Empty)
-                {
-                    coin = CheckColumns(columnIdx);
-                }
-                else if (CheckDiagonallyUp() != Coin.Empty)
-                {
-                    coin = CheckDiagonallyUp();
-                }
-                else if (CheckDiagonallyDown() != Coin.Empty)
-                {
-                    coin = CheckDiagonallyDown();
-                }
+                    if (CheckRows() != Coin.Empty)
+                    {
+                        coin = CheckRows();
+                    }
+                    else if (CheckColumns(columnIdx) != Coin.Empty)
+                    {
+                        coin = CheckColumns(columnIdx);
+                    }
+                    else if (CheckDiagonallyUp() != Coin.Empty)
+                    {
+                        coin = CheckDiagonallyUp();
+                    }
+                    else if (CheckDiagonallyDown() != Coin.Empty)
+                    {
+                        coin = CheckDiagonallyDown();
+                    }
 
-                break;
+                    break;
 
+                }
+                else if ((helper % 2 != 0) && ((i == 6 - 1) || board.BoardLayout[i + 1, columnIdx] != Coin.Empty))
+                {
+                    board.BoardLayout[i, columnIdx] = Coin.PlayerB;
+
+                    if (CheckRows() != Coin.Empty)
+                    {
+                        coin = CheckRows();
+                    }
+                    else if (CheckColumns(columnIdx) != Coin.Empty)
+                    {
+                        coin = CheckColumns(columnIdx);
+                    }
+                    else if (CheckDiagonallyUp() != Coin.Empty)
+                    {
+                        coin = CheckDiagonallyUp();
+                    }
+                    else if (CheckDiagonallyDown() != Coin.Empty)
+                    {
+                        coin = CheckDiagonallyDown();
+                    }
+
+                    break;
+
+                }
             }
         }
 
         return coin;
+    }
+
+    public Coin DropIntoBoardAI()
+    {
+        int columnIdx = DetermineColumnAI();
+
+        for(int i = 0; i < ROWS_COUNT; i++)
+        {
+            if((i == 6 - 1) || board.BoardLayout[i + 1, columnIdx] != Coin.Empty)
+            {
+                board.BoardLayout[i, columnIdx] = Coin.PlayerB;
+                LASTPOS_X = i;
+                LASTPOS_Y = columnIdx;
+
+                if(CheckRows() != Coin.Empty)
+                {
+                    coin = CheckRows();
+                }
+                else if (CheckColumns(columnIdx) != Coin.Empty)
+                {
+                    coin = CheckColumns(columnIdx);
+                }
+                if (CheckDiagonallyUp() != Coin.Empty)
+                {
+                    coin = CheckDiagonallyUp();
+                }
+                if (CheckDiagonallyDown() != Coin.Empty)
+                {
+                    coin = CheckDiagonallyDown();
+                }
+
+                break;
+            }
+        }
+
+        return coin;
+    }
+
+    public static int DetermineColumnAI()
+    {
+        int column;
+        System.Random random = new System.Random();
+
+        if(CheckHorizontallyAI() == Coin.PlayerB || CheckHorizontallyAI() == Coin.PlayerA)
+        {
+            column = LASTPOS_Y + 1;
+        }
+        else if(CheckVerticallyAI() == Coin.PlayerB || CheckVerticallyAI() == Coin.PlayerA)
+        {
+            column = LASTPOS_Y;
+        }
+        else
+        {
+            column = random.Next(1, 7);
+        }
+
+        return column;
+    }
+    public static Coin CheckHorizontallyAI()
+    {
+        Coin coin = new Coin();
+
+        int counter = 0;
+        int k = 0, m = 0;
+
+        for (int i = 0; i < ROWS_COUNT; i++)
+        {
+            for (int j = 0; j < COLUMNS_COUNT; j++)
+            {
+                if (board.BoardLayout[i, j] == Coin.PlayerA)
+                {
+                    counter++;
+                    k = i;
+                    m = j;
+                }
+            }
+
+            if (counter == 3)
+            {
+                LASTPOS_X = k;
+                LASTPOS_Y = m;
+                coin = board.BoardLayout[k, m];
+                return coin;
+            }
+        }
+        return Coin.Empty;
+    }
+
+    public static Coin CheckVerticallyAI()
+    {
+        Coin coin = new Coin();
+
+        int counter = 0;
+        int k = 0;
+        int m = 0;
+
+        for (int i = 0; i < ROWS_COUNT; i++)
+        {
+            if (board.BoardLayout[i, LASTPOS_Y] == Coin.PlayerA)
+            {
+                counter++;
+                k = i;
+                m = LASTPOS_Y;
+            }
+            else if (board.BoardLayout[i, LASTPOS_Y] == Coin.PlayerB)
+            {
+                counter++;
+                k = i;
+                m = LASTPOS_Y;
+            }
+        }
+
+        if (counter == 3)
+        {
+            coin = board.BoardLayout[k, m];
+            return coin;
+        }
+        return Coin.Empty;
     }
 
 
@@ -120,7 +303,6 @@ public class Logic
 
         return Coin.Empty;
     }
-
 
     public Coin CheckRows()
     {
